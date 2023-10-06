@@ -1,6 +1,1 @@
-# PBL6-FashionHub
-Project-Based Learning on E-Commerce.
-
-### Use case design
-
-<img src="./images/usecasedesign.drawio.png" width="" height="">
+<h3>PBL6-shoe-shop</h3>
