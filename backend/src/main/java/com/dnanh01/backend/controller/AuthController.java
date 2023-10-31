@@ -1,6 +1,6 @@
 package com.dnanh01.backend.controller;
 
-import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
+// import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -8,7 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+// import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +32,7 @@ public class AuthController {
     private UserRepository userRepository;
     private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
-    private CustomAutowireConfigurer customerUserService;
+    private CustomerUserServiceImplementation customerUserService;
 
     public AuthController(
             UserRepository userRepository,
@@ -40,10 +40,16 @@ public class AuthController {
             PasswordEncoder passwordEncoder,
             JwtProvider jwtProvider) {
         this.userRepository = userRepository;
-        this.jwtProvider = jwtProvider;
+        this.customerUserService= customerUserService;
         this.passwordEncoder = passwordEncoder;
-        this.customerUserService = this.customerUserService;
+        this.jwtProvider = jwtProvider;
     }
+
+    @GetMapping("/test")
+    public String testFunc() {
+        return "Hello !!!";
+    }
+
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException {
@@ -99,7 +105,7 @@ public class AuthController {
     }
 
     private Authentication authenticate(String userName, String password) {
-        UserDetails userDetails = ((UserDetailsService) customerUserService).loadUserByUsername(userName);
+        UserDetails userDetails = customerUserService.loadUserByUsername(userName);
 
         if (userDetails == null) {
             throw new BadCredentialsException("Invalid username...");
