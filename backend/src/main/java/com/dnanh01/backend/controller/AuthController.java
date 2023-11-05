@@ -1,6 +1,5 @@
 package com.dnanh01.backend.controller;
 
-// import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -8,9 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +20,6 @@ import com.dnanh01.backend.repository.UserRepository;
 import com.dnanh01.backend.request.LoginRequest;
 import com.dnanh01.backend.response.AuthResponse;
 import com.dnanh01.backend.service.CustomerUserServiceImplementation;
-
 
 @RestController
 @RequestMapping("/auth")
@@ -40,16 +36,10 @@ public class AuthController {
             PasswordEncoder passwordEncoder,
             JwtProvider jwtProvider) {
         this.userRepository = userRepository;
-        this.customerUserService= customerUserService;
+        this.customerUserService = customerUserService;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
     }
-
-    @GetMapping("/test")
-    public String testFunc() {
-        return "Hello !!!";
-    }
-
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException {
@@ -58,7 +48,7 @@ public class AuthController {
         String firstNameString = user.getFirstName();
         String lastNameString = user.getLastName();
 
-        User isEmailExist = userRepository.findUserByEmail(email);
+        User isEmailExist = userRepository.findByEmail(email);
 
         if (isEmailExist != null) {
             throw new UserException("Email is already used with another account");
@@ -69,7 +59,7 @@ public class AuthController {
         createUser.setLastName(lastNameString);
         createUser.setEmail(email);
         createUser.setPassword(passwordEncoder.encode(password));
-        
+
         User saveUser = userRepository.save(createUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(saveUser.getEmail(),
@@ -96,11 +86,11 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
-        
+
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(token);
         authResponse.setMessage("Signin Success");
-        
+
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }
 

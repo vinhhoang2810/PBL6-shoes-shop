@@ -1,8 +1,22 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "cSpell.words": [
-        "Autowire",
-        "Configurer",
-        "signin"
-    ]
+  "java.compile.nullAnalysis.mode": "automatic",
+
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.dependency.packagePresentation": "hierarchical",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "Autowire",
+    "Configurer",
+    "dnanh",
+    "Lavel",
+    "Persent",
+    "signin"
+  ],
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  }
 }

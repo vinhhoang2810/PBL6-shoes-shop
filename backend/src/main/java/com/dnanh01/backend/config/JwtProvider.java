@@ -1,6 +1,5 @@
 package com.dnanh01.backend.config;
 
-
 import java.util.Date;
 
 import javax.crypto.SecretKey;
@@ -26,7 +25,7 @@ public class JwtProvider {
     }
 
     public String getEmailFromToken(String jwt) {
-        jwt = jwt.substring(7);
+        jwt = jwt.substring(7); // loại bỏ tiền tố "Bearer " từ chuỗi JWT.
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
         String email = String.valueOf(claims.get("email"));
         return email;

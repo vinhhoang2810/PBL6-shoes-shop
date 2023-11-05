@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.UserRepository;
 
-
-
 @Service
 public class CustomerUserServiceImplementation implements UserDetailsService {
 
@@ -25,7 +23,7 @@ public class CustomerUserServiceImplementation implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByEmail(username);
+        User user = userRepository.findByEmail(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("user not found with email - " + username);
