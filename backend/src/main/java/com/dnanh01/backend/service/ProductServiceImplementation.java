@@ -25,7 +25,9 @@ public class ProductServiceImplementation implements ProductService {
     private UserService userService;
     private CategoryRepository categoryRepository;
 
-    public ProductServiceImplementation(ProductRepository productRepository, UserService userService,
+    public ProductServiceImplementation(
+            ProductRepository productRepository,
+            UserService userService,
             CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.userService = userService;
@@ -111,8 +113,7 @@ public class ProductServiceImplementation implements ProductService {
 
     @Override
     public List<Product> findProductByCategory(String category) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findProductByCategory'");
+        return null;
     }
 
     @Override
