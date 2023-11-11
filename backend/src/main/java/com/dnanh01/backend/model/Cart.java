@@ -36,7 +36,7 @@ public class Cart {
 
     private int totalDiscountedPrice;
 
-    private int discounted;
+    private int discount;
 
     public Cart() {
     }
@@ -89,12 +89,12 @@ public class Cart {
         this.totalDiscountedPrice = totalDiscountedPrice;
     }
 
-    public int getDiscounted() {
-        return discounted;
+    public int getDiscount() {
+        return discount;
     }
 
-    public void setDiscounted(int discounted) {
-        this.discounted = discounted;
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
 }

@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dnanh01.backend.config.JwtProvider;
 import com.dnanh01.backend.exception.UserException;
+import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.UserRepository;
 import com.dnanh01.backend.request.LoginRequest;
 import com.dnanh01.backend.response.AuthResponse;
+import com.dnanh01.backend.service.CartService;
 import com.dnanh01.backend.service.CustomerUserServiceImplementation;
 
 @RestController
@@ -29,16 +31,19 @@ public class AuthController {
     private JwtProvider jwtProvider;
     private PasswordEncoder passwordEncoder;
     private CustomerUserServiceImplementation customerUserService;
+    private CartService cartService;
 
     public AuthController(
             UserRepository userRepository,
             CustomerUserServiceImplementation customerUserService,
             PasswordEncoder passwordEncoder,
-            JwtProvider jwtProvider) {
+            JwtProvider jwtProvider,
+            CartService cartService) {
         this.userRepository = userRepository;
         this.customerUserService = customerUserService;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.cartService = cartService;
     }
 
     @PostMapping("/signup")
@@ -61,6 +66,7 @@ public class AuthController {
         createUser.setPassword(passwordEncoder.encode(password));
 
         User saveUser = userRepository.save(createUser);
+        Cart cart = cartService.createCart(saveUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(saveUser.getEmail(),
                 saveUser.getPassword());

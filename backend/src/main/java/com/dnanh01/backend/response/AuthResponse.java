@@ -2,23 +2,18 @@ package com.dnanh01.backend.response;
 
 public class AuthResponse {
 
-    private String jwt;
+	private String jwt;
 
-    private String message;
+	private String message;
 
-    public AuthResponse(String jwt, String message) {
-        super();
-        this.jwt = jwt;
-        this.message = message;
-    }
-
-
-
-	public AuthResponse() {
-		// TODO Auto-generated constructor stub
+	public AuthResponse(String jwt, String message) {
+		super();
+		this.jwt = jwt;
+		this.message = message;
 	}
 
-
+	public AuthResponse() {
+	}
 
 	public String getJwt() {
 		return jwt;
@@ -35,5 +30,4 @@ public class AuthResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }
