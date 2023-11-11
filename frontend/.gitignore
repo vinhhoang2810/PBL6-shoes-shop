@@ -11,10 +11,6 @@
 # production
 /build
 
-# orther
-/.vscode
-/design_layout
-
 # misc
 .DS_Store
 .env.local
