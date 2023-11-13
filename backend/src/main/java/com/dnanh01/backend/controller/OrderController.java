@@ -39,7 +39,8 @@ public class OrderController {
 
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.createOrder(user, shippingAddress);
-        System.out.println("created order: " + order);
+
+        System.out.println("Created order: " + order);
         return new ResponseEntity<Order>(order, HttpStatus.CREATED);
     }
 
@@ -58,6 +59,7 @@ public class OrderController {
         User user = userService.findUserProfileByJwt(jwt);
         Order order = orderService.findOrderById(orderId);
 
-        return new ResponseEntity<>(order, HttpStatus.ACCEPTED);
+        // return new ResponseEntity<>(order, HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(order);
     }
 }

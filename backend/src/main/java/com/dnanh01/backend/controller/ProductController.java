@@ -17,13 +17,13 @@ import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.service.ProductService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products")
+    @GetMapping("/")
     public ResponseEntity<Page<Product>> findProductByCategoryHandler(
             @RequestParam String category,
             @RequestParam List<String> color,
@@ -43,7 +43,7 @@ public class ProductController {
         return new ResponseEntity<>(res, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping("/products/id/{productId}")
+    @GetMapping("/id/{productId}")
     public ResponseEntity<Product> findProductByIdHandler(
             @PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
