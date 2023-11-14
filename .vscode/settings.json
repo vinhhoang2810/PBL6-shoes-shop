@@ -14,7 +14,8 @@
     "dnanh",
     "Lavel",
     "Persent",
-    "signin"
+    "signin",
+    "Springdoc"
   ],
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
