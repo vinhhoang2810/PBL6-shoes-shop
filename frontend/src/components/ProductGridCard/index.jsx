@@ -5,7 +5,7 @@ import "./style-prefix.scss";
 
 export default function ProductGridCard() {
   return (
-    <div className="productGrid">
+    <div>
       <div className="product-main">
         <h2 className="title">Products</h2>
         <div className="product-grid">
@@ -52,8 +52,8 @@ export default function ProductGridCard() {
                 <i className="fa fa-star-half-o" aria-hidden="true"></i>
               </div>
               <div className="price-box">
-                <p className="price">$48.00</p>
-                <p className="deal">$75.00</p>
+                <p className="price">$4.00</p>
+                <p className="deal">$5.00</p>
               </div>
             </div>
           </div>

@@ -10,27 +10,10 @@
   -ms-scroll-chaining: none;
   overscroll-behavior: contain;
 }
-.warehouse .warehouseAdd {
-  margin-top: 40px;
-  margin-left: 50px;
-}
-.warehouse .warehouseAdd .btn-addProduct {
-  background: linear-gradient(to right, #008eff, #fa5c5c);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 17px;
-  font-family: "Poppins", sans-serif;
-}
-.warehouse .warehouseAdd .btn-addProduct:hover {
-  background: linear-gradient(to right, #4caeff, #03f2ff);
-}
+
 .warehouse .warehouseGrid {
   max-width: 100%;
   border-collapse: collapse;
-  padding: 40px 50px;
 }
 
 .warehouse .warehouseGrid .warehouseRow {
@@ -114,7 +97,7 @@
 }
 .select-warehouse-type {
   border: none;
-  font-size: 18px;
+  font-size: 16px;
 }
 .warehouse-price {
   color: black;

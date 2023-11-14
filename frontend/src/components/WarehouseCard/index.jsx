@@ -6,11 +6,6 @@ import "./style.scss";
 export default function WarehouseCard() {
   return (
     <div className="warehouse">
-      <div className="warehouseAdd">
-        <Link to="/addProduct" className="link-addProduct">
-          <button className="btn-addProduct">Thêm sản phẩm</button>
-        </Link>
-      </div>
       <div className="warehouseGrid">
         <div className="warehouseRow">
           <div className="warehouseRow-yesno"></div>

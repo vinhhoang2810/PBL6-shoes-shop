@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./style-prefix.scss";
 import trending from "../../images/banner-2.jpg";
+import Button from "../../components/Button";
 
 export default function TrendingItem() {
   return (
-    <div className="banner">
+    <div className="banner container-layout">
       <div className="container-trending">
         <div className="slider-container has-scrollbar">
           <div className="slider-item">
@@ -19,9 +19,7 @@ export default function TrendingItem() {
               <p className="banner-text">
                 starting at $ <b>20</b>.00
               </p>
-              <Link to="/cart" className="banner-btn">
-                Shop now
-              </Link>
+              <Button text="Shop Now" to="/cart"></Button>
             </div>
           </div>
         </div>

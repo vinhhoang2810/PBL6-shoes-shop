@@ -1,17 +1,91 @@
 import Header from "../../components/Layout/Header";
-import BrandCard from "../../components/BrandCard";
-import TrendingItem from "../../components/TrendingItem";
-import ProductCard from "../../components/ProductCard";
-import ProductGridCard from "../../components/ProductGridCard";
-
-export default function HomePage() {
+import "./style.scss";
+import shoes from "../../images/shoes3.png";
+import Button from "../../components/Button";
+export default function AboutPage() {
   return (
     <>
       <Header />
-      <TrendingItem />
-      <BrandCard />
-      <ProductCard />
-      <ProductGridCard />
+      <div>
+        <div className="about container-layout">
+          <div className="about-div">
+            <img src={shoes} alt="" className="about-image"></img>
+            <div class="about-voucher">
+              <span class="about-voucher-text">-33%</span>
+              <span class="about-voucher-status">HOT</span>
+            </div>
+          </div>
+          <div class="about-content">
+            <div class="about-information">
+              <h1 class="about-title">NIKE Collection</h1>
+              <div class="about-rating">
+                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+              </div>
+              <div class="about-description">
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged.
+                </p>
+              </div>
+            </div>
+            <div class="about-table">
+              <div class="about-table-price">
+                <span class="about-table-price-old">$34.99</span>
+                <span class="about-table-price-current">$20.99</span>
+              </div>
+              <div class="about-table-size">
+                <span class="about-size-name">Size:</span>
+                <select class="about-size-font">
+                  <option value="36" defaultCheckedy>
+                    Choose an option
+                  </option>
+                  <option value="37">37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                  <option value="41">41</option>
+                  <option value="42">42</option>
+                  <option value="43">43</option>
+                  <option value="44">44</option>
+                  <option value="45">45</option>
+                </select>
+              </div>
+              <div class="about-table-color">
+                <span class="about-color-name">Color:</span>
+                <select class="about-color-font">
+                  <option value="0" defaultCheckedy>
+                    Choose an option
+                  </option>
+                  <option value="1">Xanh</option>
+                  <option value="2">Đỏ</option>
+                  <option value="3">Vàng</option>
+                  <option value="4">Đen</option>
+                  <option value="5">Tím</option>
+                  <option value="6">Hồng</option>
+                </select>
+              </div>
+              <div class="about-quantity">
+                <Button text="-"></Button>
+                <input type="text" className="about-quantity-input" value="1" />
+                <Button text="+"></Button>
+                <div className="about-payment">
+                  <Button text="Add To Cart" to="/cart"></Button>
+                  <Button text="Buy Now" to="/pay"></Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

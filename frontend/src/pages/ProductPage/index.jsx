@@ -1,15 +1,14 @@
 import Header from "../../components/Layout/Header";
 import BrandCard from "../../components/BrandCard";
-import TrendingItem from "../../components/TrendingItem";
-import ProductCard from "../../components/ProductCard";
 import ProductGridCard from "../../components/ProductGridCard";
+import ProductFeaturedCard from "../../components/ProductFeaturedCard";
 
-export default function HomePage() {
+export default function ProductPage() {
   return (
     <>
       <Header />
+      <ProductFeaturedCard />
       <BrandCard />
-      <ProductCard />
       <ProductGridCard />
     </>
   );
