@@ -26,22 +26,22 @@ export default function Header() {
               placeholder="Enter your product name..."
             />
             <button className="search-btn">
-              <i class="fa fa-search" aria-hidden="true"></i>
+              <i className="fa fa-search" aria-hidden="true"></i>
             </button>
           </div>
           <div className="header-user-actions">
             <Link to="/login" className="action-btn">
-              <i class="fa fa-user-o" aria-hidden="true"></i>
+              <i className="fa fa-user-o" aria-hidden="true"></i>
             </Link>
             <Link to="/info" className="action-btn">
               <i className="fa fa-id-card" aria-hidden="true"></i>
             </Link>
             <Link to="/like" className="action-btn">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
+              <i className="fa fa-heart-o" aria-hidden="true"></i>
               <span className="count">0</span>
             </Link>
             <Link to="/cart" className="action-btn">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <i className="fa fa-shopping-cart" aria-hidden="true"></i>
               <span className="count">0</span>
             </Link>
           </div>
@@ -80,28 +80,32 @@ export default function Header() {
       </nav>
       <div className="mobile-bottom-navigation">
         <button className="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="menu-outline"></ion-icon>
+          <i className="fa fa-bars" aria-hidden="true"></i>
         </button>
+        <Link to="/cart">
+          <button className="action-btn">
+            <i className="fa fa-shopping-bag" aria-hidden="true"></i>
+            <span className="count">0</span>
+          </button>
+        </Link>
+        <Link to="/" className="mobile-bottom-navigation-home">
+          <button className="action-btn">
+            <i className="fa fa-home" aria-hidden="true"></i>
+          </button>
+        </Link>
         <button className="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
-          <span className="count">0</span>
-        </button>
-        <button className="action-btn">
-          <ion-icon name="home-outline"></ion-icon>
-        </button>
-        <button className="action-btn">
-          <ion-icon name="heart-outline"></ion-icon>
+          <i className="fa fa-heart-o" aria-hidden="true"></i>
           <span className="count">0</span>
         </button>
         <button className="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="grid-outline"></ion-icon>
+          <i className="fa fa-dropbox" aria-hidden="true"></i>
         </button>
       </div>
       <nav className="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
         <div className="menu-top">
           <h2 className="menu-title">Menu</h2>
           <button className="menu-close-btn" data-mobile-menu-close-btn>
-            <ion-icon name="close-outline"></ion-icon>
+            <i className="fa fa-home" aria-hidden="true"></i>
           </button>
         </div>
         <ul className="mobile-menu-category-list">

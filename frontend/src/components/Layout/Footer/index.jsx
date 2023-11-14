@@ -136,7 +136,7 @@ export default function Footer() {
                 </li>
                 <li className="footer-nav-item flex">
                   <div className="icon-box">
-                    <i class="fa fa-map" aria-hidden="true"></i>
+                    <i className="fa fa-map" aria-hidden="true"></i>
                   </div>
                   <address className="content">
                     419 State 414 Rte Beaver Dams, New York(NY), 14812, USA
@@ -144,7 +144,7 @@ export default function Footer() {
                 </li>
                 <li className="footer-nav-item flex">
                   <div className="icon-box">
-                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <i className="fa fa-phone" aria-hidden="true"></i>
                   </div>
                   <a href="tel:+607936-8058" className="footer-nav-link">
                     (607) 936-8058
@@ -152,7 +152,7 @@ export default function Footer() {
                 </li>
                 <li className="footer-nav-item flex">
                   <div className="icon-box">
-                    <i class="fa fa-info" aria-hidden="true"></i>
+                    <i className="fa fa-info" aria-hidden="true"></i>
                   </div>
                   <a
                     href="mailto:example@gmail.com"
@@ -160,35 +160,6 @@ export default function Footer() {
                   >
                     example@gmail.com
                   </a>
-                </li>
-              </ul>
-              <ul className="footer-nav-list">
-                <li className="footer-nav-item">
-                  <h2 className="nav-title">Follow Us</h2>
-                </li>
-                <li>
-                  <ul className="social-link">
-                    <li className="footer-nav-item">
-                      <Link href="#" className="footer-nav-link">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                      </Link>
-                    </li>
-                    <li className="footer-nav-item">
-                      <Link href="#" className="footer-nav-link">
-                        <ion-icon name="logo-twitter" />
-                      </Link>
-                    </li>
-                    <li className="footer-nav-item">
-                      <Link href="#" className="footer-nav-link">
-                        <ion-icon name="logo-linkedin" />
-                      </Link>
-                    </li>
-                    <li className="footer-nav-item">
-                      <Link href="#" className="footer-nav-link">
-                        <ion-icon name="logo-instagram" />
-                      </Link>
-                    </li>
-                  </ul>
                 </li>
               </ul>
             </div>

@@ -14,16 +14,16 @@ export default function ProductGridCard() {
               <p className="showcase-badge">15%</p>
               <div className="showcase-actions">
                 <button className="btn-action">
-                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                  <i className="fa fa-heart-o" aria-hidden="true"></i>
                 </button>
                 <button className="btn-action">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
+                  <i className="fa fa-eye" aria-hidden="true"></i>
                 </button>
                 <button className="btn-action">
-                  <i class="fa fa-repeat" aria-hidden="true"></i>
+                  <i className="fa fa-repeat" aria-hidden="true"></i>
                 </button>
                 <button className="btn-action">
-                  <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+                  <i className="fa fa-shopping-bag" aria-hidden="true"></i>
                 </button>
               </div>
               <Link to="/about">
@@ -32,12 +32,6 @@ export default function ProductGridCard() {
                   alt=""
                   width={300}
                   className="product-img default"
-                />
-                <img
-                  src={shoes}
-                  alt=""
-                  width={300}
-                  className="product-img hover"
                 />
               </Link>
             </div>
@@ -51,11 +45,11 @@ export default function ProductGridCard() {
                 </h3>
               </Link>
               <div className="showcase-rating">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star" aria-hidden="true"></i>
+                <i className="fa fa-star-half-o" aria-hidden="true"></i>
               </div>
               <div className="price-box">
                 <p className="price">$48.00</p>

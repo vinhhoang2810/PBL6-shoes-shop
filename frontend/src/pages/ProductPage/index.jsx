@@ -8,7 +8,6 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <TrendingItem />
       <BrandCard />
       <ProductCard />
       <ProductGridCard />

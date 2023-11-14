@@ -123,19 +123,8 @@
   display: block;
 }
 
-.product-grid .product-img.hover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  opacity: 0;
-}
-
 .product-grid .showcase-grid:hover .product-img .hover {
   opacity: 1;
-}
-.product-grid .showcase-grid:hover .product-img .default {
-  opacity: 0;
 }
 
 .product-grid .showcase-grid:hover .product-img {

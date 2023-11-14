@@ -17,7 +17,7 @@ export default function BrandCard() {
                 <h3 className="category-item-title">NIKE</h3>
                 <p className="category-item-amount">(53)</p>
               </div>
-              <Link href="#" className="category-btn">
+              <Link to="#" className="category-btn">
                 Show all
               </Link>
             </div>

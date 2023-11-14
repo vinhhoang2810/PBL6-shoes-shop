@@ -6,6 +6,9 @@ import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import AboutPage from "./pages/AboutPage";
 import ReviewPage from "./pages/ReviewPage";
+import WarehousePage from "./pages/WarehousePage";
+import CartPage from "./pages/CartPage";
+import ServicePage from "./pages/ServicePage";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -19,6 +22,9 @@ function App() {
         <Route path="/product" element={<ProductPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/review" element={<ReviewPage />} />
+        <Route path="/warehouse" element={<WarehousePage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/service" element={<ServicePage />} />
       </Routes>
     </BrowserRouter>
   );

@@ -11,7 +11,6 @@ export default function HomePage() {
       <TrendingItem />
       <BrandCard />
       <ProductCard />
-      <ProductGridCard />
     </>
   );
 }

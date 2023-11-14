@@ -102,7 +102,7 @@ export default function LoginPage() {
                   Register
                 </Link>
               </p>
-            </div>
+            </div>  
           </form>
         </div>
       </div>
