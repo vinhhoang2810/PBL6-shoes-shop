@@ -533,7 +533,7 @@ INSERT INTO `pbl6_shoes_shop`.`review` (`id`, `create_at`, `review`, `product_id
 VALUES
 (1, '2023-11-15 12:00:00', 'Nice product!', 1001, 2001),
 (2, '2023-11-16 13:30:00', 'Good service!', 1002, 2002),
-(3, '2023-11-17 14:45:00', 'Excellent quality!', 1003, 2003),;
+(3, '2023-11-17 14:45:00', 'Excellent quality!', 1003, 2003);
 
 
 
