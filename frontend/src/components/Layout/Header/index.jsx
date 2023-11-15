@@ -36,10 +36,6 @@ export default function Header() {
             <Link to="/info" className="action-btn">
               <i className="fa fa-id-card" aria-hidden="true"></i>
             </Link>
-            <Link to="/like" className="action-btn">
-              <i className="fa fa-heart-o" aria-hidden="true"></i>
-              <span className="count">0</span>
-            </Link>
             <Link to="/cart" className="action-btn">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
               <span className="count">0</span>
@@ -93,10 +89,6 @@ export default function Header() {
             <i className="fa fa-home" aria-hidden="true"></i>
           </button>
         </Link>
-        <button className="action-btn">
-          <i className="fa fa-heart-o" aria-hidden="true"></i>
-          <span className="count">0</span>
-        </button>
         <button className="action-btn" data-mobile-menu-open-btn>
           <i className="fa fa-dropbox" aria-hidden="true"></i>
         </button>

@@ -1,6 +1,5 @@
 import Button from "../../components/Button";
 import Header from "../../components/Layout/Header";
-import WarehouseCard from "../../components/WarehouseCard";
 import WarehouseList from "../../components/WarehouseList";
 import "./style.scss";
 export default function WarehousePage() {

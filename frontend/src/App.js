@@ -9,6 +9,7 @@ import ReviewPage from "./pages/ReviewPage";
 import WarehousePage from "./pages/WarehousePage";
 import CartPage from "./pages/CartPage";
 import ServicePage from "./pages/ServicePage";
+import PayPage from "./pages/PayPage";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/warehouse" element={<WarehousePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/service" element={<ServicePage />} />
+        <Route path="/pay" element={<PayPage />} />
       </Routes>
     </BrowserRouter>
   );

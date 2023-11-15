@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-import shoes from "../../images/shoes4.png";
 import "./style-prefix.scss";
 
 export default function ProductBoxCard({
+  image,
   title,
   name,
   brand,
@@ -48,7 +47,7 @@ export default function ProductBoxCard({
         <h1 className="product-minimal-title">{title}</h1>
         <div className="product-minimal-content">
           <Link to={"/about"} className="product-minimal-link">
-            <img src={shoes} alt="" className="product-minimal-image"></img>
+            <img src={image} alt="" className="product-minimal-image"></img>
           </Link>
           <div className="product-minimal-detail">
             <h2 className="product-minimal-name">

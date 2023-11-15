@@ -120,7 +120,7 @@ export default function RegisterPage() {
               </select>
             </div>
             <button
-              className="btn"
+              className="btn-register"
               type="button"
               onClick={handleSubmit}
               id="btn-login"

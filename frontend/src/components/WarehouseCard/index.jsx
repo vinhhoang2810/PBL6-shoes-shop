@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
@@ -35,8 +36,8 @@ export default function WarehouseCard({ image, name, brand, quantity, price }) {
         <span className="warehouse-quantity-span">{quantity}</span>
       </div>
       <div className="warehouse-operation">
-        <button className="delete-warehouse-quantity">Xóa</button>
-        <button className="update-warehouse-quantity">Chỉnh sửa</button>
+        <Button>Delete</Button>
+        <Button>Update</Button>
       </div>
     </div>
   );

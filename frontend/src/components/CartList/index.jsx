@@ -95,10 +95,11 @@ export default function CartList() {
           </div>
         </div>
         <div className="payment-btn">
-          <button className="payment-btn-cart">
-            <span className="add-text">Add To Cart</span>
-          </button>
-          <Button text="Buy Now" to="/#" className={"payment-btn-buy"}></Button>
+          <Button
+            text="Buy Now"
+            to="/pay"
+            className={"payment-btn-buy"}
+          ></Button>
         </div>
       </div>
     </>
