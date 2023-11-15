@@ -1,6 +1,6 @@
 import Header from "../../components/Layout/Header";
-import BrandCard from "../../components/BrandCard";
-import ProductGridCard from "../../components/ProductGridCard";
+import BrandList from "../../components/BrandList";
+import ProductGridList from "../../components/ProductGridList";
 import ProductFeaturedCard from "../../components/ProductFeaturedCard";
 
 export default function ProductPage() {
@@ -8,8 +8,8 @@ export default function ProductPage() {
     <>
       <Header />
       <ProductFeaturedCard />
-      <BrandCard />
-      <ProductGridCard />
+      <BrandList />
+      <ProductGridList />
     </>
   );
 }

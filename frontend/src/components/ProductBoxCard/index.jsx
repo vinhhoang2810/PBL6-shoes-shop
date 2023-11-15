@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 import shoes from "../../images/shoes4.png";
 import "./style-prefix.scss";
 
-export default function ProductBoxCard({ title, name }) {
+export default function ProductBoxCard({
+  title,
+  name,
+  brand,
+  price,
+  salePrice,
+}) {
   return (
     // <div>
     //   {/* <div className="product-minimal">
@@ -51,11 +57,11 @@ export default function ProductBoxCard({ title, name }) {
               </Link>
             </h2>
             <Link to="/#" className="product-minimal-category">
-              Nike
+              {brand}
             </Link>
             <div className="product-minimal-price">
-              <p className="product-minimal-price-real">$4.00</p>
-              <del>$5.00</del>
+              <p className="product-minimal-price-real">${price}</p>
+              <del>${salePrice}</del>
             </div>
           </div>
         </div>

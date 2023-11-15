@@ -1,10 +1,10 @@
 import Header from "../../components/Layout/Header";
-import CartCard from "../../components/CartCard";
-export default function WarehousePage() {
+import CartList from "../../components/CartList";
+export default function CartPage() {
   return (
     <>
       <Header />
-      <CartCard />
+      <CartList />
     </>
   );
 }

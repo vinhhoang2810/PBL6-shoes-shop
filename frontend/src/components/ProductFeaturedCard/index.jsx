@@ -6,7 +6,7 @@ import Button from "../../components/Button";
 
 export default function ProductFeaturedCard() {
   return (
-    <div>
+    <section>
       <div className="product-featured">
         <h2 className="product-featured-title">Deal Of The Day</h2>
         <div className="product-featured-content">
@@ -71,6 +71,6 @@ export default function ProductFeaturedCard() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

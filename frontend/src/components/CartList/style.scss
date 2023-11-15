@@ -1,8 +1,6 @@
 .cart {
-  max-width: 100%;
   border-collapse: collapse;
   font-family: "Poppins", sans-serif;
-  padding: 40px 50px;
 }
 .cart-operation,
 .cart-operation .cart-operation-delete,
@@ -12,130 +10,128 @@
 .cart-operation .cart-operation-link {
   text-decoration: none;
 }
-.cart .cartList {
+.cart .cartRow {
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 8px #6c14d0;
+  text-align: center;
+  gap: 10px;
   display: grid;
   grid-template-columns: 45% 10% 20% 10% 10%;
-  border-bottom: 1px solid #000000;
-  gap: 10px;
+  border-collapse: collapse;
+  max-width: 100%;
+  height: auto;
+  font-weight: 700;
+  background: linear-gradient(to right, #008eff, #fa5c5c);
+  font-size: 18px;
+  padding: 8px 0;
   padding-left: 2%;
 }
 
-.cart .cartList .cartList-detail {
-  color: black;
+/* payment */
+.payment {
   max-width: 100%;
-  border: none;
-  padding: 6px 0;
-  height: auto;
-  display: grid;
-  grid-template-columns: 20% 80%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-.cart .cartList .cartList-detail .cartList-detail-img {
-  width: 70px;
-  height: 70px;
-}
-.cart .cartList .cartList-detail .cartList-content {
-  display: grid;
-  grid-template-rows: 30% 30% 30%;
-  margin: 5px 0;
-  gap: 10%;
-}
-.cart .cartList .cartList-detail .cartList-content .cartList-content-link {
-  text-decoration: none;
-}
-.cart .cartList .cartList-detail .cartList-content .cartList-content-catogery {
-  text-decoration: none;
-  color: var(--salmon-pink);
-  font-weight: var(--weight-500);
-  text-transform: uppercase;
-}
-.cart
-  .cartList
-  .cartList-detail
-  .cartList-content
-  .cartList-content-type
-  .cartList-content-check {
-  font: inherit;
-  color: black;
-  border: none;
-  background: transparent;
-}
-.cart .cartList .cartList-price {
-  color: black;
-  border: none;
-  text-align: center;
-  justify-content: center;
-  font-size: 18px;
+  background-color: #fff;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  padding: 40px 50px;
+
+  font-family: "Poppins", sans-serif;
 }
-.cart .cartList .cartList-quantity {
-  color: black;
-  border: none;
-  padding: 21px 40px 0 40px;
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+
+/* Style for the payment voucher section */
+.payment .payment-voucher {
+  padding-bottom: 8px;
+  margin: 0 25px 20px;
+  border-bottom: 2px solid #ddd;
 }
-.cart .cartList .cartList-quantity .cartList-decrease {
-  background: linear-gradient(to right, #008eff, #fa5c5c);
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  margin: 0 10px 30px 10px;
-  width: 40px;
+
+.payment .payment-voucher .fa-ticket {
+  font-size: 24px;
+  color: #ff0000; /* Shopee's primary color */
+  margin-right: 10px;
 }
-.cart .cartList .cartList-quantity .cartList-input {
-  width: 40px;
-  text-align: center;
-  margin: 0 10px 30px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+
+.payment .payment-voucher span {
+  font-size: 18px;
+  color: #000000;
   padding: 5px;
 }
-.cart .cartList .cartList-quantity .cartList-increase {
+
+.payment .payment-voucher .btn-payment-voucher {
   background: linear-gradient(to right, #008eff, #fa5c5c);
   color: #fff;
   border: none;
-  padding: 5px 10px;
+  border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  width: 40px;
-  margin: 0 10px 30px 10px;
+  font-size: 16px;
 }
-.cart .cartList .cartList-money {
-  color: black;
-  border: none;
-  text-align: center;
-  justify-content: center;
-  font-size: 18px;
+
+/* Style for the payment detail section */
+.payment .payment-detail {
   display: flex;
   align-items: center;
+  margin: 10px 0;
 }
-.cart .cartList .cartList-operation {
-  color: black;
+
+.payment .payment-detail .payment-detail-btnall {
+  background-color: transparent;
   border: none;
-  padding: 6px 0;
-  text-align: center;
+  color: #ff0000; /* Shopee's primary color */
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 0 10px;
+}
+
+.payment .payment-detail .payment-detail-btndelete {
+  background-color: transparent;
+  border: none;
+  color: #ff0000; /* Shopee's primary color */
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+/* Style for payment content section */
+.payment .payment-detail .payment-content {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  font-size: 16px;
+  color: #333;
 }
-.cart .cartList .cartList-operation .cartList-operation-delete {
-  color: black;
-  border: none;
-  padding: 6px 0;
-  width: 100%;
-  background-color: transparent;
-  font-size: 18px;
+.payment .payment-detail .payment-content label {
+  padding: 0 20px;
 }
-.cart .cartList .cartList-operation .cartList-operation-update {
-  color: black;
+
+/* Style for product-add and product-buy buttons */
+
+.payment .payment-btn .payment-btn-cart {
+  background: linear-gradient(to right, #008eff, #fa5c5c);
+  color: #fff;
   border: none;
-  padding: 6px 0;
-  width: 100px;
-  background-color: transparent;
-  font-size: 18px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  float: right;
+  margin: 0 30px;
+}
+.payment-btn-buy {
+  background: linear-gradient(to right, #c389b1cc, #a48ac2cc);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  float: right;
 }
 
 @media (max-width: 480px) {

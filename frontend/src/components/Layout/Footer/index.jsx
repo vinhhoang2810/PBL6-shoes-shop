@@ -5,7 +5,7 @@ import pay from "../../../images/payment.png";
 
 export default function Footer() {
   return (
-    <div>
+    <section>
       <footer className="footer">
         <div className="footer-category">
           <div className="footer-nav">
@@ -174,6 +174,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-    </div>
+    </section>
   );
 }
