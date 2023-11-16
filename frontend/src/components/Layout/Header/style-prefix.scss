@@ -165,7 +165,6 @@
 }
 
 .header-search-container {
-  margin-top: 20px;
   position: relative;
 }
 
@@ -198,6 +197,8 @@
   -webkit-transition: color var(--transition-timing);
   -o-transition: color var(--transition-timing);
   transition: color var(--transition-timing);
+  cursor: pointer;
+  border: none;
 }
 
 .search-btn:hover {

@@ -7,7 +7,7 @@ export default function WarehousePage() {
     <>
       <Header />
       <div className="warehouse-addProduct container-layout">
-        <Button text="Thêm sản phẩm" to="/addProduct"></Button>
+        <Button text="Add new products" to="/addProduct"></Button>
       </div>
       <div className="Warehouse container-layout">
         <WarehouseList />

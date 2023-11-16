@@ -38,7 +38,7 @@ export default function ProductGridCard({
           </Link>
         </div>
         <div className="showcase-content">
-          <Link to="/about" className="showcase-category-grid">
+          <Link to="/" className="showcase-category-grid">
             {brand}
           </Link>
           <Link to="/about" className="showcase-title-grid">

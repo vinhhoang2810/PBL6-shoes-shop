@@ -10,11 +10,11 @@ export default function WarehouseList() {
         <div className="warehouseGrid">
           <div className="warehouseRow">
             <div className="warehouseRow-yesno"></div>
-            <div className="warehouseRow-product">Sản phẩm</div>
-            <div className="warehouseRow-type">Phân loại hàng</div>
-            <div className="warehouseRow-price">Đơn giá</div>
-            <div className="warehouseRow-quantity">Số lượng còn lại</div>
-            <div className="warehouseRow-operation">Thao tác</div>
+            <div className="warehouseRow-product">Product</div>
+            <div className="warehouseRow-type">Type</div>
+            <div className="warehouseRow-price">Price</div>
+            <div className="warehouseRow-quantity">The remaining amount</div>
+            <div className="warehouseRow-operation">Operation</div>
           </div>
           {/* Danh sách sản phẩm */}
           <WarehouseCard

@@ -11,6 +11,7 @@ import CartPage from "./pages/CartPage";
 import ServicePage from "./pages/ServicePage";
 import PayPage from "./pages/PayPage";
 import "react-toastify/dist/ReactToastify.css";
+import AddProductPage from "./pages/AddProductPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/service" element={<ServicePage />} />
         <Route path="/pay" element={<PayPage />} />
+        <Route path="/addproduct" element={<AddProductPage />} />
       </Routes>
     </BrowserRouter>
   );

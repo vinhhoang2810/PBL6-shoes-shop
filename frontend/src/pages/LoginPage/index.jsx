@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -8,41 +8,41 @@ export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(rememberMe);
   }, [rememberMe]);
   const handleLogin = async () => {
-    // if (username === "admin" && password === "admin") {
-    //   toast.success("Đăng nhập thành công");
-    //   setTimeout(() => {
-    //     naviagte("/register");
-    //   }, 2000);
-    // } else {
-    //   toast.error("Sai tài khoản hoặc mật khẩu");
-    // }
-
-    try {
-      const formData = {
-        email: username,
-        password,
-      };
-      const response = await axios.post(
-        "https://nthdv-pbl6.up.railway.app/api/user/login",
-        formData
-      );
-      if (response) {
-        toast.success("Đăng nhập thành công");
-        localStorage.setItem("user", JSON.stringify(formData));
-
-        setTimeout(() => {
-          naviagte("/");
-        }, 2000);
-      }
-    } catch (error) {
-      toast.error(error?.message);
+    if (username === "admin" && password === "admin") {
+      toast.success("Đăng nhập thành công");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } else {
+      toast.error("Sai tài khoản hoặc mật khẩu");
     }
+
+    // try {
+    //   const formData = {
+    //     email: username,
+    //     password,
+    //   };
+    //   const response = await axios.post(
+    //     "https://nthdv-pbl6.up.railway.app/api/user/login",
+    //     formData
+    //   );
+    //   if (response) {
+    //     toast.success("Đăng nhập thành công");
+    //     localStorage.setItem("user", JSON.stringify(formData));
+
+    //     setTimeout(() => {
+    //       naviagte("/");
+    //     }, 2000);
+    //   }
+    // } catch (error) {
+    //   toast.error(error?.message);
+    // }
   };
 
   return (
@@ -102,7 +102,7 @@ export default function LoginPage() {
                   Register
                 </Link>
               </p>
-            </div>  
+            </div>
           </form>
         </div>
       </div>

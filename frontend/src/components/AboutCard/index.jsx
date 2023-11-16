@@ -1,18 +1,18 @@
-import Header from "../../components/Layout/Header";
+import Header from "../Layout/Header";
 import "./style.scss";
-import shoes from "../../images/shoes3.png";
+import image from "../../images/shoes3.png";
 import Button from "../../components/Button";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function AboutPage({
-  // image,
-  // name,
-  // description,
-  // brand,
-  // price,
-  // salePrice,
+export default function AboutCard({
+  image,
+  name,
+  description,
+  brand,
+  price,
+  salePrice,
   quantity = 1,
 }) {
   // lỗi toast
@@ -40,7 +40,7 @@ export default function AboutPage({
         <ToastContainer />
         <div className="about container-layout">
           <div className="about-div">
-            <img src={shoes} alt="" className="about-image"></img>
+            <img src={image} alt="" className="about-image"></img>
             <div class="about-voucher">
               <span class="about-voucher-text">-33%</span>
               <span class="about-voucher-status">HOT</span>
@@ -48,7 +48,10 @@ export default function AboutPage({
           </div>
           <div class="about-content">
             <div class="about-information">
-              <h1 class="about-title">NIKE Collection</h1>
+              <h1 class="about-title">{name}</h1>
+              <Link to="/about" className="showcase-category-grid">
+                {brand}
+              </Link>
               <div class="about-rating">
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
@@ -57,21 +60,13 @@ export default function AboutPage({
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
               </div>
               <div class="about-description">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged.
-                </p>
+                <p>{description}</p>
               </div>
             </div>
             <div class="about-table">
               <div class="about-table-price">
-                <span class="about-table-price-old">$34.99</span>
-                <span class="about-table-price-current">$20.99</span>
+                <span class="about-table-price-old">${salePrice}</span>
+                <span class="about-table-price-current">${price}</span>
               </div>
               <div class="about-table-size">
                 <span class="about-size-name">Size:</span>

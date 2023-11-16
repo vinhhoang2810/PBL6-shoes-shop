@@ -50,17 +50,17 @@ export default function CartList() {
       <div className="cart container-layout">
         <div className="cart-operation">
           <Link to="/product" className="cart-operation-link">
-            <button className="cart-operation-add">Thêm sản phẩm mới</button>
+            <button className="cart-operation-add">Add New Products</button>
           </Link>
 
-          <button className="cart-operation-delete">Xóa</button>
+          <button className="cart-operation-delete">Delete</button>
         </div>
         <div className="cartRow">
-          <div className="cartRow-product">Sản phẩm</div>
-          <div className="cartRow-price">Đơn giá</div>
-          <div className="cartRow-quantity">Số lượng</div>
-          <div className="cartRow-money">Thành tiền</div>
-          <div className="cartRow-operation">Thao tác</div>
+          <div className="cartRow-product">Product</div>
+          <div className="cartRow-price">Unit price</div>
+          <div className="cartRow-quantity">Quantity</div>
+          <div className="cartRow-money">Total amount</div>
+          <div className="cartRow-operation">Operation</div>
         </div>
 
         {/* Danh sách sản phẩm  */}
@@ -81,16 +81,16 @@ export default function CartList() {
       <div className="payment">
         <div className="payment-voucher">
           <i className="fa fa-ticket" aria-hidden="true" />
-          <span>Voucher của bạn</span>
+          <span>Your voucher</span>
           <button className="btn-payment-voucher">
-            Chọn hoặc nhập mã Voucher
+            Select or enter Voucher code
           </button>
         </div>
         <div className="payment-detail">
-          <button className="payment-detail-btnall">Chọn tất cả</button>
-          <button className="payment-detail-btndelete">Xóa</button>
+          <button className="payment-detail-btnall">Select all</button>
+          <button className="payment-detail-btndelete">Delete</button>
           <div className="payment-content">
-            <label>Tổng số tiền</label>
+            <label>The Total Amount</label>
             <label>${totalPrice}</label>
           </div>
         </div>

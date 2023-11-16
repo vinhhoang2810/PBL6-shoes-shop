@@ -13,17 +13,17 @@ export default function ProductGridList() {
             name="Giày jordan Cổ Thấp, Giày thể thao nam nữ "
             image={shoes}
             brand="Nike"
-            salePrice={5.0}
-            price={4.0}
+            salePrice={5.99}
+            price={4.99}
             discount="15%"
           />
           <ProductGridCard
             name="Giày jordan Cổ Thấp, Giày thể thao nam nữ "
             image={shoes}
             brand="Nike"
-            salePrice={5.0}
-            price={4.0}
-            discount="15%"
+            salePrice={5.99}
+            price={4.99}
+            discount="On Sale"
           />
         </div>
       </div>

@@ -124,7 +124,7 @@
   }
   &-quantity {
     display: grid;
-    grid-template-columns: 8% 10% 8% 50%;
+    grid-template-columns: 1fr 1fr;
     gap: 0 30px;
   }
   &-quantity-input {
@@ -139,5 +139,13 @@
     display: flex;
     gap: 0 30px;
     margin-top: 10px;
+  }
+  &-quantity-detail {
+    display: flex;
+    margin-top: 15px;
+    gap: 0 30px;
+  }
+  &-pay {
+    background: linear-gradient(to right, #c389b1cc, #a48ac2cc);
   }
 }
