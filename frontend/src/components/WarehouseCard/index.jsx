@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
 
-export default function WarehouseCard({ image, name, brand, quantity, price }) {
+export default function WarehouseCard({
+  image,
+  name,
+  brand,
+  quantity,
+  type,
+  price,
+  onDelete,
+  onUpdate,
+  onSelectType,
+}) {
+  // const [selectedType, setSelectedType] = useState(type);
+  // const handleTypeChange = (e) => {
+  //   const newType = e.target.value;
+  //   setSelectedType(newType);
+  //   // Gọi hàm callback từ props để cập nhật giá trị type trong WarehouseList
+  //   onSelectType(newType);
+  // };
+
+  const handleDeleteClick = () => {
+    // Gọi hàm xử lý xóa từ props
+    onDelete();
+  };
+
+  const handleUpdateClick = () => {
+    // Gọi hàm xử lý cập nhật từ props
+    onUpdate();
+  };
   return (
     <div className="warehouseList">
       <input className="warehouse-yesno" type={"checkbox"}></input>
@@ -23,7 +50,11 @@ export default function WarehouseCard({ image, name, brand, quantity, price }) {
         </div>
       </div>
       <div className="warehouse-type">
-        <select className="select-warehouse-type">
+        <select
+          className="select-warehouse-type"
+          // value={selectedType}
+          // onChange={handleTypeChange}
+        >
           <option value={0}>Vàng</option>
           <option value={1}>Đen</option>
           <option value={2}>Đỏ</option>
@@ -36,8 +67,8 @@ export default function WarehouseCard({ image, name, brand, quantity, price }) {
         <span className="warehouse-quantity-span">{quantity}</span>
       </div>
       <div className="warehouse-operation">
-        <Button>Delete</Button>
-        <Button>Update</Button>
+        <Button onClick={handleDeleteClick}>Delete</Button>
+        <Button onClick={handleUpdateClick}>Update</Button>
       </div>
     </div>
   );

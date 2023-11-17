@@ -61,7 +61,7 @@ export default function AddProductPage() {
           <div className="add-price">
             <label className="add-label">Giá:</label>
             <input
-              type="text"
+              type="number"
               className="add-price-input"
               value={priceProduct}
               onChange={(event) => setpriceProduct(event.target.value)}

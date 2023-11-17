@@ -1,7 +1,9 @@
 .add-product {
   font: inherit;
   font-family: "Poppins", sans-serif;
-  background-color: rgb(255, 250, 243);
+  background: url(../../images/background5.png);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .add-content {
@@ -36,29 +38,27 @@
   }
   &-name-input {
     width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
     margin-bottom: 30px;
-    font-size: 14px;
+    font-size: 16px;
   }
   &-description-text {
     width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
     margin-bottom: 30px;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 16px;
   }
   &-price-input {
     width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
     margin-bottom: 30px;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 16px;
   }
   &-type {
     display: flex;

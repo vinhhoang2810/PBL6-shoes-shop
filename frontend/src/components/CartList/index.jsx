@@ -5,46 +5,90 @@ import CartCard from "../CartCard";
 import shoes from "../../images/shoes4.png";
 import "./style.scss";
 
-const data = [
-  {
-    image: shoes,
-    name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-    brand: "Nike",
-    price: 5,
-    quantity: 2,
-  },
-  {
-    image: shoes,
-    name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-    brand: "Nike",
-    price: 3,
-    quantity: 3,
-  },
-  {
-    image: shoes,
-    name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-    brand: "Nike",
-    price: 4,
-    quantity: 2,
-  },
-];
-
 export default function CartList() {
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
+      brand: "Nike",
+      quantity: 10,
+      price: 50,
+      // type: "Vàng",
+    },
+    {
+      id: 2,
+      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
+      brand: "Adidas",
+      quantity: 20,
+      price: 30,
+      // type: "Đen",
+    },
+    {
+      id: 3,
+      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
+      brand: "Gucci",
+      quantity: 20,
+      price: 40,
+      // type: "Đỏ",
+    },
+    {
+      id: 4,
+
+      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
+      brand: "New Balance",
+      quantity: 30,
+      price: 10,
+      // type: "Xanh",
+    },
+    // ...Thêm các sản phẩm khác
+  ]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const handleSetTotalPrice = useCallback((price) => {
-    setTotalPrice((prev) => prev + price);
-  }, []);
+  const handleIncreaseQuantity = (productId) => {
+    // Tìm sản phẩm cần tăng số lượng
+    const updatedProducts = products.map((product) =>
+      product.id === productId
+        ? { ...product, quantity: product.quantity + 1 }
+        : product
+    );
+
+    // Cập nhật danh sách sản phẩm
+    setProducts(updatedProducts);
+  };
+
+  const handleDeCreaseQuantity = (productId) => {
+    // Tìm sản phẩm cần giảm số lượng
+    const updatedProducts = products.map((product) =>
+      product.id === productId && product.quantity > 1
+        ? { ...product, quantity: product.quantity - 1 }
+        : product
+    );
+
+    // Cập nhật danh sách sản phẩm
+    setProducts(updatedProducts);
+  };
+
+  const handleDeleteProduct = (productId) => {
+    const updatedProducts = products.filter(
+      (product) => product.id !== productId
+    );
+    setProducts(updatedProducts);
+  };
+
+  const handleTotal = useCallback(() => {
+    // Tính tổng giá trị của sản phẩm trong giỏ hàng
+    const total = products.reduce((acc, product) => {
+      return acc + product.price * product.quantity;
+    }, 0);
+
+    // Cập nhật state với tổng giá trị mới
+    setTotalPrice(total);
+  }, [products]);
 
   useEffect(() => {
-    const totalPriceArray = data.map((product) => {
-      return product.price * product.quantity;
-    });
-
-    totalPriceArray.forEach((price) => {
-      handleSetTotalPrice(price);
-    });
-  }, [handleSetTotalPrice]);
-
+    // Gọi hàm handleTotal mỗi khi danh sách sản phẩm thay đổi
+    handleTotal();
+  }, [handleTotal, products]);
+  console.log("Total Price:", totalPrice); // Thêm dòng này để debug
   return (
     <>
       <div className="cart container-layout">
@@ -64,19 +108,21 @@ export default function CartList() {
         </div>
 
         {/* Danh sách sản phẩm  */}
-        {data.map((product) => {
+        {products.map((product) => {
           return (
             <CartCard
-              image={product.image}
+              key={product.id}
+              image={shoes}
               name={product.name}
               brand={product.brand}
-              price={product.price}
               quantity={product.quantity ?? 1}
+              price={product.price}
+              onDelete={() => handleDeleteProduct(product.id)}
+              onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
+              onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
             />
           );
         })}
-
-        {/* Thêm các sản phẩm khác ở đây */}
       </div>
       <div className="payment">
         <div className="payment-voucher">

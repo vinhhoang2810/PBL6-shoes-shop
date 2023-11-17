@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import shoes from "../../images/shoes3.png";
 import "./style.scss";
 import Button from "../../components/Button";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export default function ProductFeaturedCard() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ export default function ProductFeaturedCard() {
   };
   return (
     <section>
-      <ToastContainer />
       <div className="product-featured">
         <h2 className="product-featured-title">Deal Of The Day</h2>
         <div className="product-featured-content">

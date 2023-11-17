@@ -1,6 +1,5 @@
 import Header from "../Layout/Header";
 import "./style.scss";
-import image from "../../images/shoes3.png";
 import Button from "../../components/Button";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";

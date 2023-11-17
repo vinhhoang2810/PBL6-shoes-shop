@@ -9,6 +9,8 @@ export default function CartCard({
   price,
   quantity,
   onIncreaseQuantity,
+  onDeCreaseQuantity,
+  onDelete,
 }) {
   const [quantityDefault, setQuantityDefault] = useState(quantity);
 
@@ -19,10 +21,15 @@ export default function CartCard({
   const handleDeCreaseQuantity = () => {
     if (quantityDefault > 1) {
       setQuantityDefault(quantityDefault - 1);
+      onDeCreaseQuantity();
     }
   };
   const handleIncreaseQuantity = () => {
     setQuantityDefault(quantityDefault + 1);
+    onIncreaseQuantity();
+  };
+  const handleDelete = () => {
+    onDelete();
   };
   return (
     <>
@@ -73,7 +80,7 @@ export default function CartCard({
           <span>${quantityDefault * Number(price)}</span>
         </div>
         <div className="cartList-operation">
-          <Button className="">Delete</Button>
+          <Button onClick={handleDelete}>Delete</Button>
         </div>
       </div>
     </>
