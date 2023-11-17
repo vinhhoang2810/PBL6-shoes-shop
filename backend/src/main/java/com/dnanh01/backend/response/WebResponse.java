@@ -1,5 +1,6 @@
 package com.dnanh01.backend.response;
 
+
 public class WebResponse {
     private Integer code;
     private String status;

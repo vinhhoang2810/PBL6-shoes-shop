@@ -1,5 +1,6 @@
 package com.dnanh01.backend.controller;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,6 +23,7 @@ import com.dnanh01.backend.request.LoginRequest;
 import com.dnanh01.backend.response.AuthResponse;
 import com.dnanh01.backend.service.CartService;
 import com.dnanh01.backend.service.CustomerUserServiceImplementation;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -48,6 +50,7 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException {
+        
         String email = user.getEmail();
         String password = user.getPassword();
         String firstNameString = user.getFirstName();
@@ -95,7 +98,7 @@ public class AuthController {
 
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(token);
-        authResponse.setMessage("Signin Success");
+        authResponse.setMessage("Sign in Success");
 
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.CREATED);
     }

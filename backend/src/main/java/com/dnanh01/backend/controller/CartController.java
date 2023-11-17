@@ -19,7 +19,6 @@ import com.dnanh01.backend.response.ApiResponse;
 import com.dnanh01.backend.service.CartService;
 import com.dnanh01.backend.service.UserService;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/cart")
