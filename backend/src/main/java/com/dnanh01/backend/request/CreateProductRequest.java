@@ -11,8 +11,8 @@ public class CreateProductRequest {
     private String description;
     private int price;
 
-    private int DiscountedPrice;
-    private int DiscountedPersent;
+    private int discountedPrice;
+    private int discountedPersent;
     private int quantity;
     private String brand;
 
@@ -50,19 +50,19 @@ public class CreateProductRequest {
     }
 
     public int getDiscountedPrice() {
-        return DiscountedPrice;
+        return discountedPrice;
     }
 
-    public void setDiscountedPrice(int DiscountedPrice) {
-        this.DiscountedPrice = DiscountedPrice;
+    public void setDiscountedPrice(int discountedPrice) {
+        this.discountedPrice = discountedPrice;
     }
 
     public int getDiscountedPersent() {
-        return DiscountedPersent;
+        return discountedPersent;
     }
 
-    public void setDiscountedPersent(int DiscountedPersent) {
-        this.DiscountedPersent = DiscountedPersent;
+    public void setDiscountedPersent(int discountedPersent) {
+        this.discountedPersent = discountedPersent;
     }
 
     public int getQuantity() {
@@ -128,4 +128,5 @@ public class CreateProductRequest {
     public void setThirdLavelCategory(String thirdLavelCategory) {
         this.thirdLavelCategory = thirdLavelCategory;
     }
+
 }

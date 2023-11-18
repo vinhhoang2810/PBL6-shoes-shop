@@ -47,7 +47,9 @@ public class AppConfig {
                                 cfg.setAllowedOrigins(Arrays.asList(
                                         "http://localhost:3000",
                                         "http://localhost:4200",
-                                        "http://localhost:4200"));
+                                        "http://localhost:5454",
+                                        "https://pbl6-shoes-shop-production.up.railway.app",
+                                        "https://study-fontend.vercel.app"));
                                 cfg.setAllowedMethods(Collections.singletonList("*"));
                                 cfg.setAllowCredentials(true);
                                 cfg.setAllowedHeaders(Collections.singletonList("*"));
