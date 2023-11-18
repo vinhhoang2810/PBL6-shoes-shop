@@ -20,7 +20,13 @@ export default function AboutPage({
   const handleAddtocart = async () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
     setTimeout(() => {
-      navigate("/cart");
+      navigate(`/cart`);
+    }, 2000);
+  };
+  const handleBuynow = () => {
+    toast.success("Thêm sản phẩm vào giỏ thành công");
+    setTimeout(() => {
+      navigate(`/pay?step=1`);
     }, 2000);
   };
 
@@ -115,15 +121,11 @@ export default function AboutPage({
                   <Button text="+" onClick={handleIncreaseQuantity}></Button>
                 </div>
                 <div className="about-payment">
-                  <Button
-                    text="Add To Cart"
-                    to="/cart"
-                    onClick={handleAddtocart}
-                  ></Button>
+                  <Button text="Add To Cart" onClick={handleAddtocart}></Button>
                   <Button
                     className="about-pay"
                     text="Buy Now"
-                    to="/pay"
+                    onClick={handleBuynow}
                   ></Button>
                 </div>
               </div>

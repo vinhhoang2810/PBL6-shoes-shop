@@ -13,6 +13,7 @@ export default function CartList() {
       brand: "Nike",
       quantity: 10,
       price: 50,
+      priceSale: 40,
       // type: "Vàng",
     },
     {
@@ -21,6 +22,7 @@ export default function CartList() {
       brand: "Adidas",
       quantity: 20,
       price: 30,
+      priceSale: 25,
       // type: "Đen",
     },
     {
@@ -29,15 +31,16 @@ export default function CartList() {
       brand: "Gucci",
       quantity: 20,
       price: 40,
+      priceSale: 35,
       // type: "Đỏ",
     },
     {
       id: 4,
-
       name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
       brand: "New Balance",
       quantity: 30,
       price: 10,
+      priceSale: 8,
       // type: "Xanh",
     },
     // ...Thêm các sản phẩm khác
@@ -77,7 +80,7 @@ export default function CartList() {
   const handleTotal = useCallback(() => {
     // Tính tổng giá trị của sản phẩm trong giỏ hàng
     const total = products.reduce((acc, product) => {
-      return acc + product.price * product.quantity;
+      return acc + product.priceSale * product.quantity;
     }, 0);
 
     // Cập nhật state với tổng giá trị mới
@@ -102,6 +105,7 @@ export default function CartList() {
         <div className="cartRow">
           <div className="cartRow-product">Product</div>
           <div className="cartRow-price">Unit price</div>
+          <div className="cartRow-priceSale">Sale price</div>
           <div className="cartRow-quantity">Quantity</div>
           <div className="cartRow-money">Total amount</div>
           <div className="cartRow-operation">Operation</div>
@@ -117,6 +121,7 @@ export default function CartList() {
               brand={product.brand}
               quantity={product.quantity ?? 1}
               price={product.price}
+              priceSale={product.priceSale}
               onDelete={() => handleDeleteProduct(product.id)}
               onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
               onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
@@ -143,7 +148,7 @@ export default function CartList() {
         <div className="payment-btn">
           <Button
             text="Buy Now"
-            to="/pay"
+            to="/pay?step=1"
             className={"payment-btn-buy"}
           ></Button>
         </div>

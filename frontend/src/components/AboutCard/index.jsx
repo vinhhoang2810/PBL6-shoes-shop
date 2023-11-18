@@ -16,10 +16,15 @@ export default function AboutCard({
 }) {
   // lỗi toast
   const navigate = useNavigate();
-  const handleAddtocart = async () => {
+  const handleAddtocart = () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
     setTimeout(() => {
       navigate("/cart");
+    }, 2000);
+  };
+  const handleBuynow = () => {
+    setTimeout(() => {
+      navigate(`/pay?step=1`);
     }, 2000);
   };
 
@@ -109,16 +114,10 @@ export default function AboutCard({
                   <Button text="+" onClick={handleIncreaseQuantity}></Button>
                 </div>
                 <div className="about-payment">
-                  <Button
-                    text="Add To Cart"
-                    to="/cart"
-                    onClick={handleAddtocart}
-                  ></Button>
-                  <Button
-                    className="about-pay"
-                    text="Buy Now"
-                    to="/pay"
-                  ></Button>
+                  <Button text="Add To Cart" onClick={handleAddtocart}></Button>
+                  <button className="about-pay" onClick={handleBuynow}>
+                    Buy Now
+                  </button>
                 </div>
               </div>
             </div>

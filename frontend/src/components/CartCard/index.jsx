@@ -7,6 +7,7 @@ export default function CartCard({
   name,
   brand,
   price,
+  priceSale,
   quantity,
   onIncreaseQuantity,
   onDeCreaseQuantity,
@@ -57,6 +58,9 @@ export default function CartCard({
         <div className="cartList-price">
           <span>${price}</span>
         </div>
+        <div className="cartList-priceSale">
+          <span>${priceSale}</span>
+        </div>
         <div className="cartList-quantity">
           <button
             className="cartList-decrease"
@@ -77,7 +81,7 @@ export default function CartCard({
           </button>
         </div>
         <div className="cartList-money">
-          <span>${quantityDefault * Number(price)}</span>
+          <span>${quantityDefault * Number(priceSale)}</span>
         </div>
         <div className="cartList-operation">
           <Button onClick={handleDelete}>Delete</Button>

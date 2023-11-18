@@ -10,7 +10,7 @@ export default function ProductFeaturedCard() {
   const handleAddtocart = async () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
     setTimeout(() => {
-      navigate("/cart");
+      navigate(`/cart`);
     }, 2000);
   };
   return (
@@ -41,11 +41,7 @@ export default function ProductFeaturedCard() {
               <p className="product-featured-price-real">$12.00</p>
               <del>$15.00</del>
             </div>
-            <Button
-              text="ADD TO CART"
-              to="/cart"
-              onClick={handleAddtocart}
-            ></Button>
+            <Button text="ADD TO CART" onClick={handleAddtocart}></Button>
             <div className="product-featured-status">
               <p>
                 {" "}
