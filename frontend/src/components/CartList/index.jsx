@@ -5,7 +5,7 @@ import CartCard from "../CartCard";
 import shoes from "../../images/shoes4.png";
 import "./style.scss";
 
-export default function CartList() {
+export default function CartList(onDelete) {
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -92,6 +92,13 @@ export default function CartList() {
     handleTotal();
   }, [handleTotal, products]);
   console.log("Total Price:", totalPrice); // Thêm dòng này để debug
+
+  const handleDelete = () => {
+    // console.log("abbaba");
+    if (onDelete && typeof onDelete === "function") {
+      onDelete();
+    }
+  };
   return (
     <>
       <div className="cart container-layout">
@@ -100,15 +107,17 @@ export default function CartList() {
             <button className="cart-operation-add">Add New Products</button>
           </Link>
 
-          <button className="cart-operation-delete">Delete</button>
+          <button className="cart-operation-delete" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
         <div className="cartRow">
-          <div className="cartRow-product">Product</div>
-          <div className="cartRow-price">Unit price</div>
-          <div className="cartRow-priceSale">Sale price</div>
-          <div className="cartRow-quantity">Quantity</div>
-          <div className="cartRow-money">Total amount</div>
-          <div className="cartRow-operation">Operation</div>
+          <div className="cartRow-product font-15">Product</div>
+          <div className="cartRow-price font-15">Unit price</div>
+          <div className="cartRow-priceSale font-15">Sale price</div>
+          <div className="cartRow-quantity font-15">Quantity</div>
+          <div className="cartRow-money font-15">Total</div>
+          <div className="cartRow-operation font-15">Operation</div>
         </div>
 
         {/* Danh sách sản phẩm  */}

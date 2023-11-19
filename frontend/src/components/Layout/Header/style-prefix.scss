@@ -240,6 +240,7 @@
   padding: 10px;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .mobile-bottom-navigation .count {
@@ -333,6 +334,7 @@
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  text-decoration: none;
 }
 
 .mobile-menu-category-list .menu-category {
@@ -341,9 +343,10 @@
 
 .mobile-menu-category-list .menu-title {
   color: var(--onyx);
-  font-size: var(--fs-6);
+  font-size: 18px;
   font-weight: var(--weight-500);
   padding: 12px 0;
+  text-decoration: none;
 }
 
 .accordion-menu > div {

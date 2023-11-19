@@ -2,8 +2,8 @@ import React from "react";
 import "./style.scss";
 export default function AddressCard() {
   return (
-    <div>
-      <div className="address">
+    <section>
+      <div className="address container-layout">
         <p className="address-name">Nguyễn Hoàng Mỹ</p>
         <p className="address-p">Lien Chieu - Da Nang</p>
         <div className="address-phone">
@@ -15,6 +15,6 @@ export default function AddressCard() {
           <p className="address-p">n.h.my2002@gmail.com</p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

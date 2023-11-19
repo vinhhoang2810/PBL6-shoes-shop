@@ -112,18 +112,30 @@ export default function AboutPage({
               </div>
               <div class="about-quantity">
                 <div className="about-quantity-detail">
-                  <Button text="-" onClick={handleDeCreaseQuantity}></Button>
+                  <Button
+                    className="btn-about"
+                    text="-"
+                    onClick={handleDeCreaseQuantity}
+                  ></Button>
                   <input
                     type="text"
                     className="about-quantity-input"
                     value={quantityDefault}
                   />
-                  <Button text="+" onClick={handleIncreaseQuantity}></Button>
+                  <Button
+                    className="btn-about"
+                    text="+"
+                    onClick={handleIncreaseQuantity}
+                  ></Button>
                 </div>
                 <div className="about-payment">
-                  <Button text="Add To Cart" onClick={handleAddtocart}></Button>
                   <Button
-                    className="about-pay"
+                    className="btn-about"
+                    text="Add To Cart"
+                    onClick={handleAddtocart}
+                  ></Button>
+                  <Button
+                    className="about-pay btn-about"
                     text="Buy Now"
                     onClick={handleBuynow}
                   ></Button>

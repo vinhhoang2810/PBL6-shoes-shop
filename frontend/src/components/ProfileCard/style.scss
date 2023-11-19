@@ -20,7 +20,7 @@
   &-content {
     display: grid;
     grid-template-columns: 30% 70%;
-    gap: 0 70px;
+    gap: 0 30px;
   }
   &-info {
     padding: 50px;
@@ -31,8 +31,8 @@
   &-info .profile-accout {
     text-align: center;
   }
-  %-detail {
-    padding: 20px 50px;
+  &-detail {
+    padding: 20px auto;
   }
   &-detail .profile-btn {
     margin-bottom: 30px;
@@ -175,4 +175,21 @@
 }
 .hidden {
   display: none;
+}
+@media (max-width: 570px) {
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-detail .profile-show-input {
+    width: auto;
+  }
+  .profile-content {
+    margin-bottom: 80px;
+  }
+  .profile-btn-submit,
+  .profile-btn-cancel {
+    width: auto;
+    margin: 0 auto;
+  }
 }

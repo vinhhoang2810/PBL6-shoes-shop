@@ -133,8 +133,9 @@
   height: 100%;
   border: none;
   backdrop-filter: blur(20px);
-  overflow: hidden;
   color: #16293869;
+  border-radius: 10px;
+  background: transparent;
 }
 
 .btn-register {
@@ -150,38 +151,10 @@
   font-weight: 500;
 }
 
-/* Media query for screens smaller than 768px (typical mobile screens) */
-@media (max-width: 450px) {
-  .input-register {
-    height: 35px;
-    margin: 20px 0;
-  }
-  .input-register label {
-    font-size: 0.8em;
-  }
-  .btn {
-    height: 35px;
-    font-size: 0.8em;
-  }
-}
-@media (max-width: 350px) {
-  .input-register {
-    height: 30px;
-    margin: 20px 0;
-  }
-  .input-register label {
-    font-size: 0.7em;
-  }
-  .login-register {
-    font-size: 0.8em;
-    margin: 15px 0 10px;
-  }
-}
-
-@media (max-width: 450px) {
+@media (max-width: 480px) {
   .wrapper-register {
     width: 300px;
-    height: 500px;
+    height: auto;
   }
   .wrapper-register .form-box {
     width: 100%;
@@ -190,6 +163,9 @@
   .wrapper-register .form-box h2 {
     font-size: 30px;
     margin: 0;
+  }
+  .input-register {
+    margin: 20px 0;
   }
   .input-register input {
     font-size: 0.8em;
@@ -212,7 +188,7 @@
 @media (max-width: 350px) {
   .wrapper-register {
     width: 250px;
-    height: 470px;
+    height: auto;
   }
   .wrapper-register .form-box {
     width: 100%;
@@ -238,4 +214,22 @@
   .btn {
     height: 30px;
   }
+}
+@media (max-width: 1024px) {
+  .wrapper-register {
+    width: auto;
+  }
+  .input-register {
+    margin: 25px 0;
+  }
+}
+input[type="number"] {
+  -webkit-appearance: none; /* Remove default arrow styles for Safari */
+  margin: 0; /* Remove default margin */
+  -moz-appearance: textfield; /* Firefox */
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Remove default arrow styles for WebKit browsers */
+  margin: 0; /* Remove default margin */
 }

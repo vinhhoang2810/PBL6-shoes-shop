@@ -35,7 +35,7 @@ export default function CartCard({
   return (
     <>
       <div className="cartList" role="list">
-        <div className="cartList-detail">
+        <div className="cartList-detail ">
           <Link to="/about" className="cartList-detail-link">
             <img src={image} alt="" className="cartList-detail-img" />
           </Link>
@@ -56,10 +56,10 @@ export default function CartCard({
           </div>
         </div>
         <div className="cartList-price">
-          <span>${price}</span>
+          <span className="font-15">${price}</span>
         </div>
         <div className="cartList-priceSale">
-          <span>${priceSale}</span>
+          <span className="font-15">${priceSale}</span>
         </div>
         <div className="cartList-quantity">
           <button
@@ -69,7 +69,7 @@ export default function CartCard({
             -
           </button>
           <input
-            type="text"
+            type="number"
             className="cartList-input"
             value={quantityDefault}
           />
@@ -81,7 +81,9 @@ export default function CartCard({
           </button>
         </div>
         <div className="cartList-money">
-          <span>${quantityDefault * Number(priceSale)}</span>
+          <span className="font-15">
+            ${quantityDefault * Number(priceSale)}
+          </span>
         </div>
         <div className="cartList-operation">
           <Button onClick={handleDelete}>Delete</Button>

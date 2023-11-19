@@ -6,7 +6,7 @@ import shoes from "../../images/shoes4.png";
 export default function ProductGridList() {
   return (
     <section>
-      <div className="product-main">
+      <div className="product-main container-layout">
         <h2 className="title">Products</h2>
         <div className="product-grid">
           <ProductGridCard

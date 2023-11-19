@@ -1,6 +1,5 @@
 .product {
   &-featured {
-    margin: 30px 85px;
     font: inherit;
     font-family: "Poppins", sans-serif;
     background: url(../../images/background5.png);
@@ -57,6 +56,7 @@
   &-featured-name-link {
     text-decoration: none;
     color: var(--eerie-black);
+    text-wrap: balance;
   }
   &-featured-category {
     text-decoration: none;
@@ -117,5 +117,15 @@
   &-featured-display-text {
     color: var(--davys-gray);
     font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /**
+  * #PRODUCT 
+  */
+  .product-featured-content {
+    display: flex;
+    flex-direction: column;
   }
 }

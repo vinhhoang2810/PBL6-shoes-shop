@@ -404,3 +404,8 @@
     color: var(--sonic-silver);
   }
 }
+@media(max-width:480px){
+  .product-box{
+    flex-direction: column;
+  }
+}

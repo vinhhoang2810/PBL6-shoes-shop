@@ -5,7 +5,24 @@ import logo from "../../images/logoNike.png";
 import "swiper/css";
 
 // Install Swiper components
-
+const breakpointsSwiper = {
+  320: {
+    slidesPerView: 1,
+    spaceBetween: 20,
+  },
+  576: {
+    slidesPerView: 2,
+    spaceBetween: 30,
+  },
+  768: {
+    slidesPerView: 3,
+    spaceBetween: 40,
+  },
+  992: {
+    slidesPerView: 4,
+    spaceBetween: 40,
+  },
+};
 export default function BrandList() {
   return (
     <section className="container-layout">
@@ -14,6 +31,7 @@ export default function BrandList() {
         slidesPerView={4}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
+        breakpoints={breakpointsSwiper}
       >
         <SwiperSlide>
           <BrandCard image={logo} name="NIKE" amount="53" />

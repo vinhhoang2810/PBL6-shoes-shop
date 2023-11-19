@@ -23,7 +23,7 @@ export default function DeliveryAddressForm() {
   return (
     <div>
       <ToastContainer />
-      <Grid container spacing={4}>
+      <Grid container spacing={4} className="delivery-main">
         <Grid xs={12} lg={5} className="delivery">
           <div className="delivery-btn">
             <AddressCard />
@@ -34,7 +34,7 @@ export default function DeliveryAddressForm() {
             ></Button>
           </div>
         </Grid>
-        <Grid item xs={12} lg={7}>
+        <Grid xs={12} lg={7}>
           <Box className="delivery-box">
             <form onSubmit={handleSubmit}>
               <Grid container spacing={3}>

@@ -15,7 +15,7 @@ export default function ProductFeaturedCard() {
   };
   return (
     <section>
-      <div className="product-featured">
+      <div className="product-featured container-layout">
         <h2 className="product-featured-title">Deal Of The Day</h2>
         <div className="product-featured-content">
           <Link to={"/about"} className="product-featured-link">

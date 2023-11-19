@@ -3,6 +3,7 @@
   gap: 0 30px;
   font: inherit;
   font-family: "Poppins", sans-serif;
+  margin-bottom: 50px;
 }
 .about {
   &-div {
@@ -72,6 +73,7 @@
     border: #3535357e solid 2px;
     padding: 30px;
     border-radius: 10px;
+    margin-bottom: 50px;
   }
   &-table-price {
     font-size: 24px;
@@ -147,5 +149,29 @@
   }
   &-pay {
     background: linear-gradient(to right, #c389b1cc, #a48ac2cc);
+  }
+}
+
+@media (max-width: 570px) {
+  .about-table {
+    padding: 10px;
+  }
+  .btn-about {
+    font-size: 13px;
+    padding: 5px 10px;
+    height: auto;
+  }
+  .about-quantity-detail {
+    height: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+  }
+  .about-image {
+    width: 100%;
   }
 }
