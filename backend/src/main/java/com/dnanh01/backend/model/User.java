@@ -1,6 +1,5 @@
 package com.dnanh01.backend.model;
 
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,10 @@ public class User {
 
     private String mobile;
 
+    private String gender;
+
+    private Integer age;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
 
@@ -58,6 +61,7 @@ public class User {
     }
 
     public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
+            String gender,
             List<Address> addresses, List<PaymentInFormation> paymentInFormations, List<Rating> ratings,
             List<Review> reviews, LocalDateTime createAt) {
         this.id = id;
@@ -67,6 +71,7 @@ public class User {
         this.email = email;
         this.role = role;
         this.mobile = mobile;
+        this.gender = gender;
         this.addresses = addresses;
         this.paymentInFormations = paymentInFormations;
         this.ratings = ratings;
@@ -130,6 +135,8 @@ public class User {
         this.mobile = mobile;
     }
 
+    
+
     public List<Address> getAddresses() {
         return addresses;
     }
@@ -168,6 +175,14 @@ public class User {
 
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
 }
