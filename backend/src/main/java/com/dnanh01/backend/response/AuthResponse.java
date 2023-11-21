@@ -6,10 +6,13 @@ public class AuthResponse {
 
 	private String message;
 
-	public AuthResponse(String jwt, String message) {
+	private String role; 
+
+	public AuthResponse(String jwt, String message, String role) {
 		super();
 		this.jwt = jwt;
 		this.message = message;
+		this.role = role;
 	}
 
 	public AuthResponse() {
@@ -30,4 +33,13 @@ public class AuthResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 }
