@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,35 +14,27 @@ export default function LoginPage() {
     console.log(rememberMe);
   }, [rememberMe]);
   const handleLogin = async () => {
-    if (username === "admin" && password === "admin") {
-      toast.success("Đăng nhập thành công");
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-    } else {
-      toast.error("Sai tài khoản hoặc mật khẩu");
+    try {
+      const formData = {
+        email: username,
+        password,
+      };
+      const response = await axios.post(
+        "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signin",
+        formData
+      );
+      if (response) {
+        toast.success("Đăng nhập thành công");
+        console.log("response", response);
+        localStorage.setItem("user", JSON.stringify(formData));
+
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error(error?.message);
     }
-
-    // try {
-    //   const formData = {
-    //     email: username,
-    //     password,
-    //   };
-    //   const response = await axios.post(
-    //     "https://nthdv-pbl6.up.railway.app/api/user/login",
-    //     formData
-    //   );
-    //   if (response) {
-    //     toast.success("Đăng nhập thành công");
-    //     localStorage.setItem("user", JSON.stringify(formData));
-
-    //     setTimeout(() => {
-    //       naviagte("/");
-    //     }, 2000);
-    //   }
-    // } catch (error) {
-    //   toast.error(error?.message);
-    // }
   };
 
   return (

@@ -6,7 +6,7 @@
 
 .warehouseList {
   display: grid;
-  grid-template-columns: 5% 40% 15% 10% 15% 10%;
+  grid-template-columns: 40% 10% 10% 10% 15% 10%;
   border-bottom: 1px solid #000000;
   gap: 10px;
 }
@@ -36,10 +36,17 @@
 }
 .warehouseList .warehouse-product .warehouse-content {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 50% 30%;
 }
 .warehouseList .warehouse-product .warehouse-content .link-warehouse-content {
   text-decoration: none;
+}
+.warehouseList
+  .warehouse-product
+  .warehouse-content
+  .link-warehouse-content
+  .name-warehouse-content {
+  text-wrap: balance;
 }
 .warehouseList
   .warehouse-product
@@ -48,7 +55,6 @@
   color: var(--salmon-pink);
   font-weight: var(--weight-500);
   text-transform: uppercase;
-  margin-bottom: 10px;
   text-decoration: none;
 }
 .warehouseList .warehouse-type {
@@ -60,6 +66,16 @@
 .warehouseList .warehouse-type .select-warehouse-type {
   border: none;
   font-size: 16px;
+}
+.warehouseList .warehouse-color {
+  color: black;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 18px;
+}
+.warehouseList .warehouse-color .name-warehouse-color {
+  text-transform: capitalize;
 }
 .warehouseList .warehouse-price {
   color: black;

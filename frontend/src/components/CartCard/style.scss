@@ -36,7 +36,8 @@
 }
 .cart .cartList .cartList-detail .cartList-content {
   display: grid;
-  grid-template-rows: 60% 20% 20%;
+  grid-template-rows: 50% 20% 20%;
+  gap: 5% 0;
 }
 .cart .cartList .cartList-detail .cartList-content .cartList-content-link {
   text-decoration: none;
@@ -57,6 +58,9 @@
   color: black;
   border: none;
   background: transparent;
+}
+.cart .cartList .cartList-content-color-p {
+  text-transform: capitalize;
 }
 .cart .cartList .cartList-price {
   color: black;

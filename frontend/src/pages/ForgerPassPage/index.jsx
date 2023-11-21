@@ -10,18 +10,18 @@ export default function ForgetPassPage() {
   const navigate = useNavigate();
 
   const handleReset = async () => {
-    if (
-      username === "admin" &&
-      password === "admin" &&
-      passwordconfim === "admin"
-    ) {
-      toast.success("Thay đổi mật khẩu thành công");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    } else {
-      toast.error("Sai tài khoản hoặc mật khẩu chưa giống nhau");
-    }
+    // if (
+    //   username === "admin" &&
+    //   password === "admin" &&
+    //   passwordconfim === "admin"
+    // ) {
+    //   toast.success("Thay đổi mật khẩu thành công");
+    //   setTimeout(() => {
+    //     navigate("/login");
+    //   }, 2000);
+    // } else {
+    //   toast.error("Sai tài khoản hoặc mật khẩu chưa giống nhau");
+    // }
   };
 
   return (
@@ -69,7 +69,6 @@ export default function ForgetPassPage() {
               <p>
                 If you already have an Account?
                 <Link to="/login" className="login-link">
-                  {" "}
                   Login
                 </Link>
               </p>

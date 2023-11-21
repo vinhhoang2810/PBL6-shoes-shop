@@ -1,14 +1,10 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
+import chroma from "chroma-js";
 
 export default function WarehouseCard({
-  image,
-  name,
-  brand,
-  quantity,
-  type,
-  price,
+  product,
   onDelete,
   onUpdate,
   onSelectType,
@@ -21,6 +17,9 @@ export default function WarehouseCard({
   //   onSelectType(newType);
   // };
 
+  const hexColorCode = product?.color;
+  const colorName = chroma(hexColorCode).name();
+
   const handleDeleteClick = () => {
     // Gọi hàm xử lý xóa từ props
     onDelete();
@@ -32,38 +31,38 @@ export default function WarehouseCard({
   };
   return (
     <div className="warehouseList">
-      <input className="warehouse-yesno" type={"checkbox"}></input>
       <div className="warehouse-product">
         <div className="warehouse-detail">
           <Link to="/about" className="link-warehouse-detail">
-            <img className="img-warehouse-detail" src={image} alt=""></img>
+            <img
+              className="img-warehouse-detail"
+              src={product?.imageUrl}
+              alt=""
+            ></img>
           </Link>
         </div>
         <div className="warehouse-content">
           <Link to="/about" className="link-warehouse-content">
-            <span className="name-warehouse-content">{name}</span>
+            <span className="name-warehouse-content">{product?.title}</span>
           </Link>
           <Link to="#" className="catogery-warehouse-content">
-            {brand}
+            {product?.brand}
           </Link>
         </div>
       </div>
-      <div className="warehouse-type">
-        <select
-          className="select-warehouse-type"
-          // value={selectedType}
-          // onChange={handleTypeChange}
-        >
-          <option value={0}>Vàng</option>
-          <option value={1}>Đen</option>
-          <option value={2}>Đỏ</option>
-        </select>
+      <div className="warehouse-color">
+        <span className="name-warehouse-color">{colorName}</span>
       </div>
       <div className="warehouse-price">
-        <span className="name-warehouse-price">${price}.00</span>
+        <span className="name-warehouse-price">
+          ${product?.discountPersent}
+        </span>
+      </div>
+      <div className="warehouse-price">
+        <span className="name-warehouse-price">${product?.price}</span>
       </div>
       <div className="warehouse-quantity">
-        <span className="warehouse-quantity-span">{quantity}</span>
+        <span className="warehouse-quantity-span">{product?.quantity}</span>
       </div>
       <div className="warehouse-operation">
         <Button onClick={handleDeleteClick}>Delete</Button>

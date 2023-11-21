@@ -1,3 +1,4 @@
+import chroma from "chroma-js";
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -14,6 +15,8 @@ export default function CartCard({
   onDelete,
 }) {
   const [quantityDefault, setQuantityDefault] = useState(quantity);
+  const hexColorCode = "#f0f8ff";
+  const colorName = chroma(hexColorCode).name();
 
   // useEffect(() => {
   //   onIncreaseQuantity(price, quantity);
@@ -46,12 +49,8 @@ export default function CartCard({
             <Link to="/#" className="cartList-content-catogery">
               {brand}
             </Link>
-            <div className="cartList-content-type">
-              <select className="cartList-content-check">
-                <option value={0}>Vàng</option>
-                <option value={1}>Đen</option>
-                <option value={2}>Đỏ</option>
-              </select>
+            <div className="cartList-content-color">
+              <span className="cartList-content-color-p">{colorName}</span>
             </div>
           </div>
         </div>

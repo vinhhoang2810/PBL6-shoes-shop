@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import apiProfile from "../API/apiProfile";
 import Button from "../Button";
 import "./style.scss";
 
 export default function ProfileCard() {
+  const [profiles, setProfiles] = useState([]);
+  // const [error, setError] = useState([]);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await apiProfile.getProfile();
+        setProfiles(response.data);
+      } catch (error) {
+        toast.error(error?.message);
+      }
+    };
+    // Call the fetchProductGrid function
+    fetchProfile();
+  }, []);
+
+  const [auth, setAuth] = useState(null);
   const image =
     "https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg";
 
@@ -38,31 +56,12 @@ export default function ProfileCard() {
   };
   const handleLogout = () => {
     toast.success("Đăng xuất thành công");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("auth");
+    setAuth(null);
     setTimeout(() => {
       navigate("/login");
     }, 2000);
-  };
-
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-  const handleAge = (e) => {
-    setAge(e.target.value);
-  };
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
-  };
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handlePhonenumber = (e) => {
-    setPhonenumber(e.target.value);
-  };
-  const handleGenderChange = (e) => {
-    setGender(e.target.value);
-  };
-  const handleDateChange = (e) => {
-    setBirthDate(e.target.value);
   };
 
   const handleEdit = () => {
@@ -126,7 +125,7 @@ export default function ProfileCard() {
                 <input
                   type="text"
                   value={name}
-                  onChange={handleName}
+                  // onChange={handleName}
                   className="profile-show-input"
                 ></input>
               </div>
@@ -135,7 +134,7 @@ export default function ProfileCard() {
                 <input
                   type="number"
                   value={age}
-                  onChange={handleAge}
+                  // onChange={handleAge}
                   className="profile-show-input"
                 ></input>
               </div>
@@ -144,7 +143,7 @@ export default function ProfileCard() {
                 <input
                   type="text"
                   value={address}
-                  onChange={handleAddress}
+                  // onChange={handleAddress}
                   className="profile-show-input"
                 ></input>
               </div>
@@ -153,7 +152,7 @@ export default function ProfileCard() {
                 <input
                   type="email"
                   value={email}
-                  onChange={handleEmail}
+                  // onChange={handleEmail}
                   className="profile-show-input"
                 ></input>
               </div>
@@ -162,7 +161,7 @@ export default function ProfileCard() {
                 <input
                   type="text"
                   value={phonenumber}
-                  onChange={handlePhonenumber}
+                  // onChange={handlePhonenumber}
                   className="profile-show-input"
                 ></input>
               </div>
@@ -172,7 +171,7 @@ export default function ProfileCard() {
                   type="radio"
                   value="nam"
                   checked={gender === "nam"}
-                  onChange={handleGenderChange}
+                  // onChange={handleGenderChange}
                 />
                 <label>Nam</label>
 
@@ -180,7 +179,7 @@ export default function ProfileCard() {
                   type="radio"
                   value="nu"
                   checked={gender === "nu"}
-                  onChange={handleGenderChange}
+                  // onChange={handleGenderChange}
                 />
                 <label>Nữ</label>
 
@@ -188,7 +187,7 @@ export default function ProfileCard() {
                   type="radio"
                   value="khac"
                   checked={gender === "khac"}
-                  onChange={handleGenderChange}
+                  // onChange={handleGenderChange}
                 />
                 <label>Khác</label>
               </div>
@@ -197,7 +196,7 @@ export default function ProfileCard() {
                 <input
                   type="date"
                   value={birthDate}
-                  onChange={handleDateChange}
+                  // onChange={handleDateChange}
                 />
               </div>
 

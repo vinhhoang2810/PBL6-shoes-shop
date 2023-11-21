@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
@@ -33,19 +33,19 @@ export default function RegisterPage() {
         phone,
         email,
       };
-      //   const response = await axios.post(
-      //     "https://nthdv-pbl6.up.railway.app/api/user/login",
-      //     formData
-      //   );
-      //   if (response) {
-      toast.success("Đăng ký thành công");
-      localStorage.setItem("user1", JSON.stringify(formData));
+      const response = await axios.post(
+        "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signup",
+        formData
+      );
+      if (response) {
+        toast.success("Đăng ký thành công");
+        localStorage.setItem("user", JSON.stringify(formData));
 
-      setTimeout(() => {
-        naviagte("/login");
-      }, 2000);
+        setTimeout(() => {
+          naviagte("/login");
+        }, 2000);
+      }
     } catch (error) {
-      // }
       toast.error(error?.message);
     }
   };
