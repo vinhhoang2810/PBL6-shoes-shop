@@ -1,41 +1,10 @@
-@import './variables.scss';
-@import './grid.scss';
-@import './responsive.scss';
-
-*,
-*::before,
-*::after {
-    margin: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-size: 62.5%;
-}
+@import 'fonts.scss';
 
 body {
-    font-size: 1.6rem;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f7f8fa;
     font-family: $Poppins_font;
-    color: $light_text;
-    height: 1000vh;
-    background: $primary_background;
-}
-
-button {
-    font-family: inherit;
-    outline: none;
-    border: none;
-    background: none;
-    letter-spacing: inherit;
-    color: inherit;
-    font-size: inherit;
-    text-align: inherit;
-    padding: 0;
-}
-
-button,
-input,
-[tabindex] {
-    outline: none;
-    border: none;
+    font-weight: 200;
 }
