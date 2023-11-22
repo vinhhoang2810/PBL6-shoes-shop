@@ -6,6 +6,9 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 
 export default function DeliveryAddressForm() {
+
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
@@ -83,9 +86,29 @@ export default function DeliveryAddressForm() {
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
-                    id="email"
-                    name="email"
-                    label="Email"
+                    id="city"
+                    name="city"
+                    label="City"
+                    fullWidth
+                    autoComplete="given-name"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="state"
+                    name="state"
+                    label="State"
+                    fullWidth
+                    autoComplete="given-name"
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    id="zipCode"
+                    name="zipCode"
+                    label="ZipCode"
                     fullWidth
                     autoComplete="given-name"
                   />

@@ -7,13 +7,14 @@ import "./style.scss";
 
 export default function ProfileCard() {
   const [profiles, setProfiles] = useState([]);
-  // const [error, setError] = useState([]);
+  const [fullName, setfullName] = useState("");
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const response = await apiProfile.getProfile();
         setProfiles(response.data);
+        setfullName(response.data.firstName + " " + response.data.lastName);
       } catch (error) {
         toast.error(error?.message);
       }
@@ -22,18 +23,10 @@ export default function ProfileCard() {
     fetchProfile();
   }, []);
 
-  const [auth, setAuth] = useState(null);
   const image =
     "https://png.pngtree.com/element_our/20200611/ourlarge/pngtree-doggie-cute-cheap-expression-pack-avatar-image_2251655.jpg";
 
   // personal
-  const [name, setName] = useState("Nguyễn Hoàng Mỹ");
-  const [age, setAge] = useState("21");
-  const [address, setAddress] = useState("Lien Chieu - Da Nang");
-  const [email, setEmail] = useState("n.h.my2002@gmail.com");
-  const [phonenumber, setPhonenumber] = useState("0985048769");
-  const [gender, setGender] = useState("nam");
-  const [birthDate, setBirthDate] = useState("2002-09-18");
   const [isEditing, setIsEditing] = useState(false);
 
   // change pass
@@ -58,7 +51,6 @@ export default function ProfileCard() {
     toast.success("Đăng xuất thành công");
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("auth");
-    setAuth(null);
     setTimeout(() => {
       navigate("/login");
     }, 2000);
@@ -98,7 +90,7 @@ export default function ProfileCard() {
           <div className="profile-info">
             <img src={image} alt="" className="profile-img"></img>
             <div className="profile-accout">
-              <span>Nguyễn Hoàng Mỹ</span>
+              <span>{fullName}</span>
             </div>
           </div>
           <div className="profile-detail">
@@ -124,12 +116,12 @@ export default function ProfileCard() {
                 <label className="profile-show-label">Họ và tên</label>
                 <input
                   type="text"
-                  value={name}
+                  defaultValue={fullName}
                   // onChange={handleName}
                   className="profile-show-input"
                 ></input>
               </div>
-              <div className="profile-age">
+              {/* <div className="profile-age">
                 <label className="profile-show-label">Tuổi</label>
                 <input
                   type="number"
@@ -137,12 +129,12 @@ export default function ProfileCard() {
                   // onChange={handleAge}
                   className="profile-show-input"
                 ></input>
-              </div>
+              </div> */}
               <div className="profile-address">
                 <label className="profile-show-label">Địa chỉ</label>
                 <input
                   type="text"
-                  value={address}
+                  defaultValue={profiles.addresses}
                   // onChange={handleAddress}
                   className="profile-show-input"
                 ></input>
@@ -151,7 +143,7 @@ export default function ProfileCard() {
                 <label className="profile-show-label">Email</label>
                 <input
                   type="email"
-                  value={email}
+                  defaultValue={profiles.email}
                   // onChange={handleEmail}
                   className="profile-show-input"
                 ></input>
@@ -160,7 +152,7 @@ export default function ProfileCard() {
                 <label className="profile-show-label">Số điện thoại</label>
                 <input
                   type="text"
-                  value={phonenumber}
+                  defaultValue={profiles.mobile}
                   // onChange={handlePhonenumber}
                   className="profile-show-input"
                 ></input>
@@ -169,36 +161,28 @@ export default function ProfileCard() {
                 <label className="profile-show-label">Giới tính</label>
                 <input
                   type="radio"
-                  value="nam"
-                  checked={gender === "nam"}
+                  defaultValue={profiles.gender}
+                  checked={profiles.gender === "male"}
                   // onChange={handleGenderChange}
                 />
                 <label>Nam</label>
 
                 <input
                   type="radio"
-                  value="nu"
-                  checked={gender === "nu"}
+                  defaultValue={profiles.gender}
+                  checked={profiles.gender === "female"}
                   // onChange={handleGenderChange}
                 />
                 <label>Nữ</label>
-
-                <input
-                  type="radio"
-                  value="khac"
-                  checked={gender === "khac"}
-                  // onChange={handleGenderChange}
-                />
-                <label>Khác</label>
               </div>
-              <div className="profile-date">
+              {/* <div className="profile-date">
                 <label className="profile-show-label">Ngày Sinh</label>
                 <input
                   type="date"
                   value={birthDate}
                   // onChange={handleDateChange}
                 />
-              </div>
+              </div> */}
 
               <div className="profile-btn-update">
                 {/* Use the isEditing state to conditionally render "Chỉnh sửa" or "Lưu" button */}

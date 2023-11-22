@@ -149,6 +149,13 @@
   }
   &-pay {
     background: linear-gradient(to right, #c389b1cc, #a48ac2cc);
+    color: white;
+    border: 0;
+    outline: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
 

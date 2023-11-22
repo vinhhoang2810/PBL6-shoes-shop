@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import WarehouseCard from "../WarehouseCard";
-import shoes from "../../images/shoes4.png";
 import "./style.scss";
 import { toast } from "react-toastify";
 import apiProductGrid from "../API/apiProductGrid";
@@ -53,7 +52,7 @@ export default function WarehouseList() {
           <div className="warehouseRow">
             <div className="warehouseRow-product">Product</div>
             <div className="warehouseRow-type">Color</div>
-            <div className="warehouseRow-price">Price Persent</div>
+            <div className="warehouseRow-price">Discounted Price</div>
             <div className="warehouseRow-price">Price </div>
             <div className="warehouseRow-quantity">The remaining amount</div>
             <div className="warehouseRow-operation">Operation</div>

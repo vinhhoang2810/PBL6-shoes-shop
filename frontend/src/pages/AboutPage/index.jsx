@@ -1,22 +1,31 @@
 import Header from "../../components/Layout/Header";
 import "./style.scss";
-import shoes from "../../images/shoes3.png";
 import Button from "../../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import apiProductDetail from "../../components/API/apiProductDetail";
 
-export default function AboutPage({
-  // image,
-  // name,
-  // description,
-  // brand,
-  // price,
-  // salePrice,
-  quantity = 1,
-}) {
+export default function AboutPage({ quantity = 1 }) {
   // lỗi toast
   const navigate = useNavigate();
+  const [productDetail, setproductDetail] = useState([]);
+  let id = useParams();
+  console.log(id);
+  // const selectedId = searchParams.get("selectedId");
+
+  useEffect(() => {
+    const fetchproductDetail = async () => {
+      try {
+        const response = await apiProductDetail.getProductDetail(id?.id);
+        setproductDetail(response.data);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+      }
+    };
+    fetchproductDetail();
+  }, []);
+
   const handleAddtocart = async () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
     setTimeout(() => {
@@ -46,38 +55,39 @@ export default function AboutPage({
         <ToastContainer />
         <div className="about container-layout">
           <div className="about-div">
-            <img src={shoes} alt="" className="about-image"></img>
-            <div class="about-voucher">
-              <span class="about-voucher-text">-33%</span>
-              <span class="about-voucher-status">HOT</span>
+            <img
+              src={productDetail.imageUrl}
+              alt=""
+              className="about-image"
+            ></img>
+            <div className="about-voucher">
+              <span className="about-voucher-text">
+                {productDetail.discountPersent}%
+              </span>
             </div>
           </div>
-          <div class="about-content">
-            <div class="about-information">
-              <h1 class="about-title">NIKE Collection</h1>
-              <div class="about-rating">
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+          <div className="about-content">
+            <div className="about-information">
+              <h1 className="about-title">{productDetail.title}</h1>
+              <div className="about-rating">
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
               </div>
-              <div class="about-description">
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged.
-                </p>
+              <div className="about-description">
+                <p>{productDetail.description}</p>
               </div>
             </div>
             <div class="about-table">
               <div class="about-table-price">
-                <span class="about-table-price-old">$34.99</span>
-                <span class="about-table-price-current">$20.99</span>
+                <span class="about-table-price-old">
+                  ${productDetail.price}
+                </span>
+                <span class="about-table-price-current">
+                  ${productDetail.discountedPrice}
+                </span>
               </div>
               <div class="about-table-size">
                 <span class="about-size-name">Size:</span>
@@ -112,33 +122,19 @@ export default function AboutPage({
               </div>
               <div class="about-quantity">
                 <div className="about-quantity-detail">
-                  <Button
-                    className="btn-about"
-                    text="-"
-                    onClick={handleDeCreaseQuantity}
-                  ></Button>
+                  <Button text="-" onClick={handleDeCreaseQuantity}></Button>
                   <input
                     type="text"
                     className="about-quantity-input"
                     value={quantityDefault}
                   />
-                  <Button
-                    className="btn-about"
-                    text="+"
-                    onClick={handleIncreaseQuantity}
-                  ></Button>
+                  <Button text="+" onClick={handleIncreaseQuantity}></Button>
                 </div>
                 <div className="about-payment">
-                  <Button
-                    className="btn-about"
-                    text="Add To Cart"
-                    onClick={handleAddtocart}
-                  ></Button>
-                  <Button
-                    className="about-pay btn-about"
-                    text="Buy Now"
-                    onClick={handleBuynow}
-                  ></Button>
+                  <Button text="Add To Cart" onClick={handleAddtocart}></Button>
+                  <button className="about-pay" onClick={handleBuynow}>
+                    Buy Now
+                  </button>
                 </div>
               </div>
             </div>

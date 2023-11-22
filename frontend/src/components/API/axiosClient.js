@@ -6,12 +6,12 @@ const axiosClient = axios.create({
     "Content-Type": "application/json",
     accept: "application/json",
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA1MzY1NTUsImV4cCI6MTcwMDYyMjU1NSwiZW1haWwiOiJraW4yMDAyQGdtYWlsLmNvbSJ9.DdlrHtRL4gYh2R9sxlUnvOA_Y3ymbA5lj6r20eSHJ0k",
+      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDA2MzA2OTYsImV4cCI6MTcwMDcxNjY5NiwiZW1haWwiOiJraW5AZ21haWwuY29tIn0.aEL7QLW59W34FAclcuBnNCnb3CzG94YIrJqNpTIOqr0",
   },
 });
 
 // Add a request interceptor
-axios.interceptors.request.use(
+axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     return config;
@@ -23,7 +23,7 @@ axios.interceptors.request.use(
 );
 
 // Add a response interceptor
-axios.interceptors.response.use(
+axiosClient.interceptors.response.use(
   function (response) {
     // Any status code that lie within the range of 2xx cause this function to trigger
     // Do something with response data

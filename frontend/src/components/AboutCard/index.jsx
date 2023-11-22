@@ -1,21 +1,31 @@
 import Header from "../Layout/Header";
 import "./style.scss";
 import Button from "../../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import apiProductDetail from "../API/apiProductDetail";
 
-export default function AboutCard({
-  image,
-  name,
-  description,
-  brand,
-  price,
-  salePrice,
-  quantity = 1,
-}) {
-  // lỗi toast
+export default function AboutCard({ quantity = 1 }) {
   const navigate = useNavigate();
+  const [productDetail, setproductDetail] = useState([]);
+
+  let [searchParams, setSearchParams] = useSearchParams();
+  // const [brands, setBrands] = useState([]);
+  const selectedId = searchParams.get("selectedId");
+
+  useEffect(() => {
+    const fetchproductDetail = async () => {
+      try {
+        const response = await apiProductDetail.getProductDetail(selectedId);
+        setproductDetail(response.data);
+      } catch (error) {
+        console.error("Error fetching brands:", error);
+      }
+    };
+    fetchproductDetail();
+  }, []);
+
   const handleAddtocart = () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
     setTimeout(() => {
@@ -44,33 +54,41 @@ export default function AboutCard({
         <ToastContainer />
         <div className="about container-layout">
           <div className="about-div">
-            <img src={image} alt="" className="about-image"></img>
-            <div class="about-voucher">
-              <span class="about-voucher-text">-33%</span>
-              <span class="about-voucher-status">HOT</span>
+            <img
+              src={productDetail.imageUrl}
+              alt=""
+              className="about-image"
+            ></img>
+            <div className="about-voucher">
+              <span className="about-voucher-text">-33%</span>
+              <span className="about-voucher-status">HOT</span>
             </div>
           </div>
-          <div class="about-content">
-            <div class="about-information">
-              <h1 class="about-title">{name}</h1>
+          <div className="about-content">
+            <div className="about-information">
+              <h1 className="about-title">{productDetail.title}</h1>
               <Link to="/about" className="showcase-category-grid">
-                {brand}
+                {productDetail.brand}
               </Link>
-              <div class="about-rating">
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
-                <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
+              <div className="about-rating">
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
+                <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
                 <i class="fa fa-solid fa-star fa-2xl icon-star"></i>
               </div>
               <div class="about-description">
-                <p>{description}</p>
+                <p>{productDetail.description}</p>
               </div>
             </div>
             <div class="about-table">
               <div class="about-table-price">
-                <span class="about-table-price-old">${salePrice}</span>
-                <span class="about-table-price-current">${price}</span>
+                <span class="about-table-price-old">
+                  ${productDetail.price}
+                </span>
+                <span class="about-table-price-current">
+                  ${productDetail.discountedPrice}
+                </span>
               </div>
               <div class="about-table-size">
                 <span class="about-size-name">Size:</span>

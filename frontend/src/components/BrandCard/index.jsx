@@ -16,7 +16,7 @@ export default function BrandCard({ image, name, amount }) {
                 <h3 className="category-item-title">{name}</h3>
                 <p className="category-item-amount">({amount})</p>
               </div>
-              <Link to="#" className="category-btn">
+              <Link to={`/product?brand=${name}`} className="category-btn">
                 Show all
               </Link>
             </div>

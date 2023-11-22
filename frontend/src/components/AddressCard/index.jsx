@@ -10,10 +10,10 @@ export default function AddressCard() {
           <p className="address-phone-title">Phone Number:</p>
           <p className="address-p">0985048769</p>
         </div>
-        <div className="address-email">
+        {/* <div className="address-email">
           <p className="address-email-title">Email:</p>
           <p className="address-p">n.h.my2002@gmail.com</p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

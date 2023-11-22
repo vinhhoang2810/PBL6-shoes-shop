@@ -17,8 +17,8 @@ export default function WarehouseCard({
   //   onSelectType(newType);
   // };
 
-  const hexColorCode = product?.color;
-  const colorName = chroma(hexColorCode).name();
+  // const hexColorCode = product?.color;
+  // const colorName = chroma(hexColorCode).name();
 
   const handleDeleteClick = () => {
     // Gọi hàm xử lý xóa từ props
@@ -51,11 +51,11 @@ export default function WarehouseCard({
         </div>
       </div>
       <div className="warehouse-color">
-        <span className="name-warehouse-color">{colorName}</span>
+        <span className="name-warehouse-color">{product?.color}</span>
       </div>
       <div className="warehouse-price">
         <span className="name-warehouse-price">
-          ${product?.discountPersent}
+          ${product?.discountedPrice}
         </span>
       </div>
       <div className="warehouse-price">

@@ -4,6 +4,7 @@
   background: url(../../images/background5.png);
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 50px;
 }
 
 .add-content {
@@ -27,6 +28,9 @@
   &-name,
   &-description,
   &-price,
+  &-discountedPrice,
+  &-discountPersent,
+  &-quantity,
   &-type,
   &-image {
     margin: 15px;
@@ -41,7 +45,6 @@
     padding: 10px 15px;
     border: 2px solid rgba(19, 66, 101, 0.2470588235);
     border-radius: 10px;
-    margin-bottom: 30px;
     font-size: 16px;
   }
   &-description-text {
@@ -49,10 +52,32 @@
     padding: 10px 15px;
     border: 2px solid rgba(19, 66, 101, 0.2470588235);
     border-radius: 10px;
-    margin-bottom: 30px;
     font-size: 16px;
   }
   &-price-input {
+    width: 80%;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  &-discountedPrice-input {
+    width: 80%;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+  &-discountPersent-input {
+    width: 80%;
+    padding: 10px 15px;
+    border: 2px solid rgba(19, 66, 101, 0.2470588235);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+  &-quantity-input {
     width: 80%;
     padding: 10px 15px;
     border: 2px solid rgba(19, 66, 101, 0.2470588235);
@@ -90,6 +115,7 @@
   }
   &-product-btn {
     text-align: center;
+    margin-bottom: 100px;
   }
   &-image-input {
     cursor: pointer;

@@ -5,9 +5,9 @@ const ProductGridCard = ({ product }) => {
   return (
     <div className="showcase-productGrid">
       <div className="showcase-grid">
-        <p className="showcase-badge">{`${product?.discountedPrice}%`}</p>
+        <p className="showcase-badge">{`${product?.discountPersent}%`}</p>
         <div className="showcase-actions">
-          <Link to="/about" className="btn-action">
+          <Link to={`/product/${product.id}`} className="btn-action">
             <i className="fa fa-eye" aria-hidden="true"></i>
           </Link>
           <button className="btn-action">
@@ -17,7 +17,7 @@ const ProductGridCard = ({ product }) => {
             <i className="fa fa-shopping-bag" aria-hidden="true"></i>
           </Link>
         </div>
-        <Link to="/about" className="showcase-grid-link">
+        <Link to={`/product/${product.id}`} className="showcase-grid-link">
           <img
             src={product?.imageUrl}
             alt=""
@@ -30,7 +30,7 @@ const ProductGridCard = ({ product }) => {
         <Link to="/" className="showcase-category-grid">
           {product?.brand}
         </Link>
-        <Link to="/about" className="showcase-title-grid">
+        <Link to={`/product/${product.id}`} className="showcase-title-grid">
           <h3 className="showcase-title">{product?.title}</h3>
         </Link>
         <div className="showcase-rating">
@@ -43,7 +43,7 @@ const ProductGridCard = ({ product }) => {
           )}
         </div>
         <div className="price-box">
-          <p className="price">${product?.discountPersent}</p>
+          <p className="price">${product?.discountedPrice}</p>
           <p className="deal">${product?.price}</p>
         </div>
       </div>
