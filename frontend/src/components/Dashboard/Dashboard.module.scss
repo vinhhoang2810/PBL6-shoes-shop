@@ -1,3 +1,5 @@
-.text {
-    font-size: 1.5rem;
+.grid {
+    background-color: green;
+    height: calc(100vh - 65px - 73px);
+    display: grid;
 }
