@@ -1,5 +1,50 @@
 .grid {
-    background-color: green;
-    height: calc(100vh - 65px - 73px);
+    background-color: #c3cad9;
+    // height: calc(100vh - 65px - 73px);
+    height: 100%;
     display: grid;
+    grid-template-areas:
+        'section1 section2 section3'
+        'section4 section2 section3'
+        'section4 section6 section3'
+        'section5 section6 section7'
+        'section5 section6 section7';
+
+    grid-gap: 0.3rem;
+    color: #fff;
+
+    & .section1 {
+        grid-area: section1;
+        background-color: green;
+    }
+
+    & .section2 {
+        grid-area: section2;
+        background-color: rgb(7, 170, 7);
+    }
+
+    & .section3 {
+        grid-area: section3;
+        background-color: rgb(20, 56, 20);
+    }
+
+    & .section4 {
+        grid-area: section4;
+        background-color: rgb(60, 120, 60);
+    }
+
+    & .section5 {
+        grid-area: section5;
+        background-color: rgb(120, 242, 120);
+    }
+
+    & .section6 {
+        grid-area: section6;
+        background-color: rgb(57, 91, 57);
+    }
+
+    & .section7 {
+        grid-area: section7;
+        background-color: rgb(101, 153, 101);
+    }
 }

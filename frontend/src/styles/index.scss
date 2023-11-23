@@ -11,4 +11,6 @@ body {
 
 main {
     margin-left: 65px;
+    height: calc(100vh - 65px - 41px);
+    padding: 0.5rem;
 }
