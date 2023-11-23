@@ -16,6 +16,7 @@ import {
     SearchIcon,
     StatsIcon,
     TasksIcon,
+    UptrendIcon,
     UsdIcon,
     UserIcon,
 } from './Icons';
@@ -26,6 +27,7 @@ const Icon = (props) => {
         basket: BasketIcon,
         cog: CogIcon,
         dashboard: DashboardIcon,
+        uptrend: UptrendIcon,
         downtrend: DowntrendIcon,
         eye: EyeIcon,
         grid: GridIcon,

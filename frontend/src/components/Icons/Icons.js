@@ -9,7 +9,7 @@ export const ArrowIcon = ({ classes, width = '25px  ', height = '25px ', color }
     >
         <path
             d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
-            stroke={color}
+            fill={color}
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -84,6 +84,23 @@ export const DashboardIcon = ({ classes, width = '25px  ', height = '25px ', col
     39 142 99 182 183 l31 65 0 570 0 570 -33 67 c-40 82 -119 157 -200 190 l-57
     23 -855 2 c-649 1 -867 -1 -905 -11z"
             />
+        </g>
+    </svg>
+);
+
+export const UptrendIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 128.000000 128.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M840 1140 c0 -5 20 -10 45 -10 25 0 45 -3 45 -7 0 -4 -51 -58 -112 -120 l-113 -113 -65 65 -66 66 -130 -131 c-71 -72 -130 -135 -132 -140 -10 -27 25 1 138 115 l125 125 68 -68 68 -67 115 123 c64 67 120 122 125 122 5 0 9 -20 9 -45 0 -25 5 -45 10 -45 6 0 10 30 10 70 l0 70 -70 0 c-40 0 -70 -4 -70 -10z" />
+            <path d="M888 483 l-3 -328 -82 -3 -83 -3 0 246 0 245 -80 0 -80 0 0 -245 0 -246 -82 3 -83 3 -3 158 -3 157 -79 0 -80 0 0 -160 0 -160 -85 0 c-50 0 -85 -4 -85 -10 0 -7 200 -10 580 -10 380 0 580 3 580 10 0 6 -35 10 -85 10 l-85 0 0 330 0 330 -80 0 -80 0 -2 -327z" />
         </g>
     </svg>
 );

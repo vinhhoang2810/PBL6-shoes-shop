@@ -1,6 +1,4 @@
 .grid {
-    background-color: #c3cad9;
-    // height: calc(100vh - 65px - 73px);
     height: 100%;
     display: grid;
     grid-template-areas:
@@ -10,41 +8,45 @@
         'section5 section6 section7'
         'section5 section6 section7';
 
-    grid-gap: 0.3rem;
-    color: #fff;
+    grid-gap: 0.4rem;
 
+    @mixin section-style {
+        border: 2px solid #edeff2;
+        border-radius: 6px;
+        box-shadow: 4px 4px 4px 1px #ccc;
+    }
     & .section1 {
         grid-area: section1;
-        background-color: green;
+        @include section-style();
     }
 
     & .section2 {
         grid-area: section2;
-        background-color: rgb(7, 170, 7);
+        @include section-style();
     }
 
     & .section3 {
         grid-area: section3;
-        background-color: rgb(20, 56, 20);
+        @include section-style();
     }
 
     & .section4 {
         grid-area: section4;
-        background-color: rgb(60, 120, 60);
+        @include section-style();
     }
 
     & .section5 {
         grid-area: section5;
-        background-color: rgb(120, 242, 120);
+        @include section-style();
     }
 
     & .section6 {
         grid-area: section6;
-        background-color: rgb(57, 91, 57);
+        @include section-style();
     }
 
     & .section7 {
         grid-area: section7;
-        background-color: rgb(101, 153, 101);
+        @include section-style();
     }
 }
