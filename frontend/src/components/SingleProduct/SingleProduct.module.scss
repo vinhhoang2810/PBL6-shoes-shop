@@ -1,23 +1,21 @@
 .img {
-    width: auto;
-    height: 3.8rem;
-    object-fit: cover;
+    width: 46px;
+    height: auto;
+    object-fit: contain;
 }
 
-.icon {
-    margin-left: 0.1rem;
-}
 .downtrendColor {
-    color: red;
+    color: var(--status-alert);
 }
 .title {
     color: #626262;
+    user-select: none;
 }
 
 .text-success {
-    color: green;
+    color: var(--status-success);
 }
 
 .text-danger {
-    color: red;
+    color: var(--status-alert);
 }

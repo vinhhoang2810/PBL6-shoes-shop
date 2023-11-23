@@ -2,7 +2,7 @@
     width: 250px;
     height: 45px;
     border-radius: 25px;
-    border: 2px solid #c3cad9;
+    border: 2px solid var(--main-text);
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -27,7 +27,7 @@
     }
 
     & .icon {
-        color: #c3cad9;
+        color: var(--main-text);
         padding: 0.1rem;
         display: flex;
         align-items: center;

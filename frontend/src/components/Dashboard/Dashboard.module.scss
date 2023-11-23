@@ -1,3 +1,9 @@
+@mixin section-style {
+    border: 2px solid var(--main-divider);
+    border-radius: 6px;
+    box-shadow: 4px 4px 4px 1px #ccc;
+}
+
 .grid {
     height: 100%;
     display: grid;
@@ -7,14 +13,8 @@
         'section4 section6 section3'
         'section5 section6 section7'
         'section5 section6 section7';
-
     grid-gap: 0.4rem;
 
-    @mixin section-style {
-        border: 2px solid #edeff2;
-        border-radius: 6px;
-        box-shadow: 4px 4px 4px 1px #ccc;
-    }
     & .section1 {
         grid-area: section1;
         @include section-style();
@@ -48,5 +48,50 @@
     & .section7 {
         grid-area: section7;
         @include section-style();
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media screen and (max-width: 991.98px) {
+    .grid {
+        height: 100%;
+        grid-template-areas:
+            'section7 section7'
+            'section1 section2'
+            'section1 section2'
+            'section6 section4'
+            'section6 section4'
+            'section6 section4'
+            'section6 section5'
+            'section3 section5'
+            'section3 section5'
+            'section3 section5';
+        grid-gap: 0.2rem;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media screen and (max-width: 767.98px) {
+    .grid {
+        height: 100%;
+        grid-template-areas:
+            'section1'
+            'section2'
+            'section3'
+            'section4'
+            'section5'
+            'section6'
+            'section7';
+        grid-gap: 0.2rem;
+
+        & .section1,
+        & .section2,
+        & .section3,
+        & .section4,
+        & .section5,
+        & .section6,
+        & .section7 {
+            width: 100%; // Set width to 100% for 1-column layout
+        }
     }
 }

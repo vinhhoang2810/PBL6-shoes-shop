@@ -2,13 +2,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import '~/styles/index.scss';
+// import '~/styles/index.scss';
 import reportWebVitals from './reportWebVitals';
+import GlobalStyles from './components/GlobalStyles';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <App />
+        <GlobalStyles>
+            <App />
+        </GlobalStyles>
     </React.StrictMode>,
 );
 

@@ -1,5 +1,5 @@
 .side-nav {
-    border-right: 3px solid #edeff2;
+    border-right: 3px solid var(--main-divider);
     width: 65px;
     height: 100vh;
     display: flex;
@@ -11,7 +11,7 @@
     top: 0;
 
     .image {
-        background-color: #c3cad9;
+        background-color: var(--main-text);
         border-radius: 50%;
         width: 45px;
         height: 45px;
@@ -20,12 +20,12 @@
     .icon {
         width: 30px;
         height: 30px;
-        color: #c3cad9;
+        color: var(--main-text);
         display: flex;
         align-items: center;
         justify-content: center;
     }
     .arrow {
-        color: #c3cad9;
+        color: var(--main-text);
     }
 }

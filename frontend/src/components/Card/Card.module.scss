@@ -7,9 +7,9 @@
     overflow: hidden;
 
     .headline {
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-weight: 600;
-        color: #c3cad9;
-        user-select: none;
+        color: var(--main-text);
+        // user-select: none;
     }
 }
