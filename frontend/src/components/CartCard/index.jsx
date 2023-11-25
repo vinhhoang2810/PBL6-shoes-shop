@@ -4,11 +4,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
 export default function CartCard({
-  image,
-  name,
-  brand,
-  price,
-  priceSale,
+  product,
   quantity,
   onIncreaseQuantity,
   onDeCreaseQuantity,
@@ -40,25 +36,33 @@ export default function CartCard({
       <div className="cartList" role="list">
         <div className="cartList-detail ">
           <Link to="/about" className="cartList-detail-link">
-            <img src={image} alt="" className="cartList-detail-img" />
+            <img
+              src={product?.product.imageUrl}
+              alt=""
+              className="cartList-detail-img"
+            />
           </Link>
           <div className="cartList-content">
             <Link to="/about" className="cartList-content-link">
-              <span className="cartList-content-span">{name}</span>
+              <span className="cartList-content-span">
+                {product?.product.title}
+              </span>
             </Link>
             <Link to="/#" className="cartList-content-catogery">
-              {brand}
+              {product.product.brand}
             </Link>
             <div className="cartList-content-color">
-              <span className="cartList-content-color-p">{colorName}</span>
+              <span className="cartList-content-color-p">
+                {product?.product.color}
+              </span>
             </div>
           </div>
         </div>
         <div className="cartList-price">
-          <span className="font-15">${price}</span>
+          <span className="font-15">${product?.discountedPrice}</span>
         </div>
         <div className="cartList-priceSale">
-          <span className="font-15">${priceSale}</span>
+          <span className="font-15">${product?.price}</span>
         </div>
         <div className="cartList-quantity">
           <button
@@ -70,7 +74,7 @@ export default function CartCard({
           <input
             type="number"
             className="cartList-input"
-            value={quantityDefault}
+            value={product?.quantity}
           />
           <button
             className="cartList-increase"
@@ -81,7 +85,7 @@ export default function CartCard({
         </div>
         <div className="cartList-money">
           <span className="font-15">
-            ${quantityDefault * Number(priceSale)}
+            ${product.quantity * Number(product.discountedPrice)}
           </span>
         </div>
         <div className="cartList-operation">

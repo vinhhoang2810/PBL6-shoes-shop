@@ -24,17 +24,21 @@ export default function AddProductPage() {
   //   { name: "L", quantity: 30 },
   //   { name: "S", quantity: 50 },
   // ]);
-  const arrSize = [
-    { name: "M", quantity: 20 },
-    { name: "L", quantity: 30 },
-    { name: "S", quantity: 50 },
-  ];
+  const arrSize = ["S", "M", "L"];
   const [selectedSize, setSelectedSize] = useState([]);
   console.log(selectedSize);
 
+  const [selectedGender, setSelectedGender] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const navigate = useNavigate();
 
+  const handleQuantityChange = (event, size) => {
+    const value = event.target.value;
+    setSelectedSize((prevSizeQuantities) => ({
+      ...prevSizeQuantities,
+      [size]: value === "" ? 0 : parseInt(value, 10),
+    }));
+  };
   // Thay đổi hàm xử lý sự kiện khi chọn size
   const handleSizeChange = (event, sizeName) => {
     if (event.target.checked) {
@@ -156,14 +160,26 @@ export default function AddProductPage() {
               }
             />
           </div>
-          <div className="add-quantity">
-            <label className="add-label">Quantity:</label>
-            <input
-              type="number"
-              className="add-quantity-input"
-              value={quantityProduct}
-              onChange={(event) => setquantityProduct(event.target.value)}
-            />
+          <div className="add-size">
+            <label className="add-label">Chọn Size và Số lượng:</label>
+            {arrSize.map((size) => (
+              <div key={size} className="add-size-checkbox">
+                <input
+                  type="checkbox"
+                  id={`checkbox-${size}`}
+                  checked={selectedSize[size] > 0}
+                  onChange={(event) => handleSizeChange(event, size)}
+                />
+                <label htmlFor={`checkbox-${size}`}>{size}</label>
+                <input
+                  type="text"
+                  className="add-size-input"
+                  id={`size-${size}`}
+                  value={selectedSize[size] || ""}
+                  onChange={(event) => handleQuantityChange(event, size)}
+                />
+              </div>
+            ))}
           </div>
           <div className="add-type">
             <div className="add-brand">
@@ -183,19 +199,25 @@ export default function AddProductPage() {
                 <option value="Reebok">Reebok</option>
               </select>
             </div>
-            <div className="add-size">
-              <label className="add-label">Chọn Size:</label>
-              {arrSize.map((size) => (
-                <div key={size.name} className="size-checkbox">
-                  <input
-                    type="checkbox"
-                    value={size.name}
-                    checked={selectedSize.some((s) => s.name === size.name)}
-                    onChange={(event) => handleSizeChange(event, size.name)}
-                  />
-                  <label htmlFor={`size-${size.name}`}>{size.name}</label>
-                </div>
-              ))}
+            <div className="add-gender">
+              <label className="add-label">Chọn Giới Tính:</label>
+              <div className="add-gender-radio">
+                <input
+                  type="radio"
+                  value={selectedGender}
+                  name="gender"
+                  checked
+                  onChange={(event) => setSelectedGender(event.target.value)}
+                />
+                Nam
+                <input
+                  type="radio"
+                  value={selectedGender}
+                  name="gender"
+                  onChange={(event) => setSelectedGender(event.target.value)}
+                />
+                Nữ
+              </div>
             </div>
             <div className="add-color">
               <label className="add-label">Chọn màu:</label>

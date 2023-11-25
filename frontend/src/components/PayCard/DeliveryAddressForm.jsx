@@ -1,27 +1,50 @@
 import { Box, Grid, TextField } from "@mui/material";
 import React from "react";
+import { useState } from "react";
 import AddressCard from "../AddressCard";
 import Button from "../../components/Button";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
+import apiCreateOrder from "../API/apiCreateOrder.js";
 
 export default function DeliveryAddressForm() {
+  const [Firstname, setFirstname] = useState("");
+  const [Lastname, setLastname] = useState("");
+  const [streetAddress, setstreetAddress] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [City, setCity] = useState("");
+  const [State, setState] = useState("");
+  const [Zipcode, setZipcode] = useState("");
 
-
-  
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
 
     const address = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      address: data.get("address"),
-      phone: data.get("phone"),
-      email: data.get("email"),
+      firstName: Firstname,
+      lastName: Lastname,
+      streetAddress: streetAddress,
+      city: City,
+      state: State,
+      zipCode: parseInt(Zipcode),
+      mobile: mobile,
     };
-    toast.success("Điền thông tin thành công");
     console.log("address", address);
+    try {
+      const response = await apiCreateOrder.postCreateOrder(address);
+      // const response = await axiosInstance.post("/admin/products/", formData);
+      console.log("response:", response);
+      if (response) {
+        toast.success("Thêm thông tin thành công ");
+        setTimeout(() => {
+          // navigate("/OderSummary");
+        }, 2000);
+      } else {
+        toast.error("Có lỗi khi thêm thông tin");
+      }
+    } catch (error) {
+      console.error("Lỗi khi thực hiện yêu cầu API:", error);
+      toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
+    }
   };
   return (
     <div>
@@ -49,6 +72,8 @@ export default function DeliveryAddressForm() {
                     label="First Name"
                     fullWidth
                     autoComplete="given-name"
+                    value={Firstname}
+                    onChange={(event) => setFirstname(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -59,6 +84,8 @@ export default function DeliveryAddressForm() {
                     label="Last Name"
                     fullWidth
                     autoComplete="given-name"
+                    value={Lastname}
+                    onChange={(event) => setLastname(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -71,6 +98,8 @@ export default function DeliveryAddressForm() {
                     autoComplete="given-name"
                     multiline
                     rows={4}
+                    value={streetAddress}
+                    onChange={(event) => setstreetAddress(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -81,6 +110,8 @@ export default function DeliveryAddressForm() {
                     label="Phone Number"
                     fullWidth
                     autoComplete="given-name"
+                    value={mobile}
+                    onChange={(event) => setMobile(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -91,6 +122,8 @@ export default function DeliveryAddressForm() {
                     label="City"
                     fullWidth
                     autoComplete="given-name"
+                    value={City}
+                    onChange={(event) => setCity(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -101,6 +134,8 @@ export default function DeliveryAddressForm() {
                     label="State"
                     fullWidth
                     autoComplete="given-name"
+                    value={State}
+                    onChange={(event) => setState(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -111,6 +146,8 @@ export default function DeliveryAddressForm() {
                     label="ZipCode"
                     fullWidth
                     autoComplete="given-name"
+                    value={Zipcode}
+                    onChange={(event) => setZipcode(event.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>

@@ -18,7 +18,6 @@ export default function Header() {
 
   const handleClickOutside = (event) => {
     console.log(event?.target);
-    console.log(dropdownRef?.current);
     if (!dropdownRef?.current?.contains(event?.target)) {
       setActive(false);
     }

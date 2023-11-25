@@ -4,48 +4,29 @@ import Button from "../Button";
 import CartCard from "../CartCard";
 import shoes from "../../images/shoes4.png";
 import "./style.scss";
+import apiCart from "../API/apiCart";
+import { toast } from "react-toastify";
 
 export default function CartList(onDelete) {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-      brand: "Nike",
-      quantity: 10,
-      price: 50,
-      priceSale: 40,
-      // type: "Vàng",
-    },
-    {
-      id: 2,
-      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-      brand: "Adidas",
-      quantity: 20,
-      price: 30,
-      priceSale: 25,
-      // type: "Đen",
-    },
-    {
-      id: 3,
-      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-      brand: "Gucci",
-      quantity: 20,
-      price: 40,
-      priceSale: 35,
-      // type: "Đỏ",
-    },
-    {
-      id: 4,
-      name: "Giày Converse Chuck Taylor All Star Classic Low 121178",
-      brand: "New Balance",
-      quantity: 30,
-      price: 10,
-      priceSale: 8,
-      // type: "Xanh",
-    },
-    // ...Thêm các sản phẩm khác
-  ]);
+  const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  console.log(products);
+
+  // API cart
+  useEffect(() => {
+    const fetchCarts = async () => {
+      try {
+        const response = await apiCart.getAllCart();
+        setProducts(response.data);
+      } catch (error) {
+        toast.error(error?.message);
+      }
+    };
+
+    // Gọi hàm fetchCarts
+    fetchCarts();
+  }, []);
+
   const handleIncreaseQuantity = (productId) => {
     // Tìm sản phẩm cần tăng số lượng
     const updatedProducts = products.map((product) =>
@@ -79,7 +60,7 @@ export default function CartList(onDelete) {
 
   const handleTotal = useCallback(() => {
     // Tính tổng giá trị của sản phẩm trong giỏ hàng
-    const total = products.reduce((acc, product) => {
+    const total = products?.cartItems?.reduce((acc, product) => {
       return acc + product.priceSale * product.quantity;
     }, 0);
 
@@ -121,22 +102,18 @@ export default function CartList(onDelete) {
         </div>
 
         {/* Danh sách sản phẩm  */}
-        {products.map((product) => {
-          return (
-            <CartCard
-              key={product.id}
-              image={shoes}
-              name={product.name}
-              brand={product.brand}
-              quantity={product.quantity ?? 1}
-              price={product.price}
-              priceSale={product.priceSale}
-              onDelete={() => handleDeleteProduct(product.id)}
-              onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
-              onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
-            />
-          );
-        })}
+        {products?.cartItems?.length > 0 &&
+          products?.cartItems.map((product) => {
+            return (
+              <CartCard
+                key={product?.id}
+                product={product}
+                onDelete={() => handleDeleteProduct(product.id)}
+                onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
+                onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
+              />
+            );
+          })}
       </div>
       <div className="payment">
         <div className="payment-voucher">
