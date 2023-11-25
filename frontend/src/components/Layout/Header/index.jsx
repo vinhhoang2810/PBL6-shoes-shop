@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import "./style-prefix.scss";
 
 import logo2 from "../../../images/logo2png.png";
+import apiCart from "../../API/apiCart";
 
 export default function Header() {
+  const [cartCount, setCartCount] = useState(0);
   const dropdownRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -28,6 +30,26 @@ export default function Header() {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
+  }, []);
+
+  useEffect(() => {
+    // Mô phỏng một cuộc gọi API để lấy số lượng sản phẩm trong giỏ hàng
+    // Thay thế đoạn này bằng cuộc gọi API thực tế của bạn để lấy số lượng
+    const fetchCartCount = async () => {
+      try {
+        // Giả lập việc lấy dữ liệu từ API
+        const response = await apiCart.getAllCart();
+        const data = await response.json();
+        setCartCount(data.count); // Giả sử API trả về có trường 'count'
+      } catch (error) {
+        console.error("Lỗi khi lấy số lượng sản phẩm trong giỏ hàng:", error);
+      }
+    };
+
+    // Gọi API để lấy số lượng sản phẩm trong giỏ hàng khi component được mount
+    fetchCartCount();
+
+    // ... (mã trước đó)
   }, []);
   return (
     <header className="header">
@@ -110,7 +132,7 @@ export default function Header() {
           <Link to="/cart">
             <button className="action-btn">
               <i className="fa fa-shopping-bag" aria-hidden="true"></i>
-              <span className="count">0</span>
+              <span className="count">{cartCount}</span>
             </button>
           </Link>
           <Link to="/" className="mobile-bottom-navigation-home">

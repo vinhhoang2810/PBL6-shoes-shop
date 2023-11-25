@@ -17,7 +17,7 @@ const ProductGridCard = ({ product }) => {
             <i className="fa fa-shopping-bag" aria-hidden="true"></i>
           </Link>
         </div>
-        <Link to={`/product/${product.id}`} className="showcase-grid-link">
+        <Link to={`/product/${product?.id}`} className="showcase-grid-link">
           <img
             src={product?.imageUrl}
             alt=""
@@ -27,10 +27,13 @@ const ProductGridCard = ({ product }) => {
         </Link>
       </div>
       <div className="showcase-content">
-        <Link to="/" className="showcase-category-grid">
+        <Link
+          to={`/product?brand=${product?.brand}`}
+          className="showcase-category-grid"
+        >
           {product?.brand}
         </Link>
-        <Link to={`/product/${product.id}`} className="showcase-title-grid">
+        <Link to={`/product/${product?.id}`} className="showcase-title-grid">
           <h3 className="showcase-title">{product?.title}</h3>
         </Link>
         <div className="showcase-rating">

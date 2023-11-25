@@ -5,7 +5,8 @@ import "./style.scss";
 import Button from "../../components/Button";
 import { toast } from "react-toastify";
 
-export default function ProductFeaturedCard() {
+export default function ProductFeaturedCard(product) {
+  console.log(product);
   const navigate = useNavigate();
   const handleAddtocart = async () => {
     toast.success("Thêm sản phẩm vào giỏ thành công");
@@ -18,7 +19,7 @@ export default function ProductFeaturedCard() {
       <div className="product-featured container-layout">
         <h2 className="product-featured-title">Deal Of The Day</h2>
         <div className="product-featured-content">
-          <Link to={"/about"} className="product-featured-link">
+          <Link to={`/product/${82}`} className="product-featured-link">
             <img src={shoes} alt="" className="product-featured-image"></img>
           </Link>
           <div className="product-featured-detail">
@@ -30,7 +31,10 @@ export default function ProductFeaturedCard() {
               <i className="fa fa-star" aria-hidden="true"></i>
             </div>
             <h2 className="product-featured-name">
-              <Link to="/about" className="product-featured-name-link">
+              <Link
+                to={`/product/${82}`}
+                className="product-featured-name-link"
+              >
                 Giày Nike Air Force 1 Canviày Jordad
               </Link>
             </h2>

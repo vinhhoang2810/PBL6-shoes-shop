@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
 export default function CartCard({
+  name,
   product,
   quantity,
   onIncreaseQuantity,
@@ -11,7 +12,7 @@ export default function CartCard({
   onDelete,
 }) {
   const [quantityDefault, setQuantityDefault] = useState(quantity);
-  const hexColorCode = "#f0f8ff";
+  const hexColorCode = product?.product.color;
   const colorName = chroma(hexColorCode).name();
 
   // useEffect(() => {
@@ -35,7 +36,10 @@ export default function CartCard({
     <>
       <div className="cartList" role="list">
         <div className="cartList-detail ">
-          <Link to="/about" className="cartList-detail-link">
+          <Link
+            to={`/product/${product?.product.id}`}
+            className="cartList-detail-link"
+          >
             <img
               src={product?.product.imageUrl}
               alt=""
@@ -43,18 +47,22 @@ export default function CartCard({
             />
           </Link>
           <div className="cartList-content">
-            <Link to="/about" className="cartList-content-link">
+            <Link
+              to={`/product/${product?.product.id}`}
+              className="cartList-content-link"
+            >
               <span className="cartList-content-span">
                 {product?.product.title}
               </span>
             </Link>
-            <Link to="/#" className="cartList-content-catogery">
-              {product.product.brand}
+            <Link
+              to={`/product?brand=${name}`}
+              className="cartList-content-catogery"
+            >
+              {product?.product.brand}
             </Link>
             <div className="cartList-content-color">
-              <span className="cartList-content-color-p">
-                {product?.product.color}
-              </span>
+              <span className="cartList-content-color-p">{colorName}</span>
             </div>
           </div>
         </div>
