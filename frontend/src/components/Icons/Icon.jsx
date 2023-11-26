@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ICON_COLOR } from '~/shared/constant';
-
 import {
     ArrowIcon,
     BasketIcon,
@@ -57,5 +55,5 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
     icon: 'arrow',
-    color: ICON_COLOR,
+    color: '#c3cad9',
 };

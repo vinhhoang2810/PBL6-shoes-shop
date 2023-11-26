@@ -1,2 +1,2 @@
-import TopNav from './SideNav';
-export default TopNav;
+import SideNav from './SideNav';
+export default SideNav;

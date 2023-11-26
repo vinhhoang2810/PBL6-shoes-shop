@@ -5,7 +5,7 @@ import Icon from '../Icons/Icon';
 
 const cx = classNames.bind(styles);
 const SideNavLinks = () => {
-    const menu = ['dashboard', 'tasks', 'grid', 'list', 'basket', 'user', 'stats', 'cog'];
+    const menu = ['dashboard', 'list', 'user', 'stats'];
 
     return (
         <div className={cx('panel')}>

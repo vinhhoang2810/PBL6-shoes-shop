@@ -11,19 +11,19 @@ const SingleProduct = ({ imgSrc, imgAlt, amount, percentage, icon, isUptrend }) 
         : { iconColor: '#c12d2d', titleStyle: 'text-danger' };
 
     return (
-        <div className={`align-items-center d-flex h-100 justify-content-between w-100`}>
+        <div className={`align-items-center d-flex h-75 justify-content-between w-75`}>
             <img className={`${cx('img')} `} src={imgSrc} alt={imgAlt} />
 
             <div className={`align-items-lg-start d-flex flex-column h-50 justify-content-between w-50`}>
-                <div className={`align-items-center d-flex justify-content-between w-100 pr-4`}>
-                    <Icon icon={icon} width="24px" height="24px" />
+                <div className={`align-items-center d-flex justify-content-between w-100`}>
+                    <Icon icon={icon} width="14px" height="14px" />
                     <h5 className={`${cx('title')} mb-0`}>{amount}</h5>
                 </div>
-                <div className={`align-items-center d-flex justify-content-between w-100 pr-4`}>
+                <div className={`align-items-center d-flex justify-content-between w-100`}>
                     <Icon
                         icon={isUptrend ? 'uptrend' : 'downtrend'}
-                        width="24px"
-                        height="24px"
+                        width="14px"
+                        height="14px"
                         color={trendColorClass.iconColor}
                     />
                     <h5 className={`${cx('title')} mb-0 ${trendColorClass.titleStyle}`}>{percentage}</h5>

@@ -8,11 +8,10 @@
     height: 100%;
     display: grid;
     grid-template-areas:
-        'section1 section2 section3'
-        'section4 section2 section3'
-        'section4 section6 section3'
-        'section5 section6 section7'
-        'section5 section6 section7';
+        'section1 section2 section9 section9 section11 section11'
+        'section3 section4 section9 section9 section11 section11'
+        'section5 section6 section10 section10 section11 section11'
+        'section7 section8 section10 section10 section11 section11';
     grid-gap: 0.4rem;
 
     & .section1 {
@@ -47,6 +46,22 @@
 
     & .section7 {
         grid-area: section7;
+        @include section-style();
+    }
+    & .section8 {
+        grid-area: section8;
+        @include section-style();
+    }
+    & .section9 {
+        grid-area: section9;
+        @include section-style();
+    }
+    & .section10 {
+        grid-area: section10;
+        @include section-style();
+    }
+    & .section11 {
+        grid-area: section11;
         @include section-style();
     }
 }

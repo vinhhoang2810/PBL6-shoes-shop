@@ -2,12 +2,21 @@
     margin-left: 65px;
     border-bottom: 3px solid var(--main-divider);
     height: 65px;
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-between;
-    // padding: 0 1rem;
 
     .brand {
         margin: 0;
+        background-image: var(--primary);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+    }
+
+    .user-avatar {
+        width: 5rem;
+        height: 5rem;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-left: 1.2rem;
+        cursor: pointer;
     }
 }
