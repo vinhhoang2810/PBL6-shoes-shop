@@ -29,6 +29,7 @@ export default function WarehouseCard({
     // Gọi hàm xử lý cập nhật từ props
     onUpdate();
   };
+  console.log(product);
   return (
     <div className="warehouseList">
       <div className="warehouse-product">
@@ -63,6 +64,7 @@ export default function WarehouseCard({
       </div>
       <div className="warehouse-quantity">
         <span className="warehouse-quantity-span">{product?.quantity}</span>
+        {/* <span className="warehouse-quantity-span">{product?.size}</span> */}
       </div>
       <div className="warehouse-operation">
         <Button onClick={handleDeleteClick}>Delete</Button>

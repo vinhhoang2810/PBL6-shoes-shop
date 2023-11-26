@@ -32,25 +32,25 @@ export default function Header() {
     };
   }, []);
 
-  useEffect(() => {
-    // Mô phỏng một cuộc gọi API để lấy số lượng sản phẩm trong giỏ hàng
-    // Thay thế đoạn này bằng cuộc gọi API thực tế của bạn để lấy số lượng
-    const fetchCartCount = async () => {
-      try {
-        // Giả lập việc lấy dữ liệu từ API
-        const response = await apiCart.getAllCart();
-        const data = await response.json();
-        setCartCount(data.count); // Giả sử API trả về có trường 'count'
-      } catch (error) {
-        console.error("Lỗi khi lấy số lượng sản phẩm trong giỏ hàng:", error);
-      }
-    };
+  // useEffect(() => {
+  //   // Mô phỏng một cuộc gọi API để lấy số lượng sản phẩm trong giỏ hàng
+  //   // Thay thế đoạn này bằng cuộc gọi API thực tế của bạn để lấy số lượng
+  //   const fetchCartCount = async () => {
+  //     try {
+  //       // Giả lập việc lấy dữ liệu từ API
+  //       const response = await apiCart.getAllCart();
+  //       const data = await response.json();
+  //       setCartCount(data.count); // Giả sử API trả về có trường 'count'
+  //     } catch (error) {
+  //       console.error("Lỗi khi lấy số lượng sản phẩm trong giỏ hàng:", error);
+  //     }
+  //   };
 
-    // Gọi API để lấy số lượng sản phẩm trong giỏ hàng khi component được mount
-    fetchCartCount();
+  //   // Gọi API để lấy số lượng sản phẩm trong giỏ hàng khi component được mount
+  //   fetchCartCount();
 
-    // ... (mã trước đó)
-  }, []);
+  //   // ... (mã trước đó)
+  // }, []);
   return (
     <header className="header">
       <div className="header-main">

@@ -36,24 +36,6 @@ export default function BrandList() {
         <SwiperSlide>
           <BrandCard image={logo} name="NIKE" amount="53" />
         </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="Adidas" amount="53" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="Gucci" amount="53" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="New Balance" amount="53" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="Alex" amount="53" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="Converse" amount="53" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <BrandCard image={logo} name="Puma" amount="53" />
-        </SwiperSlide>
       </Swiper>
     </section>
   );

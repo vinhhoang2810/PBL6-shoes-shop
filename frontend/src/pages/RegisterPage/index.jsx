@@ -10,21 +10,38 @@ export default function RegisterPage() {
   const [firstName, setFirstName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("user");
   const naviagte = useNavigate();
 
+  const validatePassword = (password) => {
+    // Biểu thức chính quy kiểm tra mật khẩu
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+    return passwordRegex.test(password);
+  };
+  const validateEmail = (email) => {
+    // Biểu thức chính quy kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
   const handleSubmit = async () => {
-    // if (username === "admin" && password === "admin") {
-    //   toast.success("Đăng nhập thành công");
-    //   setTimeout(() => {
-    //     naviagte("/register");
-    //   }, 2000);
-    // } else {
-    //   toast.error("Sai tài khoản hoặc mật khẩu");
-    // }
     if (!password || !lastName || !firstName || !phone || !email) {
       toast.error("Please fill in all required fields");
       return;
     }
+    // Kiểm tra định dạng email
+    if (!validateEmail(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+    // Kiểm tra mật khẩu
+    if (!validatePassword(password)) {
+      toast.error(
+        "Password must contain at least 8 characters, one uppercase letter, and one digit"
+      );
+      return;
+    }
+
     try {
       const formData = {
         password,
@@ -32,11 +49,13 @@ export default function RegisterPage() {
         firstName,
         phone,
         email,
+        role,
       };
       const response = await axios.post(
         "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signup",
         formData
       );
+      console.log(formData);
       if (response) {
         toast.success("Đăng ký thành công");
         localStorage.setItem("user", JSON.stringify(formData));
@@ -65,6 +84,7 @@ export default function RegisterPage() {
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 required
+                autoComplete="off"
               />
               <label>Email</label>
             </div>
@@ -74,6 +94,7 @@ export default function RegisterPage() {
                 id="password"
                 name="password"
                 value={password}
+                autoComplete="off"
                 onChange={(event) => setPassword(event.target.value)}
                 required
               />
@@ -85,6 +106,7 @@ export default function RegisterPage() {
                 id="lastName"
                 name="lastName"
                 value={lastName}
+                autoComplete="off"
                 onChange={(event) => setLastName(event.target.value)}
                 required
               />
@@ -96,6 +118,7 @@ export default function RegisterPage() {
                 id="firstName"
                 name="firstName"
                 value={firstName}
+                autoComplete="off"
                 onChange={(event) => setFirstName(event.target.value)}
                 required
               />
@@ -108,6 +131,7 @@ export default function RegisterPage() {
                 id="phone"
                 name="phone"
                 value={phone}
+                autoComplete="off"
                 onChange={(event) => setPhone(event.target.value)}
                 required
               />
@@ -115,9 +139,12 @@ export default function RegisterPage() {
             </div>
 
             <div className="input-register">
-              <select className="permission">
-                <option value="0">Sell</option>
-                <option value="1">Purchase</option>
+              <select
+                className="permission"
+                onChange={(event) => setRole(event.target.value)}
+              >
+                <option value="user">Purchase</option>
+                <option value="admin">Sell</option>
               </select>
             </div>
             <button
@@ -131,7 +158,7 @@ export default function RegisterPage() {
             <div className="login-register">
               <p>
                 If you already have an Account?
-                <Link to="/login" className="login-link">
+                <Link to="/#" className="login-link">
                   {" "}
                   Login
                 </Link>

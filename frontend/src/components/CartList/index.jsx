@@ -7,7 +7,7 @@ import "./style.scss";
 import apiCart from "../API/apiCart";
 import { toast } from "react-toastify";
 
-export default function CartList(onDelete) {
+export default function CartList({ onDelete = () => {} }) {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   console.log(products);
@@ -29,7 +29,8 @@ export default function CartList(onDelete) {
 
   const handleIncreaseQuantity = (productId) => {
     // Tìm sản phẩm cần tăng số lượng
-    const updatedProducts = products.map((product) =>
+    // console.log(products);
+    const updatedProducts = products?.product?.map((product) =>
       product.id === productId
         ? { ...product, quantity: product.quantity + 1 }
         : product
@@ -52,9 +53,16 @@ export default function CartList(onDelete) {
   };
 
   const handleDeleteProduct = (productId) => {
-    const updatedProducts = products.filter(
-      (product) => product.id !== productId
-    );
+    console.log("Deleting product with ID:", productId);
+
+    const updatedProducts = products?.product?.map((product) => ({
+      ...product,
+      cartItems: product.cartItems.map((p) =>
+        p.id === productId ? { ...p, quantity: Math.max(0, p.quantity - 1) } : p
+      ),
+    }));
+
+    // Cập nhật state với sản phẩm mới
     setProducts(updatedProducts);
   };
 
@@ -72,7 +80,7 @@ export default function CartList(onDelete) {
     // Gọi hàm handleTotal mỗi khi danh sách sản phẩm thay đổi
     handleTotal();
   }, [handleTotal, products]);
-  console.log("Total Price:", totalPrice); // Thêm dòng này để debug
+  // console.log("Total Price:", totalPrice); // Thêm dòng này để debug
 
   const handleDelete = () => {
     // console.log("abbaba");
@@ -128,7 +136,7 @@ export default function CartList(onDelete) {
           <button className="payment-detail-btndelete">Delete</button>
           <div className="payment-content">
             <label>The Total Amount</label>
-            <label>${totalPrice}</label>
+            <label>${products?.totalPrice}</label>
           </div>
         </div>
         <div className="payment-btn">

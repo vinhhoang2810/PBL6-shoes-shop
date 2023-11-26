@@ -6,6 +6,7 @@ import Button from "../../components/Button";
 import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import apiCreateOrder from "../API/apiCreateOrder.js";
+import { useNavigate } from "react-router-dom";
 
 export default function DeliveryAddressForm() {
   const [Firstname, setFirstname] = useState("");
@@ -15,6 +16,7 @@ export default function DeliveryAddressForm() {
   const [City, setCity] = useState("");
   const [State, setState] = useState("");
   const [Zipcode, setZipcode] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +38,7 @@ export default function DeliveryAddressForm() {
       if (response) {
         toast.success("Thêm thông tin thành công ");
         setTimeout(() => {
-          // navigate("/OderSummary");
+          navigate("/pay?step=2");
         }, 2000);
       } else {
         toast.error("Có lỗi khi thêm thông tin");

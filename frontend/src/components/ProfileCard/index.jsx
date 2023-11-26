@@ -8,6 +8,9 @@ import "./style.scss";
 export default function ProfileCard() {
   const [profiles, setProfiles] = useState([]);
   const [fullName, setfullName] = useState("");
+  const [streetAddress, setstreetAddress] = useState("");
+  const [defaultAddress, setDefaultAddress] = useState(null);
+  console.log(profiles);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -15,6 +18,14 @@ export default function ProfileCard() {
         const response = await apiProfile.getProfile();
         setProfiles(response.data);
         setfullName(response.data.firstName + " " + response.data.lastName);
+        // Check if addresses is an array and not empty
+        if (
+          Array.isArray(response.data.addresses) &&
+          response.data.addresses.length > 0
+        ) {
+          // Set the first address as the default address
+          setDefaultAddress(response.data.addresses[0]);
+        }
       } catch (error) {
         toast.error(error?.message);
       }
@@ -132,12 +143,18 @@ export default function ProfileCard() {
               </div> */}
               <div className="profile-address">
                 <label className="profile-show-label">Địa chỉ</label>
-                <input
-                  type="text"
-                  defaultValue={profiles.addresses}
-                  // onChange={handleAddress}
-                  className="profile-show-input"
-                ></input>
+                {defaultAddress ? (
+                  <div className="address-item">
+                    <input
+                      type="text"
+                      defaultValue={`${defaultAddress.streetAddress}`}
+                      className="profile-show-input"
+                      readOnly
+                    />
+                  </div>
+                ) : (
+                  <p>Không có địa chỉ</p>
+                )}
               </div>
               <div className="profile-email">
                 <label className="profile-show-label">Email</label>
