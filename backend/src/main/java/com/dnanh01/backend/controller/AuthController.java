@@ -102,8 +102,9 @@ public class AuthController {
         String password = loginRequest.getPassword();
 
         Authentication authentication = authenticate(userName, password);
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        
         String token = jwtProvider.generateToken(authentication);
 
         User foundUser = userRepository.findByEmail(userName);

@@ -17,7 +17,7 @@ public class UserServiceImplementation implements UserService {
 
     public UserServiceImplementation(UserRepository userRepository, JwtProvider jwtProvider) {
         this.userRepository = userRepository;
-        this.jwtProvider = jwtProvider;
+        this.jwtProvider = jwtProvider;	
     }
 
     @Override
@@ -29,6 +29,11 @@ public class UserServiceImplementation implements UserService {
         throw new UserException("User not found with id - " + userId);
     }
 
+    @Override
+    public User getUserByEmail(String email) {
+		return this.userRepository.findByEmail(email);
+	}
+    
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
         String email = jwtProvider.getEmailFromToken(jwt);

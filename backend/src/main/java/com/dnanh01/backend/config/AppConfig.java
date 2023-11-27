@@ -3,11 +3,15 @@ package com.dnanh01.backend.config;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,23 +19,46 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
+import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.service.UserServiceImplementation;
+
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration
 @EnableAutoConfiguration
-public class AppConfig {
+public class AppConfig implements UserDetailsService {
 
+	@Autowired
+	private UserServiceImplementation userServiceImplementation;
+	
     // Configuration for the Spring Security filter chain
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+        User user = userServiceImplementation.getUserByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found with email: " + email);
+        }
+
+        // @formatter:off
+        UserDetails details = org.springframework.security.core.userdetails.User
+                .builder().username(user.getEmail()).password(user.getPassword())
+                .roles(user.getRole()).disabled(false).build();
+        // @formatter:on
+
+        return details;
+    }
+	
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Set session creation policy to STATELESS
                 .and()
-                .authorizeHttpRequests(Authorize -> Authorize.requestMatchers("/api/**") // Authorize requests for
-                                                                                         // "/api/**"
-                        .authenticated() // Require authentication for authorized requests
-                        .anyRequest() // For any other request
-                        .permitAll() // Permit all (no authentication required)
+                .authorizeHttpRequests(Authorize -> Authorize.requestMatchers("/auth/**","/api/**","/index","/order","/guest/**").permitAll()
+                		.anyRequest().authenticated()
+//        				.requestMatchers("/user/**").hasRole("USER")
+//        				.requestMatchers("/admin/**").hasRole("ADMIN"))
                 ).addFilterBefore(
                         new JwtValidator(), BasicAuthenticationFilter.class // Add JwtValidator before
                                                                             // BasicAuthenticationFilter
@@ -58,11 +85,8 @@ public class AppConfig {
                                 return cfg;
                             }
 
-                        })
-                .and()
-                .httpBasic() // Enable HTTP Basic authentication
-                .and()
-                .formLogin(); // Enable form-based authentication
+                        });
+        http.csrf(t->t.disable());
         return http.build(); // Build and return the configured HttpSecurity object
     }
 

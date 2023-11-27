@@ -42,7 +42,6 @@ public class JwtValidator extends OncePerRequestFilter {
         if (jwt != null) {
             // Remove the "Bearer " prefix from the JWT token
             jwt = jwt.substring(7);
-
             try {
                 // Create a secret key using the HMAC SHA algorithm with the secret key from
                 // JwtConstant
