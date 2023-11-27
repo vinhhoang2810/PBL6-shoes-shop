@@ -19,8 +19,18 @@ public class Review {
     private Long id;
 
     private String review;
+    
+    private Long rating;
 
-    @ManyToOne
+    public Long getRating() {
+		return rating;
+	}
+
+	public void setRating(Long rating) {
+		this.rating = rating;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;
@@ -41,6 +51,7 @@ public class Review {
         this.product = product;
         this.user = user;
         this.createAt = createAt;
+        this.rating = rating;
     }
 
     public Long getId() {

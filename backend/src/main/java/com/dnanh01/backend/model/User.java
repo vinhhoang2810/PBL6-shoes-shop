@@ -46,10 +46,6 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Rating> ratings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     private LocalDateTime createAt;
@@ -58,7 +54,7 @@ public class User {
     }
 
     public User(Long id, String firstName, String lastName, String password, String email, String role, String mobile,
-            List<Address> addresses, List<PaymentInFormation> paymentInFormations, List<Rating> ratings,
+            List<Address> addresses, List<PaymentInFormation> paymentInFormations,
             List<Review> reviews, LocalDateTime createAt) {
         this.id = id;
         this.firstName = firstName;
@@ -69,7 +65,6 @@ public class User {
         this.mobile = mobile;
         this.addresses = addresses;
         this.paymentInFormations = paymentInFormations;
-        this.ratings = ratings;
         this.reviews = reviews;
         this.createAt = createAt;
     }
@@ -144,14 +139,6 @@ public class User {
 
     public void setPaymentInFormations(List<PaymentInFormation> paymentInFormations) {
         this.paymentInFormations = paymentInFormations;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     public List<Review> getReviews() {
