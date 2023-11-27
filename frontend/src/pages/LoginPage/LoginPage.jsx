@@ -26,6 +26,7 @@ export default function LoginPage() {
             const res = await postSignIn(formData);
 
             if (res.status === 201 && res.data?.role === 'admin') {
+                debugger;
                 toast.success(res.data?.message);
                 navigate('/dashboard');
             } else if (res.status === 201 && res.data?.role === 'user') {

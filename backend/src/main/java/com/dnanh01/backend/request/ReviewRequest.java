@@ -1,7 +1,9 @@
 package com.dnanh01.backend.request;
 
 public class ReviewRequest {
+
     private Long productId;
+
     private String review;
 
     public Long getProductId() {

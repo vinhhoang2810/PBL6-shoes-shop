@@ -25,8 +25,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "title")
     private String title;
-    
+
+    @Column(name = "description")
     private String description;
 
     @Column(name = "price")
@@ -40,9 +42,6 @@ public class Product {
 
     @Column(name = "quantity")
     private int quantity;
-
-    @Column(name = "brand")
-    private String brand;
 
     @Column(name = "color")
     private String color;
@@ -65,17 +64,18 @@ public class Product {
     private int numRatings;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "brand")
+    private Brand brand;
 
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
     public Product() {
     }
 
     public Product(Long id, String title, String description, int price, int discountedPrice, int discountPersent,
-            int quantity, String brand, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings,
-            List<Review> reviews, int numRatings, Category category, LocalDateTime createAt) {
+            int quantity, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings, List<Review> reviews,
+            int numRatings, Brand brand, LocalDateTime createAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -83,14 +83,13 @@ public class Product {
         this.discountedPrice = discountedPrice;
         this.discountPersent = discountPersent;
         this.quantity = quantity;
-        this.brand = brand;
         this.color = color;
         this.sizes = sizes;
         this.imageUrl = imageUrl;
         this.ratings = ratings;
         this.reviews = reviews;
         this.numRatings = numRatings;
-        this.category = category;
+        this.brand = brand;
         this.createAt = createAt;
     }
 
@@ -150,14 +149,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public String getColor() {
         return color;
     }
@@ -206,12 +197,12 @@ public class Product {
         this.numRatings = numRatings;
     }
 
-    public Category getCategory() {
-        return category;
+    public Brand getBrand() {
+        return brand;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public LocalDateTime getCreateAt() {

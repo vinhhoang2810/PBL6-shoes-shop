@@ -34,6 +34,12 @@ public class AdminProductController {
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Product>> getAllProduct() {
+        List<Product> products = productService.findAllProducts();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{productId}/delete")
     public ResponseEntity<ApiResponse> deleteProduct(
             @PathVariable("productId") Long productId) throws ProductException {
@@ -43,12 +49,6 @@ public class AdminProductController {
         res.setStatus(true);
 
         return new ResponseEntity<>(res, HttpStatus.OK);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Product>> getAllProduct() {
-        List<Product> products = productService.findAllProducts();
-        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @PutMapping("/{productId}/update")

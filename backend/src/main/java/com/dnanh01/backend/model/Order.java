@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
+// import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +24,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "order_id")
-    private String orderId;
+    // @Column(name = "order_id")
+    // private String orderId;
 
     @ManyToOne
     private User user;
@@ -62,7 +62,7 @@ public class Order {
             LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice,
             Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
         this.id = id;
-        this.orderId = orderId;
+        // this.orderId = orderId;
         this.user = user;
         this.orderItems = orderItems;
         this.orderDate = orderDate;
@@ -85,13 +85,13 @@ public class Order {
         this.id = id;
     }
 
-    public String getOrderId() {
-        return orderId;
-    }
+    // public String getOrderId() {
+    // return orderId;
+    // }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
+    // public void setOrderId(String orderId) {
+    // this.orderId = orderId;
+    // }
 
     public User getUser() {
         return user;

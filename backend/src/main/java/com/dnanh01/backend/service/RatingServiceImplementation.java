@@ -33,6 +33,7 @@ public class RatingServiceImplementation implements RatingService {
         rating.setUser(user);
         rating.setRating(req.getRating());
         rating.setCreateAt(LocalDateTime.now());
+
         return ratingRepository.save(rating);
     }
 

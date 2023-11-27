@@ -31,11 +31,24 @@ public class CartItemServiceImplementation implements CartItemService {
 
     @Override
     public CartItem createCartItem(CartItem cartItem) {
-        cartItem.setQuantity(1);
-        cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
-        cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() * cartItem.getQuantity());
 
-        CartItem createCartItem = cartItemRepository.save(cartItem);
+        CartItem saveCartItem = new CartItem();
+        saveCartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() * cartItem.getQuantity());
+        saveCartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+
+        saveCartItem.setQuantity(cartItem.getQuantity());
+        saveCartItem.setSize(cartItem.getSize());
+        saveCartItem.setUserId(cartItem.getUserId());
+        saveCartItem.setCart(cartItem.getCart());
+        saveCartItem.setProduct(cartItem.getProduct());
+        // cartItem.setQuantity(1);
+
+        // cartItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity());
+
+        // cartItem.setDiscountedPrice(cartItem.getProduct().getDiscountedPrice() *
+        // cartItem.getQuantity());
+
+        CartItem createCartItem = cartItemRepository.save(saveCartItem);
         return createCartItem;
     }
 

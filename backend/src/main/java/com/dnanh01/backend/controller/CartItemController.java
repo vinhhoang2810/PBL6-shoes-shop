@@ -49,4 +49,5 @@ public class CartItemController {
         CartItem updatedCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
         return ResponseEntity.status(HttpStatus.OK).body(updatedCartItem);
     }
+
 }

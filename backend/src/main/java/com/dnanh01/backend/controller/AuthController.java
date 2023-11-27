@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dnanh01.backend.config.JwtProvider;
 import com.dnanh01.backend.exception.UserException;
+import com.dnanh01.backend.model.Cart;
 // import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.UserRepository;
@@ -74,8 +75,7 @@ public class AuthController {
         createUser.setCreateAt(LocalDateTime.now());
 
         User saveUser = userRepository.save(createUser);
-        // Cart cart = cartService.createCart(saveUser);
-        cartService.createCart(saveUser);
+        Cart cart = cartService.createCart(saveUser);
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 saveUser.getEmail(),

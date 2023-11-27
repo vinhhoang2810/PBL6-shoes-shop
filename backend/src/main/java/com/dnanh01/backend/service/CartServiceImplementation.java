@@ -2,11 +2,14 @@ package com.dnanh01.backend.service;
 
 import org.springframework.stereotype.Service;
 
+import com.dnanh01.backend.exception.CartItemException;
 import com.dnanh01.backend.exception.ProductException;
+import com.dnanh01.backend.exception.UserException;
 import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.CartItem;
 import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.repository.CartItemRepository;
 import com.dnanh01.backend.repository.CartRepository;
 import com.dnanh01.backend.request.AddItemRequest;
 
@@ -24,6 +27,7 @@ public class CartServiceImplementation implements CartService {
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
         this.productService = productService;
+
     }
 
     @Override
@@ -34,24 +38,42 @@ public class CartServiceImplementation implements CartService {
     }
 
     @Override
-    public String addCartItem(Long userId, AddItemRequest req) throws ProductException {
+    public String addCartItem(Long userId, AddItemRequest req)
+            throws ProductException, CartItemException, UserException {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.findProductById(req.getProductId());
         CartItem isPresent = cartItemService.isCartItemExist(cart, product, req.getSize(), userId);
+
         if (isPresent == null) {
             CartItem cartItem = new CartItem();
-            cartItem.setProduct(product);
-            cartItem.setCart(cart);
-            cartItem.setQuantity(req.getQuantity());
-            cartItem.setUserId(userId);
 
             int price = req.getQuantity() * product.getDiscountedPrice();
             cartItem.setPrice(price);
+            cartItem.setQuantity(req.getQuantity());
             cartItem.setSize(req.getSize());
+            cartItem.setUserId(userId);
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
 
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
+
             cart.getCartItems().add(createdCartItem);
+
+            cartRepository.save(cart);
+        } else {
+            CartItem cartItem = new CartItem();
+            int price = req.getQuantity() * product.getDiscountedPrice();
+            cartItem.setPrice(price);
+            cartItem.setQuantity(req.getQuantity());
+            cartItem.setSize(req.getSize());
+            cartItem.setUserId(userId);
+            cartItem.setCart(cart);
+            cartItem.setProduct(product);
+
+            cartItemService.updateCartItem(userId, isPresent.getId(), cartItem);
+
         }
+
         return "Item add to cart";
     }
 

@@ -2,7 +2,6 @@ package com.dnanh01.backend.request;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import com.dnanh01.backend.model.Size;
 
 public class CreateProductRequest {
@@ -12,18 +11,14 @@ public class CreateProductRequest {
     private int price;
 
     private int discountedPrice;
-    private int discountedPersent;
+    private int discountPersent;
     private int quantity;
-    private String brand;
+    private BrandRequest brand;
 
     private String color;
     private Set<Size> size = new HashSet<>();
 
     private String imageUrl;
-
-    private String topLavelCategory;
-    private String secondLavelCategory;
-    private String thirdLavelCategory;
 
     public String getTitle() {
         return title;
@@ -57,12 +52,12 @@ public class CreateProductRequest {
         this.discountedPrice = discountedPrice;
     }
 
-    public int getDiscountedPersent() {
-        return discountedPersent;
+    public int getDiscountPersent() {
+        return discountPersent;
     }
 
-    public void setDiscountedPersent(int discountedPersent) {
-        this.discountedPersent = discountedPersent;
+    public void setDiscountPersent(int discountPersent) {
+        this.discountPersent = discountPersent;
     }
 
     public int getQuantity() {
@@ -73,11 +68,11 @@ public class CreateProductRequest {
         this.quantity = quantity;
     }
 
-    public String getBrand() {
+    public BrandRequest getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(BrandRequest brand) {
         this.brand = brand;
     }
 
@@ -103,30 +98,6 @@ public class CreateProductRequest {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getTopLavelCategory() {
-        return topLavelCategory;
-    }
-
-    public void setTopLavelCategory(String topLavelCategory) {
-        this.topLavelCategory = topLavelCategory;
-    }
-
-    public String getSecondLavelCategory() {
-        return secondLavelCategory;
-    }
-
-    public void setSecondLavelCategory(String secondLavelCategory) {
-        this.secondLavelCategory = secondLavelCategory;
-    }
-
-    public String getThirdLavelCategory() {
-        return thirdLavelCategory;
-    }
-
-    public void setThirdLavelCategory(String thirdLavelCategory) {
-        this.thirdLavelCategory = thirdLavelCategory;
     }
 
 }
