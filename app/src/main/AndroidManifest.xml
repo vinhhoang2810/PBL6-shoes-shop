@@ -25,7 +25,11 @@
         tools:targetApi="34">
 
         <activity
-            android:name="com.shop.shoes.project.MainActivity"
+            android:name=".ui.main.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
