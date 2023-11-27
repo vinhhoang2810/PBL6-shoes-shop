@@ -2,17 +2,13 @@ import axios from "axios";
 
 const axiosClient = axios.create({
   baseURL: "https://pbl6-shoes-shop-production-810a.up.railway.app/api",
-  headers: {
-    "Content-Type": "application/json",
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDEwMTA2OTksImV4cCI6MTcwMTA5NjY5OSwiZW1haWwiOiJ0cmluaGx1Y0BnbWFpbC5jb20iLCJhdXRob3JpZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfdXNlciJ9XX0.37ii1Cn7I-CsaWytryX_hxclVdYeariQdEEDGGCYtOY",
-  },
 });
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function (config) {
+    const access_token = localStorage.getItem("token");
+    config.headers.Authorization = `Bearer ${access_token}`;
     // Do something before request is sent
     return config;
   },

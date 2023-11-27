@@ -158,7 +158,7 @@ export default function RegisterPage() {
             <div className="login-register">
               <p>
                 If you already have an Account?
-                <Link to="/#" className="login-link">
+                <Link to="/login" className="login-link">
                   {" "}
                   Login
                 </Link>

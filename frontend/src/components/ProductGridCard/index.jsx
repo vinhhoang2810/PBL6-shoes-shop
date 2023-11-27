@@ -28,10 +28,10 @@ const ProductGridCard = ({ product }) => {
       </div>
       <div className="showcase-content">
         <Link
-          to={`/product?brand=${product?.brand}`}
+          to={`/product?brand=${product?.brand?.name}`}
           className="showcase-category-grid"
         >
-          {product?.brand}
+          {product?.brand?.name}
         </Link>
         <Link to={`/product/${product?.id}`} className="showcase-title-grid">
           <h3 className="showcase-title">{product?.title}</h3>

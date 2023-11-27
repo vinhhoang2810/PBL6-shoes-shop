@@ -19,7 +19,7 @@ export default function ProductFeaturedCard(product) {
       <div className="product-featured container-layout">
         <h2 className="product-featured-title">Deal Of The Day</h2>
         <div className="product-featured-content">
-          <Link to={`/product/${82}`} className="product-featured-link">
+          <Link to={`/product/${1}`} className="product-featured-link">
             <img src={shoes} alt="" className="product-featured-image"></img>
           </Link>
           <div className="product-featured-detail">
@@ -31,14 +31,14 @@ export default function ProductFeaturedCard(product) {
               <i className="fa fa-star" aria-hidden="true"></i>
             </div>
             <h2 className="product-featured-name">
-              <Link
-                to={`/product/${82}`}
-                className="product-featured-name-link"
-              >
+              <Link to={`/product/${1}`} className="product-featured-name-link">
                 Giày Nike Air Force 1 Canviày Jordad
               </Link>
             </h2>
-            <Link to="/#" className="product-featured-category">
+            <Link
+              to={`/product?brand=Nike`}
+              className="product-featured-category"
+            >
               Nike
             </Link>
             <div className="product-featured-price">

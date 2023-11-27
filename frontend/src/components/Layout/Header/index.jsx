@@ -9,6 +9,7 @@ export default function Header() {
   const [cartCount, setCartCount] = useState(0);
   const dropdownRef = useRef(null);
   const [active, setActive] = useState(false);
+  const [auth, setAuth] = useState(null);
 
   const onMenuAccount = (e) => {
     e.preventDefault();
@@ -18,15 +19,25 @@ export default function Header() {
     setActive(false);
   };
 
-  const handleClickOutside = (event) => {
-    console.log(event?.target);
-    if (!dropdownRef?.current?.contains(event?.target)) {
-      setActive(false);
-    }
-  };
-
   useEffect(() => {
+    // Click outside handler
+    const handleClickOutside = (event) => {
+      console.log(event?.target);
+      if (!dropdownRef?.current?.contains(event?.target)) {
+        setActive(false);
+      }
+    };
+
+    // Add click event listener
     document.addEventListener("click", handleClickOutside);
+
+    // Local storage check for auth
+    const auth = localStorage.getItem("auth");
+    if (auth) {
+      setAuth(JSON.parse(auth));
+    }
+
+    // Remove click event listener on component unmount
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -64,23 +75,13 @@ export default function Header() {
               height="50"
             />
           </Link>
-          <div className="header-search-container">
-            <input
-              type="search"
-              name="search"
-              className="search-field"
-              placeholder="Enter your product name..."
-            />
-            <button className="search-btn">
-              <i className="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
+          <Link to="/profile">Hello, welcome back {auth?.user?.email}</Link>
           <div className="header-user-actions">
-            <Link to="/login" className="action-btn">
-              <i className="fa fa-user-o" aria-hidden="true"></i>
-            </Link>
             <Link to="/profile" className="action-btn">
               <i className="fa fa-id-card" aria-hidden="true"></i>
+            </Link>
+            <Link to="/login" className="action-btn">
+              <i className="fa fa-user-o" aria-hidden="true"></i>
             </Link>
             <Link to="/cart" className="action-btn">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>

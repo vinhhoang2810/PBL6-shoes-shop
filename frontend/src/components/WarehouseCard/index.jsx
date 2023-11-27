@@ -17,8 +17,8 @@ export default function WarehouseCard({
   //   onSelectType(newType);
   // };
 
-  // const hexColorCode = product?.color;
-  // const colorName = chroma(hexColorCode).name();
+  const hexColorCode = product?.color;
+  const colorName = chroma(hexColorCode).name();
 
   const handleDeleteClick = () => {
     // Gọi hàm xử lý xóa từ props
@@ -43,24 +43,27 @@ export default function WarehouseCard({
           </Link>
         </div>
         <div className="warehouse-content">
-          <Link to="/about" className="link-warehouse-content">
+          <Link
+            to={`/product/${product?.id}`}
+            className="link-warehouse-content"
+          >
             <span className="name-warehouse-content">{product?.title}</span>
           </Link>
-          <Link to="#" className="catogery-warehouse-content">
-            {product?.brand}
+          <Link to="/product" className="catogery-warehouse-content">
+            {product?.brand?.name}
           </Link>
         </div>
       </div>
       <div className="warehouse-color">
-        <span className="name-warehouse-color">{product?.color}</span>
+        <span className="name-warehouse-color">{colorName}</span>
       </div>
       <div className="warehouse-price">
         <span className="name-warehouse-price">
-          ${product?.discountedPrice}
+          {product?.discountedPrice + " "}VND
         </span>
       </div>
       <div className="warehouse-price">
-        <span className="name-warehouse-price">${product?.price}</span>
+        <span className="name-warehouse-price">{product?.price + " "}VND</span>
       </div>
       <div className="warehouse-quantity">
         <span className="warehouse-quantity-span">{product?.quantity}</span>

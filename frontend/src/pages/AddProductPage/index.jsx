@@ -7,55 +7,79 @@ import Button from "../../components/Button";
 import apiAddProduct from "../../components/API/apiAddProduct";
 
 export default function AddProductPage() {
-  const [nameProduct, setnameProduct] = useState("123123123");
-  const [descriptionProduct, setdescriptionProduct] = useState(
-    "Ở mỗi độ tuổi khác nhau, sẽ có những mẫu giày khác nhau cũng như cách chọn giày khác nhau. Để chọn được mẫu giày Puma theo từng độ tuổi nhất định, cần lựa chọn ..."
+  const [nameProduct, setnameProduct] = useState(
+    "GIÀY THỂ THAO REEBOK RIDER V"
   );
-  const [priceProduct, setpriceProduct] = useState("2000");
-  const [discountedPriceProduct, setdiscountedPriceProduct] = useState("1800");
+  const [descriptionProduct, setdescriptionProduct] = useState(
+    "ĐÔI GIÀY LẤY CẢM HỨNG TỪ GIÀY CHẠY BỘ CỔ ĐIỂN VỚI PHONG CÁCH HIỆN ĐẠI Vẻ ngoài của bạn sẽ luôn trong khỏe khoắn năng động suốt ngày dài khi diện đôi Giày Reebok Rider V này"
+  );
+  const [priceProduct, setpriceProduct] = useState("200000");
+  const [discountedPriceProduct, setdiscountedPriceProduct] =
+    useState("180000");
   const [discountPersentProduct, setdiscountPersentProduct] = useState("10");
   const [quantityProduct, setquantityProduct] = useState("100");
   const [imageProduct, setimageProduct] = useState(
-    "https://raw.githubusercontent.com/DNAnh01/PBL6-shoes-shop/frontend/frontend/src/images/shoes7.png"
+    "https://image.hsv-tech.io/1387x0/reebok/g/z/gz3109_flt_ecom.jpg"
   );
   const [selectedBrand, setSelectedBrand] = useState("Nike");
   // const [selectedSize, setSelectedSize] = useState([
-  //   { name: "M", quantity: 20 },
-  //   { name: "L", quantity: 30 },
-  //   { name: "S", quantity: 50 },
+  // { name: "M", quantity: 20 },
+  // { name: "L", quantity: 30 },
+  // { name: "S", quantity: 50 },
   // ]);
-  const arrSize = ["S", "M", "L"];
-  const [selectedSize, setSelectedSize] = useState([]);
-  console.log(selectedSize);
-
+  const [arrSize, setArrSize] = useState([
+    { name: "M", quantity: null },
+    { name: "L", quantity: null },
+    { name: "S", quantity: null },
+  ]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [size, setSize] = useState(null);
+  const [count, setCount] = useState(null);
   // const [selectedGender, setSelectedGender] = useState("");
-  const [selectedColor, setSelectedColor] = useState("FF0000");
+  const [selectedColor, setSelectedColor] = useState("#FF0000");
   const navigate = useNavigate();
 
-  const handleQuantityChange = (event, size) => {
+  const handleQuantityChange = (event, sizeName, quantitySize) => {
     const value = event.target.value;
-    setSelectedSize((prevSizeQuantities) => ({
-      ...prevSizeQuantities,
-      [size]: value === "" ? 0 : parseInt(value, 10),
-    }));
+    console.log(value);
+    setArrSize((prevArrSize) =>
+      prevArrSize.map((item) =>
+        item.name === sizeName
+          ? { ...item, quantity: value === "" ? null : parseInt(value, 10) }
+          : item
+      )
+    );
   };
   // Thay đổi hàm xử lý sự kiện khi chọn size
-  const handleSizeChange = (event, sizeName) => {
+  const handleSizeChange = (event, sizeName, quantitySize) => {
     if (event.target.checked) {
-      // If the checkbox is checked, add the size to the selected sizes
-      setSelectedSize((prevSelectedSize) => [
-        ...prevSelectedSize,
-        { name: sizeName },
-      ]);
+      setArrSize((prevArrSize) =>
+        prevArrSize.map((item) =>
+          item.name === sizeName ? { ...item, quantity: quantitySize } : item
+        )
+      );
     } else {
-      // If the checkbox is unchecked, remove the size from the selected sizes
-      setSelectedSize((prevSelectedSize) =>
-        prevSelectedSize.filter((size) => size.name !== sizeName)
+      setArrSize((prevArrSize) =>
+        prevArrSize.map((item) =>
+          item.name === sizeName ? { ...item, quantity: null } : item
+        )
       );
     }
-  };
 
+    setSelectedSizes((prevSelectedSizes) =>
+      event.target.checked
+        ? [...prevSelectedSizes, { name: sizeName, quantity: quantitySize }]
+        : prevSelectedSizes.filter((size) => size.name !== sizeName)
+    );
+  };
   const handleSubmit = async () => {
+    const arrSizes = [
+      {
+        name: size,
+        quantity: count,
+      },
+    ];
+
     const formData = {
       title: nameProduct,
       description: descriptionProduct,
@@ -64,12 +88,9 @@ export default function AddProductPage() {
       discountPersent: parseInt(discountPersentProduct),
       quantity: parseInt(quantityProduct),
       imageUrl: imageProduct,
-      brand: selectedBrand,
-      size: selectedSize,
+      brand: { name: selectedBrand },
+      size: arrSizes,
       color: selectedColor,
-      topLavelCategory: "132",
-      secondLavelCategory: "123",
-      thirdLavelCategory: "123",
     };
     console.log(formData);
     // const axiosInstance = await axios.create({
@@ -201,24 +222,48 @@ export default function AddProductPage() {
             </div> */}
             <div className="add-size">
               <label className="add-label">Chọn Size và Số lượng:</label>
-              {arrSize.map((size) => (
-                <div key={size} className="add-size-checkbox">
+              {/* {arrSize.map((size) => (
+                <div key={size.name} className="add-size-checkbox">
                   <input
                     type="checkbox"
-                    id={`checkbox-${size}`}
-                    checked={selectedSize[size] > 0}
-                    onChange={(event) => handleSizeChange(event, size)}
+                    id={`checkbox-${size.name}`}
+                    checked={selectedSizes.some(
+                      (selectedSize) => selectedSize.name === size.name
+                    )}
+                    onChange={(event) => handleSizeChange(event, size.name)}
                   />
-                  <label htmlFor={`checkbox-${size}`}>{size}</label>
+                  <label htmlFor={`checkbox-${size.name}`}>{size.name}</label>
                   <input
-                    type="text"
+                    type="number"
                     className="add-size-input"
-                    id={`size-${size}`}
-                    value={selectedSize[size] || ""}
-                    onChange={(event) => handleQuantityChange(event, size)}
+                    id={`size-${size.name}`}
+                    value={size.quantity || ""}
+                    onChange={(event) => handleQuantityChange(event, size.name)}
                   />
                 </div>
-              ))}
+              ))} */}
+              <div>
+                <input type="input" onChange={(e) => setSize(e.target.value)} />
+                <input type="text" onChange={(e) => setCount(e.target.value)} />
+              </div>
+              {/* <div>
+                <input
+                  type="checkbox"
+                  id="S"
+                  onChange={() => setNameSizeS("S")}
+                />
+                <label htmlFor="S">S</label>
+                <input type="text" onChange={(e) => setSizeS(e.target.value)} />
+              </div>
+              <div>
+                <input
+                  type="checkbox"
+                  id="L"
+                  onChange={() => setNameSizeL("L")}
+                />
+                <label htmlFor="L">L</label>
+                <input type="text" onChange={(e) => setSizeL(e.target.value)} />
+              </div> */}
             </div>
             <div className="add-color">
               <label className="add-label">Chọn màu:</label>

@@ -23,9 +23,11 @@ export default function LoginPage() {
         "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signin",
         formData
       );
+      console.log(response);
       if (response) {
         toast.success("Đăng nhập thành công");
         console.log("response", response);
+        localStorage.setItem("token", response?.data?.jwt);
         localStorage.setItem("user", JSON.stringify(formData));
 
         setTimeout(() => {

@@ -136,7 +136,7 @@ export default function CartList({ onDelete = () => {} }) {
           <button className="payment-detail-btndelete">Delete</button>
           <div className="payment-content">
             <label>The Total Amount</label>
-            <label>${products?.totalPrice}</label>
+            <label>{products?.totalDiscountedPrice + " "}VND</label>
           </div>
         </div>
         <div className="payment-btn">

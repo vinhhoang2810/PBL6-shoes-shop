@@ -13,8 +13,8 @@ export default function CartCard({
   // console.log(product);
   const [quantityDefault, setQuantityDefault] = useState(product?.quantity);
   // console.log(quantityDefault);
-  // const hexColorCode = product?.product.color;
-  // const colorName = chroma(hexColorCode).name();
+  const hexColorCode = product?.product.color;
+  const colorName = chroma(hexColorCode).name();
   // console.log(product);
   // useEffect(() => {
   //   onIncreaseQuantity(price, quantity);
@@ -60,18 +60,18 @@ export default function CartCard({
               to={`/product?brand=${name}`}
               className="cartList-content-catogery"
             >
-              {product?.product.brand}
+              {product?.product?.brand?.name}
             </Link>
             <div className="cartList-content-color">
-              <span className="cartList-content-color-p"></span>
+              <span className="cartList-content-color-p">{colorName}</span>
             </div>
           </div>
         </div>
         <div className="cartList-price">
-          <span className="font-15">${product?.discountedPrice}</span>
+          <span className="font-15">{product?.discountedPrice + " "}VND</span>
         </div>
         <div className="cartList-priceSale">
-          <span className="font-15">${product?.price}</span>
+          <span className="font-15">{product?.price + " "}VND</span>
         </div>
         <div className="cartList-quantity">
           <button
@@ -94,7 +94,7 @@ export default function CartCard({
         </div>
         <div className="cartList-money">
           <span className="font-15">
-            ${quantityDefault * Number(product.discountedPrice)}
+            {quantityDefault * Number(product.discountedPrice) + " "}VND
           </span>
         </div>
         <div className="cartList-operation">

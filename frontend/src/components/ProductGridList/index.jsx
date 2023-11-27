@@ -11,12 +11,13 @@ export default function ProductGridList() {
   let [searchParams, setSearchParams] = useSearchParams();
   // const [brands, setBrands] = useState([]);
   const selectedBrand = searchParams.get("selectedBrand");
-
+  console.log(selectedBrand);
   useEffect(() => {
+    //Lỗi brand
     const fetchBrands = async () => {
       try {
         const response = await apiBrand.getProductByBrand(selectedBrand);
-        setProducts(response.data);
+        setProducts(response.data.content);
       } catch (error) {
         console.error("Error fetching brands:", error);
       }

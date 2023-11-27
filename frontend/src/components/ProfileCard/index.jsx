@@ -144,14 +144,12 @@ export default function ProfileCard() {
               <div className="profile-address">
                 <label className="profile-show-label">Địa chỉ</label>
                 {defaultAddress ? (
-                  <div className="address-item">
-                    <input
-                      type="text"
-                      defaultValue={`${defaultAddress.streetAddress}`}
-                      className="profile-show-input"
-                      readOnly
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    defaultValue={`${defaultAddress.streetAddress}`}
+                    className="profile-show-input"
+                    readOnly
+                  />
                 ) : (
                   <p>Không có địa chỉ</p>
                 )}
