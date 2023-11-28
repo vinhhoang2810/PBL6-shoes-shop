@@ -5,7 +5,6 @@ import ForgetPassPage from "./pages/ForgerPassPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import AboutPage from "./pages/AboutPage";
-import ReviewPage from "./pages/ReviewPage";
 import WarehousePage from "./pages/WarehousePage";
 import CartPage from "./pages/CartPage";
 import ServicePage from "./pages/ServicePage";
@@ -13,6 +12,7 @@ import PayPage from "./pages/PayPage";
 import AddProductPage from "./pages/AddProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import "react-toastify/dist/ReactToastify.css";
+import HotTrendPage from "./pages/HotTrendPage";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/product" element={<ProductPage />} />
         <Route path="/product/:id" element={<AboutPage />} />
-        <Route path="/review" element={<ReviewPage />} />
+        <Route path="/hot" element={<HotTrendPage />} />
         <Route path="/warehouse" element={<WarehousePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/service" element={<ServicePage />} />

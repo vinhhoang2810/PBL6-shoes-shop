@@ -189,7 +189,6 @@
 
 textarea {
   max-width: 100%;
-  width: 100%;
   border: var(--icon-down) solid 1px;
   border-radius: 35px;
   background-color: var(--white);
@@ -197,9 +196,6 @@ textarea {
   color: var(--fontcolor);
   vertical-align: middle;
   font-size: 15px;
-}
-
-textarea {
   padding: 20px;
 }
 
@@ -305,7 +301,7 @@ input[type="checkbox"] {
 /* responsive */
 @media (max-width: 1400px) {
 }
-  
+
 @media (max-width: 992px) {
   .customerReviews-wrapper {
     display: grid;

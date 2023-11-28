@@ -10,7 +10,7 @@ export default function Header() {
   const dropdownRef = useRef(null);
   const [active, setActive] = useState(false);
   const [auth, setAuth] = useState(null);
-
+  const user = JSON.parse(localStorage.getItem("user"));
   const onMenuAccount = (e) => {
     e.preventDefault();
     setActive(true);
@@ -30,12 +30,6 @@ export default function Header() {
 
     // Add click event listener
     document.addEventListener("click", handleClickOutside);
-
-    // Local storage check for auth
-    const auth = localStorage.getItem("auth");
-    if (auth) {
-      setAuth(JSON.parse(auth));
-    }
 
     // Remove click event listener on component unmount
     return () => {
@@ -75,7 +69,9 @@ export default function Header() {
               height="50"
             />
           </Link>
-          <Link to="/profile">Hello, welcome back {auth?.user?.email}</Link>
+          <Link to="/profile" className="hello-auth">
+            Hello, Welcome Back {user?.email}!!!
+          </Link>
           <div className="header-user-actions">
             <Link to="/profile" className="action-btn">
               <i className="fa fa-id-card" aria-hidden="true"></i>
@@ -109,8 +105,8 @@ export default function Header() {
               </Link>
             </li>
             <li className="menu-category">
-              <Link to="/review" className="menu-title">
-                Review
+              <Link to="/hot" className="menu-title">
+                Hot Trend
               </Link>
             </li>
             <li className="menu-category">
@@ -181,8 +177,8 @@ export default function Header() {
               </Link>
             </li>
             <li className="menu-category">
-              <Link to="/review" className="accordion-menu" data-accordion-btn>
-                <p className="menu-title">Review</p>
+              <Link to="/hot" className="accordion-menu" data-accordion-btn>
+                <p className="menu-title">Hot Trend</p>
               </Link>
             </li>
             <li className="menu-category">

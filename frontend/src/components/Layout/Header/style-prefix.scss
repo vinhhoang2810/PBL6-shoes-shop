@@ -96,9 +96,6 @@
 
 .header {
   max-width: 100%;
-  background: url(../../../images/background5.png);
-  background-repeat: no-repeat;
-  background-size: cover;
   font: inherit;
   font-family: "Poppins", sans-serif;
   -ms-scroll-chaining: none;
@@ -144,6 +141,39 @@
 /*-----------------------------------*\
   #HEADER
 \*-----------------------------------*/
+/* style.scss */
+
+/* style.scss */
+
+.hello-auth {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  display: inline-block;
+  white-space: nowrap; /* Ngăn chữ xuống dòng */
+  overflow: hidden; /* Ẩn nội dung vượt ra khỏi khung chứa */
+  animation: marquee 10s linear infinite; /* Tốc độ chạy và lặp vô hạn */
+  transition: background-color 0.3s ease;
+  background: linear-gradient(to left, #008eff, #f60000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hello-auth:hover {
+  background-color: #ddd;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
 .header-top,
 .header-user-actions,
@@ -486,6 +516,7 @@
   /**
    * #HEADER
    */
+
   .header-logo {
     margin-bottom: 0;
     margin: 0 150px;

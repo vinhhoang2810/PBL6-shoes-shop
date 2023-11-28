@@ -8,35 +8,30 @@ import apiBrand from "../API/apiBrand";
 
 export default function ProductGridList() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
-  // const [brands, setBrands] = useState([]);
   const selectedBrand = searchParams.get("selectedBrand");
-  console.log(selectedBrand);
+
   useEffect(() => {
-    //Lỗi brand
-    const fetchBrands = async () => {
+    const fetchData = async () => {
       try {
-        const response = await apiBrand.getProductByBrand(selectedBrand);
-        setProducts(response.data.content);
-      } catch (error) {
-        console.error("Error fetching brands:", error);
-      }
-    };
-    const fetchProductGrid = async () => {
-      try {
-        const response = await apiProductGrid.getAllProduct();
-        setProducts(response.data.content);
+        setIsLoading(true);
+
+        if (selectedBrand) {
+          const response = await apiBrand.getProductByBrand(selectedBrand);
+          setProducts(response.data.content);
+        } else {
+          const response = await apiProductGrid.getAllProduct();
+          setProducts(response.data.content);
+        }
       } catch (error) {
         toast.error(error?.message);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    if (selectedBrand) {
-      fetchBrands();
-    } else {
-      // Gọi hàm fetchProductGrid
-      fetchProductGrid();
-    }
+    fetchData();
   }, [selectedBrand]);
 
   return (
@@ -44,10 +39,18 @@ export default function ProductGridList() {
       <div className="product-main container-layout">
         <h2 className="title">Products</h2>
         <div className="product-grid">
-          {products.length > 0 &&
+          {isLoading ? (
+            // Hiển thị spinner hoặc thông báo loading khi dữ liệu đang được tải
+            <div className="brandCard-loading">
+              <p></p>
+            </div>
+          ) : (
+            // Hiển thị danh sách sản phẩm khi dữ liệu đã được tải xong
+            products.length > 0 &&
             products.map((product) => {
               return <ProductGridCard key={product?.id} product={product} />;
-            })}
+            })
+          )}
         </div>
       </div>
     </section>

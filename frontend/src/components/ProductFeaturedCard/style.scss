@@ -7,13 +7,13 @@
     background-size: cover;
   }
   &-featured-title {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--eerie-black);
     font-weight: var(--weight-600);
     letter-spacing: 0.4px;
     text-transform: capitalize;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--cultured);
+    border-bottom: 3px solid var(--cultured);
     margin-bottom: 30px;
   }
   &-featured-content {

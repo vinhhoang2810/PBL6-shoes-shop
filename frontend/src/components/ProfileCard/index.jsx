@@ -10,7 +10,6 @@ export default function ProfileCard() {
   const [fullName, setfullName] = useState("");
   const [streetAddress, setstreetAddress] = useState("");
   const [defaultAddress, setDefaultAddress] = useState(null);
-  console.log(profiles);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -60,8 +59,8 @@ export default function ProfileCard() {
   };
   const handleLogout = () => {
     toast.success("Đăng xuất thành công");
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("auth");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setTimeout(() => {
       navigate("/login");
     }, 2000);
@@ -146,7 +145,7 @@ export default function ProfileCard() {
                 {defaultAddress ? (
                   <input
                     type="text"
-                    defaultValue={`${defaultAddress.streetAddress}`}
+                    defaultValue={`${defaultAddress?.streetAddress}`}
                     className="profile-show-input"
                     readOnly
                   />

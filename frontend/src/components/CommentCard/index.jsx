@@ -1,11 +1,36 @@
 "use client";
 
 import React, { useState } from "react";
-import Raiting from "../Raiting";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import apiCreateReview from "../API/apiReview";
+import Raiting from "../API/Raiting";
 import "./style.scss";
 
-export default function CommentCard() {
+export default function CommentCard(productId) {
   const [value, setValue] = useState(0);
+  const [reviewText, setReviewText] = useState("");
+  const postCreateRaiting = async () => {
+    const formdata = {
+      productId: productId?.productId,
+      review: reviewText,
+      rating: value,
+    };
+
+    try {
+      const response = await apiCreateReview.postCreateReview(formdata);
+      console.log("response:", response.data);
+
+      if (response) {
+        toast.success("Thêm đánh giá thành công");
+        setTimeout(() => {}, 2000);
+      } else {
+        toast.error("Có lỗi khi thêm đánh giá");
+      }
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
+  };
   return (
     <section>
       <div className="container-layout">
@@ -134,11 +159,13 @@ export default function CommentCard() {
                     id="comment"
                     cols="45"
                     rows="8"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
                     required
                     className="resize-none"
                   ></textarea>
                 </p>
-                <button className="form-submit">
+                <button className="form-submit" onClick={postCreateRaiting}>
                   <input
                     name="submit"
                     type="submit"

@@ -18,7 +18,6 @@ export default function ProductPage() {
           <i className="fa fa-search" aria-hidden="true"></i>
         </button>
       </div>
-      <ProductFeaturedCard />
       <BrandList />
       <ProductGridList />
     </>

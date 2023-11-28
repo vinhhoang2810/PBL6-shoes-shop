@@ -99,17 +99,6 @@
   background: hsl(0, 0%, 80%);
 }
 
-.title {
-  color: var(--eerie-black);
-  font-size: var(--fs-5);
-  font-weight: var(--weight-600);
-  letter-spacing: 0.4px;
-  text-transform: capitalize;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--cultured);
-  margin-bottom: 30px;
-}
-
 /*-----------------------------------*\
   #CATEGORY
 \*-----------------------------------*/
@@ -190,4 +179,7 @@
   text-transform: capitalize;
   font-size: 15px;
   text-decoration: none;
+}
+.border-b {
+  border-bottom: 1px;
 }

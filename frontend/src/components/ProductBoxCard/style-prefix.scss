@@ -331,12 +331,12 @@
   }
   &-minimal-title {
     color: var(--eerie-black);
-    font-size: var(--fs-5);
+    font-size: 20px;
     font-weight: var(--weight-600);
     letter-spacing: 0.4px;
     text-transform: capitalize;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--cultured);
+    border-bottom: 3px solid var(--cultured);
     margin-bottom: 30px;
   }
   &-minimal-content {
@@ -404,8 +404,8 @@
     color: var(--sonic-silver);
   }
 }
-@media(max-width:480px){
-  .product-box{
+@media (max-width: 480px) {
+  .product-box {
     flex-direction: column;
   }
 }

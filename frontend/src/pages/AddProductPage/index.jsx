@@ -89,7 +89,8 @@ export default function AddProductPage() {
       quantity: parseInt(quantityProduct),
       imageUrl: imageProduct,
       brand: { name: selectedBrand },
-      size: arrSizes,
+      // size: arrSizes,
+      size: arrSize,
       color: selectedColor,
     };
     console.log(formData);
@@ -222,7 +223,7 @@ export default function AddProductPage() {
             </div> */}
             <div className="add-size">
               <label className="add-label">Chọn Size và Số lượng:</label>
-              {/* {arrSize.map((size) => (
+              {arrSize.map((size) => (
                 <div key={size.name} className="add-size-checkbox">
                   <input
                     type="checkbox"
@@ -241,29 +242,7 @@ export default function AddProductPage() {
                     onChange={(event) => handleQuantityChange(event, size.name)}
                   />
                 </div>
-              ))} */}
-              <div>
-                <input type="input" onChange={(e) => setSize(e.target.value)} />
-                <input type="text" onChange={(e) => setCount(e.target.value)} />
-              </div>
-              {/* <div>
-                <input
-                  type="checkbox"
-                  id="S"
-                  onChange={() => setNameSizeS("S")}
-                />
-                <label htmlFor="S">S</label>
-                <input type="text" onChange={(e) => setSizeS(e.target.value)} />
-              </div>
-              <div>
-                <input
-                  type="checkbox"
-                  id="L"
-                  onChange={() => setNameSizeL("L")}
-                />
-                <label htmlFor="L">L</label>
-                <input type="text" onChange={(e) => setSizeL(e.target.value)} />
-              </div> */}
+              ))}
             </div>
             <div className="add-color">
               <label className="add-label">Chọn màu:</label>
