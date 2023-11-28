@@ -30,6 +30,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/view_bottom"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,7 +3,6 @@ package com.shop.shoes.project.ui.main.account
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.shop.shoes.project.databinding.ActivityLoginBinding
 import com.shop.shoes.project.databinding.FragmentAccountBinding
 import com.shop.shoes.project.ui.login.LoginActivity
 import com.shop.shoes.project.ui.main.base.BaseFragment
