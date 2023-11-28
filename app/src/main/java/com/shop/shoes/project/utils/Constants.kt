@@ -1,4 +1,4 @@
-package com.shop.shoes.project.ui.utils
+package com.shop.shoes.project.utils
 
 object Constants {
     const val MAIN_NUMBER_FRAGMENT: Int = 3

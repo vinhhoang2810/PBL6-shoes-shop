@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.shop.shoes.project.ui.main.account.AccountFragment
 import com.shop.shoes.project.ui.main.cart.CartFragment
 import com.shop.shoes.project.ui.main.home.HomeFragment
-import com.shop.shoes.project.ui.utils.Constants
+import com.shop.shoes.project.utils.Constants
 
 class MainViewPagerAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager) {
