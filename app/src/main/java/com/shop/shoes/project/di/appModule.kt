@@ -9,7 +9,7 @@ import com.shop.shoes.project.data.source.Repository
 import com.shop.shoes.project.data.source.local.LocalDataSourceImpl
 import com.shop.shoes.project.data.source.local.LocalDatabase
 import com.shop.shoes.project.data.source.remote.RemoteDataSourceImpl
-import com.book.tickets.project.di.HttpAuthorization
+import com.shop.shoes.project.ui.login.LoginViewModel
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Constants.SERVER
 import com.shop.shoes.project.utils.Constants.TIME_OUT
@@ -17,12 +17,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val appModule = module {
+    viewModel { LoginViewModel(androidApplication(), get()) }
     fun appApi(client: OkHttpClient, builder: GsonBuilder): ApiService {
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(SERVER)

@@ -10,6 +10,6 @@ data class Auth(
 )
 
 data class AuthResponse(
-    val accessToken: String? = null,
+    val jwt: String? = null,
     val message: String? = null
 )

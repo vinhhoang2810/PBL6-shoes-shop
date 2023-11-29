@@ -1,6 +1,6 @@
-package com.book.tickets.project.di
+package com.shop.shoes.project.di
 
-import com.book.tickets.project.utils.Pref
+import com.shop.shoes.project.utils.Pref
 import okhttp3.Interceptor
 import okhttp3.Response
 

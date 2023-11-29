@@ -14,4 +14,9 @@
     <string name="login">Login</string>
     <string name="do_not_have_an_account">Don\'t have an account?</string>
     <string name="register">Register</string>
+    <string name="account_or_password_is_incorrect">Account or password is incorrect</string>
+    <string name="sign_in_success">Sign in success</string>
+    <string name="unknow_error">Unknow Error</string>
+    <string name="sign_in_fail">Sign In Fail</string>
+    <string name="please_enter_enough_information">Please enter enough information</string>
 </resources>
