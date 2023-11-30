@@ -1,4 +1,93 @@
-export const ArrowIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const SellPhoneLink = ({ classes, width = '30px  ', height = '30px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 128.000000 128.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M92 1107 c-22 -23 -22 -28 -22 -370 l0 -347 -35 0 c-45 0 -47 -26 -6 -72 l29 -33 336 -3 336 -3 0 -43 c0 -29 6 -49 20 -64 20 -21 29 -22 170 -22 141 0 150 1 170 22 13 15 20 35 20 63 l0 42 58 6 c47 5 62 11 85 37 15 17 27 39 27 50 0 16 -7 20 -35 20 l-35 0 0 348 0 349 -23 21 -23 22 -525 0 -526 0 -21 -23z m564 -8 c10 -17 -13 -36 -27 -22 -12 12 -4 33 11 33 5 0 12 -5 16 -11z m494 -365 c0 -286 -1 -305 -17 -302 -16 3 -18 20 -21 158 -4 208 4 200 -189 200 -139 0 -145 -1 -168 -25 -24 -24 -25 -28 -25 -180 l0 -155 -300 0 -300 0 0 305 0 305 510 0 510 0 0 -306z m-294 15 c10 -17 -13 -36 -27 -22 -12 12 -4 33 11 33 5 0 12 -5 16 -11z m104 -13 c0 -18 -33 -30 -60 -21 -37 12 -23 35 20 35 28 0 40 -4 40 -14z m108 -273 l-3 -218 -145 0 -145 0 -3 218 -2 217 150 0 150 0 -2 -217z m-123 -263 c0 -18 -6 -26 -21 -28 -26 -4 -40 24 -23 45 18 21 44 11 44 -17z" />
+        </g>
+    </svg>
+);
+
+export const ProductsIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 512.000000 512.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M2075 3851 c-70 -18 -126 -63 -161 -131 -14 -28 -20 -70 -25 -200 -9 -190 -27 -270 -90 -391 -99 -190 -262 -323 -479 -390 -98 -31 -299 -33 -400 -5 -159 44 -319 145 -410 259 -27 34 -74 110 -105 168 -59 115 -101 161 -162 178 -47 13 -59 13 -105 1 -50 -14 -97 -55 -119 -105 -17 -37 -19 -81 -19 -702 l0 -663 2561 0 2561 0 -6 38 c-24 135 -107 272 -218 356 -109 83 -185 105 -413 116 -191 9 -303 28 -441 76 -93 32 -249 109 -319 157 l-50 35 -188 -186 -187 -187 -107 108 -108 107 173 173 c94 95 172 175 172 178 0 8 -157 139 -167 139 -4 0 -93 -86 -198 -190 l-190 -190 -105 105 -105 105 184 184 183 183 -85 72 c-46 39 -88 71 -93 71 -5 0 -98 -89 -206 -197 l-198 -198 -105 105 -105 105 192 192 191 192 -29 24 c-219 184 -316 262 -349 282 -44 26 -123 38 -170 26z" />
+            <path d="M77 1538 c31 -53 125 -150 185 -188 31 -20 89 -48 130 -61 l73 -24 2095 0 c2005 0 2098 1 2155 18 134 41 267 142 323 245 l23 42 -2501 0 -2501 0 18 -32z" />
+        </g>
+    </svg>
+);
+
+export const OrdersIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 128.000000 128.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M162 1008 c3 -8 28 -15 59 -18 l54 -5 21 -250 c21 -244 21 -251 3 -274 -29 -37 -25 -96 9 -127 15 -14 38 -36 52 -50 31 -29 71 -31 95 -4 16 18 31 20 155 20 124 0 139 -2 155 -20 23 -25 70 -26 87 -1 8 10 24 21 37 23 32 4 40 28 10 28 -12 0 -32 11 -45 25 -29 32 -58 32 -90 0 -24 -24 -30 -25 -156 -25 -127 0 -131 1 -154 25 -28 30 -57 32 -85 4 -25 -25 -46 -19 -55 16 -10 42 3 72 37 84 21 7 139 11 331 11 l300 0 27 28 c15 15 38 54 50 86 23 61 63 274 55 288 -3 4 -59 8 -125 8 l-119 0 0 -25 c0 -67 -58 -136 -131 -155 -96 -26 -199 51 -199 149 l0 31 -115 0 -115 0 0 39 c0 21 -3 53 -6 70 l-6 31 -70 0 c-51 0 -69 -3 -66 -12z" />
+            <path d="M645 996 c-17 -7 -43 -28 -58 -45 -53 -64 -29 -179 45 -217 127 -66 265 68 200 195 -9 19 -29 43 -43 54 -34 25 -105 31 -144 13z m89 -51 c14 -13 26 -28 26 -33 0 -16 -13 -22 -27 -11 -22 19 -16 -18 7 -41 27 -27 25 -44 -7 -80 l-28 -31 -27 26 c-16 14 -28 32 -28 40 0 18 26 20 33 3 3 -7 6 -4 6 7 1 11 -8 28 -19 38 -26 22 -25 56 3 84 28 28 29 28 61 -2z" />
+            <path d="M681 904 c0 -11 3 -14 6 -6 3 7 2 16 -1 19 -3 4 -6 -2 -5 -13z" />
+        </g>
+    </svg>
+);
+
+export const CustomersIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 260.000000 267.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,267.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M1208 1869 c-95 -22 -150 -91 -163 -202 -4 -31 -11 -60 -16 -63 -13 -8 -11 -86 4 -111 6 -11 27 -48 46 -82 42 -77 106 -136 162 -151 54 -15 116 7 168 59 48 48 122 184 123 224 1 56 -21 176 -38 209 -52 103 -159 147 -286 117z m202 -219 c15 -8 20 -8 16 -1 -4 6 -2 11 4 11 6 0 19 -20 30 -44 10 -24 23 -47 29 -50 19 -12 12 -53 -13 -83 -13 -15 -31 -44 -41 -63 -53 -107 -151 -149 -231 -99 -32 20 -94 97 -94 117 0 5 -11 21 -25 36 -15 16 -25 39 -25 57 0 30 41 105 68 125 20 14 253 10 282 -6z" />
+            <path d="M459 1737 c-19 -12 -45 -44 -59 -72 -23 -47 -25 -60 -25 -205 0 -89 -4 -162 -10 -173 -6 -9 -31 -27 -55 -40 -35 -17 -51 -34 -72 -76 -36 -71 -36 -103 1 -134 49 -41 117 -52 321 -52 l184 0 8 43 c10 57 53 150 85 184 25 26 25 26 5 37 -12 6 -28 11 -36 11 -33 0 -41 41 -41 205 0 152 -1 162 -25 205 -39 69 -78 90 -170 90 -63 0 -83 -4 -111 -23z m143 -182 c63 -33 112 -53 122 -49 21 8 22 -34 1 -61 -8 -11 -29 -41 -45 -66 -35 -54 -88 -84 -128 -74 -31 8 -87 65 -125 128 l-29 47 26 54 c23 48 46 75 67 76 3 0 53 -25 111 -55z m-87 -265 c49 -25 66 -25 114 0 37 18 39 18 55 1 9 -10 16 -22 16 -28 0 -16 -43 -41 -93 -55 -38 -10 -52 -9 -90 6 -24 9 -53 26 -62 36 -17 19 -17 21 0 40 10 11 19 20 19 20 1 0 19 -9 41 -20z" />
+            <path d="M1920 1742 c-45 -22 -77 -71 -86 -130 -3 -26 -11 -53 -17 -60 -14 -18 -2 -73 27 -118 66 -103 78 -116 123 -136 39 -17 52 -19 82 -9 43 12 90 58 125 121 47 83 48 89 35 173 -13 88 -37 131 -89 158 -46 25 -152 26 -200 1z m210 -143 c17 -1 60 -73 60 -101 0 -9 -6 -23 -13 -30 -7 -7 -25 -34 -40 -60 -37 -65 -70 -88 -123 -88 -36 0 -49 6 -77 33 -18 19 -41 50 -51 70 -9 21 -21 37 -25 37 -5 0 -12 12 -15 26 -7 25 21 85 50 110 10 8 104 10 234 3z" />
+            <path d="M1770 1271 c-14 -5 -35 -14 -47 -22 l-22 -13 26 -35 c35 -45 72 -138 73 -178 0 -30 3 -32 45 -39 83 -12 385 2 444 20 75 25 105 56 98 107 -7 53 -51 126 -89 145 -17 9 -56 18 -87 21 -55 5 -57 4 -79 -29 -12 -19 -35 -47 -52 -63 l-29 -28 -11 27 c-7 18 -7 33 0 46 15 28 13 30 -26 30 -30 0 -35 -3 -29 -17 8 -20 9 -28 7 -60 -3 -36 -18 -28 -69 36 -44 55 -51 60 -88 59 -22 0 -51 -3 -65 -7z" />
+            <path d="M956 1238 c-52 -14 -110 -76 -136 -144 -47 -128 -13 -169 176 -210 102 -22 424 -25 534 -5 207 37 257 96 194 231 -46 99 -87 128 -195 137 -60 5 -72 3 -92 -14 -33 -30 -41 -33 -104 -43 -75 -13 -167 3 -210 36 -35 26 -95 31 -167 12z" />
+        </g>
+    </svg>
+);
+
+export const AddProductIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
+    <svg
+        className={classes}
+        width={width}
+        height={height}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 128.000000 128.000000"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+    >
+        <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill={color} stroke="none">
+            <path d="M202 1143 c-18 -9 -43 -30 -55 -47 -22 -31 -22 -37 -25 -419 -3 -380 -2 -389 19 -426 38 -68 62 -76 251 -79 l168 -4 -35 57 c-148 246 17 566 299 583 90 6 160 -11 231 -53 l57 -35 -4 168 c-3 189 -11 213 -78 251 -31 17 -55 21 -139 21 l-101 0 0 -97 c0 -109 -16 -158 -60 -180 -15 -8 -65 -13 -123 -13 l-99 0 -34 34 -34 34 0 111 0 111 -102 0 c-74 0 -112 -5 -136 -17z" />
+            <path d="M522 1058 l3 -103 84 -3 c61 -2 87 1 92 10 5 7 9 55 9 106 l0 92 -95 0 -96 0 3 -102z" />
+            <path d="M725 702 c-74 -37 -116 -80 -151 -156 -23 -51 -26 -67 -22 -135 6 -96 41 -167 111 -223 154 -121 373 -71 464 106 72 142 14 323 -128 400 -44 24 -68 31 -134 34 -72 3 -86 0 -140 -26z m163 -184 l3 -48 39 0 c56 0 90 -41 57 -68 -7 -6 -30 -12 -52 -14 -39 -3 -40 -4 -43 -43 -2 -22 -8 -45 -14 -52 -27 -33 -68 1 -68 57 l0 39 -47 3 c-42 3 -48 6 -51 27 -5 31 21 51 65 51 30 0 33 3 33 31 0 47 17 71 48 67 25 -3 27 -7 30 -50z" />
+        </g>
+    </svg>
+);
+
+export const ArrowIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -17,7 +106,7 @@ export const ArrowIcon = ({ classes, width = '25px  ', height = '25px ', color }
     </svg>
 );
 
-export const BasketIcon = ({ classes, width = '25px ', height = '25px    ', color }) => (
+export const BasketIcon = ({ classes, width = '30px ', height = '30px    ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -33,7 +122,7 @@ export const BasketIcon = ({ classes, width = '25px ', height = '25px    ', colo
     </svg>
 );
 
-export const CogIcon = ({ classes, width = '25px    ', height = '25px   ', color }) => (
+export const CogIcon = ({ classes, width = '30px    ', height = '30px   ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -49,7 +138,7 @@ export const CogIcon = ({ classes, width = '25px    ', height = '25px   ', color
     </svg>
 );
 
-export const DashboardIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const DashboardIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -88,7 +177,7 @@ export const DashboardIcon = ({ classes, width = '25px  ', height = '25px ', col
     </svg>
 );
 
-export const UptrendIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const UptrendIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -105,7 +194,7 @@ export const UptrendIcon = ({ classes, width = '25px  ', height = '25px ', color
     </svg>
 );
 
-export const DowntrendIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const DowntrendIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -130,7 +219,7 @@ export const DowntrendIcon = ({ classes, width = '25px  ', height = '25px ', col
     </svg>
 );
 
-export const EyeIcon = ({ classes, width = '25px    ', height = '25px   ', color }) => (
+export const EyeIcon = ({ classes, width = '30px    ', height = '30px   ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -150,7 +239,7 @@ export const EyeIcon = ({ classes, width = '25px    ', height = '25px   ', color
     </svg>
 );
 
-export const GridIcon = ({ classes, width = '25px   ', height = '25px  ', color }) => (
+export const GridIcon = ({ classes, width = '30px   ', height = '30px  ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -166,7 +255,7 @@ export const GridIcon = ({ classes, width = '25px   ', height = '25px  ', color 
     </svg>
 );
 
-export const ListIcon = ({ classes, width = '25px   ', height = '25px  ', color }) => (
+export const ListIcon = ({ classes, width = '30px   ', height = '30px  ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -202,7 +291,7 @@ export const ListIcon = ({ classes, width = '25px   ', height = '25px  ', color 
     </svg>
 );
 
-export const OptionsIcon = ({ classes, width = '25px    ', height = '25px   ', color }) => (
+export const OptionsIcon = ({ classes, width = '30px    ', height = '30px   ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -218,7 +307,7 @@ export const OptionsIcon = ({ classes, width = '25px    ', height = '25px   ', c
     </svg>
 );
 
-export const SearchIcon = ({ classes, width = '25px ', height = '25px    ', color }) => (
+export const SearchIcon = ({ classes, width = '30px ', height = '30px    ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -236,7 +325,7 @@ export const SearchIcon = ({ classes, width = '25px ', height = '25px    ', colo
     </svg>
 );
 
-export const StatsIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const StatsIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -249,7 +338,7 @@ export const StatsIcon = ({ classes, width = '25px  ', height = '25px ', color }
     </svg>
 );
 
-export const TasksIcon = ({ classes, width = '25px  ', height = '25px ', color }) => (
+export const TasksIcon = ({ classes, width = '30px  ', height = '30px ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -265,7 +354,7 @@ export const TasksIcon = ({ classes, width = '25px  ', height = '25px ', color }
     </svg>
 );
 
-export const UsdIcon = ({ classes, width = '25px    ', height = '25px   ', color }) => (
+export const UsdIcon = ({ classes, width = '30px    ', height = '30px   ', color }) => (
     <svg
         className={classes}
         width={width}
@@ -281,7 +370,7 @@ export const UsdIcon = ({ classes, width = '25px    ', height = '25px   ', color
     </svg>
 );
 
-export const UserIcon = ({ classes, width = '25px   ', height = '25px  ', color }) => (
+export const UserIcon = ({ classes, width = '30px   ', height = '30px  ', color }) => (
     <svg
         className={classes}
         width={width}

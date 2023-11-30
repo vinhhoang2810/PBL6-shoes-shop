@@ -1,0 +1,34 @@
+`/project-root
+|-- /public
+|-- /src
+    |-- /assets
+    |-- /components
+        |-- /common
+        |-- /admin
+        |-- /user
+        |-- /saler
+    |-- /containers
+        |-- /admin
+        |-- /user
+        |-- /saler
+    |-- /services
+        |-- authService.js
+        |-- productService.js
+        |-- userService.js
+        |-- salerService.js
+        |-- api.js (file để quản lý các endpoint API)
+    |-- /redux
+        |-- /actions
+        |-- /reducers
+        |-- /thunks
+        |-- /store.js
+    |-- /utils
+        |-- /helpers
+        |-- /constants
+        |-- /middlewares
+    |-- /views
+        |-- /admin
+        |-- /user
+        |-- /saler
+    |-- App.js
+    |-- index.js`

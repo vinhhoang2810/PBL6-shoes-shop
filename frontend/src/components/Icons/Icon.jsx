@@ -2,16 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
+    AddProductIcon,
     ArrowIcon,
     BasketIcon,
     CogIcon,
+    CustomersIcon,
     DashboardIcon,
     DowntrendIcon,
     EyeIcon,
     GridIcon,
     ListIcon,
     OptionsIcon,
+    OrdersIcon,
+    ProductsIcon,
     SearchIcon,
+    SellPhoneLink,
     StatsIcon,
     TasksIcon,
     UptrendIcon,
@@ -21,6 +26,11 @@ import {
 
 const Icon = (props) => {
     const components = {
+        cell_phone_link: SellPhoneLink,
+        products: ProductsIcon,
+        orders: OrdersIcon,
+        customers: CustomersIcon,
+        add_product: AddProductIcon,
         arrow: ArrowIcon,
         basket: BasketIcon,
         cog: CogIcon,
@@ -55,5 +65,5 @@ Icon.propTypes = {
 
 Icon.defaultProps = {
     icon: 'arrow',
-    color: '#c3cad9',
+    color: '#ababab',
 };

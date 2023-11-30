@@ -1,8 +1,8 @@
 .panel {
-    & .icon {
+    &.icon {
         width: 30px;
         height: 30px;
-        color: var(--main-text);
+        // color: var(--main-text);
         display: flex;
         align-items: center;
         justify-content: center;

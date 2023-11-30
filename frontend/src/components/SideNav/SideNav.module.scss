@@ -24,6 +24,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transform: rotate(180deg);
     }
     .arrow {
         color: var(--main-text);

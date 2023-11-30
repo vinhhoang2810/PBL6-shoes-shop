@@ -26,8 +26,10 @@ export default function LoginPage() {
             const res = await postSignIn(formData);
 
             if (res.status === 201 && res.data?.role === 'admin') {
-                debugger;
+                // debugger;
                 toast.success(res.data?.message);
+                localStorage.setItem('token', res?.data?.jwt);
+                localStorage.setItem('user', JSON.stringify(formData));
                 navigate('/dashboard');
             } else if (res.status === 201 && res.data?.role === 'user') {
                 navigate('/');

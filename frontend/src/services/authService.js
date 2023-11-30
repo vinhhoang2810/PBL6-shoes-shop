@@ -1,7 +1,7 @@
-import instance from '~/utils/axiosCustomize';
+import api_instance from '~/utils/axiosCustomize';
 
 const postSignIn = (data) => {
-    return instance.post('/auth/signin', data);
+    return api_instance.post('/auth/signin', data);
 };
 
 export { postSignIn };
