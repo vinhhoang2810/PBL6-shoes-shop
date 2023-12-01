@@ -13,8 +13,6 @@ data class User(
     var password: String,
     @SerializedName("mobile")
     var mobile: String,
-    @SerializedName("gender")
-    var gender: String,
     @SerializedName("role")
     var role: String
 )
