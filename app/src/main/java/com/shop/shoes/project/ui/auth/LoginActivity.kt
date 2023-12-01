@@ -1,5 +1,6 @@
 package com.shop.shoes.project.ui.auth
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.widget.Toast
 import com.shop.shoes.project.R
@@ -13,15 +14,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(){
     override fun viewBinding(inflate: LayoutInflater): ActivityLoginBinding = ActivityLoginBinding.inflate(inflate)
 
     override fun initView() {
-        binding.run {
-            btnLogin.setOnClickListener { handleSignIn() }
-        }
     }
 
     override fun initData() {
     }
 
-    override fun initListener() {
+    override fun initListener() = binding.run {
+        llRegister.setOnClickListener { startActivity(Intent(this@LoginActivity, RegisterActivity::class.java)) }
+        tvLater.setOnClickListener { finish() }
+        btnLogin.setOnClickListener { handleSignIn() }
     }
 
     private fun handleSignIn() {

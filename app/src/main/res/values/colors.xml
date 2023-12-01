@@ -10,4 +10,5 @@
     <color name="color_start_box">#FDF5F3</color>
     <color name="color_start_btn">#D151A8</color>
     <color name="color_end_btn">#8D4DD7</color>
+    <color name="color_grey">#8D8A91</color>
 </resources>
