@@ -55,13 +55,7 @@ public class Product {
     private String imageUrl;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Rating> ratings = new ArrayList<>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
-
-    @Column(name = "num_ratings")
-    private int numRatings;
 
     @ManyToOne
     @JoinColumn(name = "brand")
@@ -74,7 +68,7 @@ public class Product {
     }
 
     public Product(Long id, String title, String description, int price, int discountedPrice, int discountPersent,
-            int quantity, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings, List<Review> reviews,
+            int quantity, String color, Set<Size> sizes, String imageUrl, List<Review> reviews,
             int numRatings, Brand brand, LocalDateTime createAt) {
         this.id = id;
         this.title = title;
@@ -86,9 +80,7 @@ public class Product {
         this.color = color;
         this.sizes = sizes;
         this.imageUrl = imageUrl;
-        this.ratings = ratings;
         this.reviews = reviews;
-        this.numRatings = numRatings;
         this.brand = brand;
         this.createAt = createAt;
     }
@@ -173,28 +165,12 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
     public List<Review> getReviews() {
         return reviews;
     }
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
-
-    public int getNumRatings() {
-        return numRatings;
-    }
-
-    public void setNumRatings(int numRatings) {
-        this.numRatings = numRatings;
     }
 
     public Brand getBrand() {

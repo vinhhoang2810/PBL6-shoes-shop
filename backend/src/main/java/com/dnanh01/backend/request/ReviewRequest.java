@@ -3,6 +3,8 @@ package com.dnanh01.backend.request;
 public class ReviewRequest {
 
     private Long productId;
+    
+    private Long rating;
 
     private String review;
 
@@ -14,7 +16,15 @@ public class ReviewRequest {
         this.productId = productId;
     }
 
-    public String getReview() {
+    public Long getRating() {
+		return rating;
+	}
+
+	public void setRating(Long rating) {
+		this.rating = rating;
+	}
+
+	public String getReview() {
         return review;
     }
 
