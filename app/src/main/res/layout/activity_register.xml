@@ -120,7 +120,7 @@
             android:layout_marginVertical="@dimen/_16sdp"/>
 
         <LinearLayout
-            android:id="@+id/llRegister"
+            android:id="@+id/llLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

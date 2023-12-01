@@ -13,7 +13,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(){
     override fun initData() {
     }
 
-    override fun initListener() {
+    override fun initListener() =binding.run {
+        llLogin.setOnClickListener { finish() }
     }
-
 }
