@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dnanh01.backend.exception.ProductException;
+import com.dnanh01.backend.exception.UserException;
 import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.service.ProductService;
 
@@ -48,5 +49,11 @@ public class ProductController {
             @PathVariable Long productId) throws ProductException {
         Product product = productService.findProductById(productId);
         return new ResponseEntity<Product>(product, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<List<Product>> findAllProducts() throws ProductException, UserException {
+        List<Product> products = productService.findAllProducts();
+        return new ResponseEntity<List<Product>>(products, HttpStatus.ACCEPTED);
     }
 }

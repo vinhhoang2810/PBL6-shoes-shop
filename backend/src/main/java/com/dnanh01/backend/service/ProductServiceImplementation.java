@@ -22,7 +22,7 @@ import com.dnanh01.backend.request.CreateProductRequest;
 public class ProductServiceImplementation implements ProductService {
 
     private ProductRepository productRepository;
-    private UserService userService;
+    // private UserService userService;
     private BrandRepository brandRepository;
 
     public ProductServiceImplementation(
@@ -30,7 +30,7 @@ public class ProductServiceImplementation implements ProductService {
             UserService userService,
             BrandRepository brandRepository) {
         this.productRepository = productRepository;
-        this.userService = userService;
+        // this.userService = userService;
         this.brandRepository = brandRepository;
 
     }
@@ -79,6 +79,7 @@ public class ProductServiceImplementation implements ProductService {
     public Product updateProduct(Long productId, Product req) throws ProductException {
         Product product = findProductById(productId);
         if (req.getQuantity() != 0) {
+            // update so luong san pham
             product.setQuantity(req.getQuantity());
         }
         return productRepository.save(product);
@@ -94,7 +95,8 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public List<Product> findProductByCategory(String category) {
+    public List<Product> findProductByBrand(String brand) {
+
         return null;
     }
 
@@ -104,11 +106,11 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice,
+    public Page<Product> getAllProduct(String brand, List<String> colors, List<String> sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
 
-        List<Product> products = productRepository.filterProducts(category, minPrice, maxPrice, minDiscount, sort);
+        List<Product> products = productRepository.filterProducts(brand, minPrice, maxPrice, minDiscount, sort);
         if (!colors.isEmpty()) {
             /**
              * Lọc các sản phẩm mà màu sắc của chúng khớp với bất kỳ màu sắc nào trong

@@ -17,10 +17,10 @@ public interface ProductService {
 
     public Product findProductById(Long id) throws ProductException;
 
-    public List<Product> findProductByCategory(String category);
+    public List<Product> findProductByBrand(String brand);
 
     public List<Product> findAllProducts();
 
-    public Page<Product> getAllProduct(String category, List<String> colors, List<String> sizes, Integer minPrice,
+    public Page<Product> getAllProduct(String brand, List<String> colors, List<String> sizes, Integer minPrice,
             Integer maxPrice, Integer minDiscount, String sort, String stock, Integer pageNumber, Integer pageSize);
 }
