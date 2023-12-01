@@ -1,12 +1,19 @@
 package com.shop.shoes.project.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.shop.shoes.project.R
+import android.view.LayoutInflater
+import com.shop.shoes.project.databinding.ActivityRegisterBinding
+import com.shop.shoes.project.ui.main.base.BaseActivity
 
-class RegisterActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>(){
+    override fun viewBinding(inflate: LayoutInflater): ActivityRegisterBinding = ActivityRegisterBinding.inflate(inflate)
+
+    override fun initView() {
     }
+
+    override fun initData() {
+    }
+
+    override fun initListener() {
+    }
+
 }
