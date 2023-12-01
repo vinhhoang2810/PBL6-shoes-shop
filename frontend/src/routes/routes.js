@@ -8,10 +8,12 @@ import AdminDashboardPage from '~/pages/AdminDashboardPage';
 import AdminOrdersPage from '~/pages/AdminOrdersPage';
 import AdminProductsPage from '~/pages/AdminProductsPage';
 import LoginPage from '~/pages/LoginPage';
+import RegisterPage from '~/pages/RegisterPage';
 
 // public routers
 const publicRoutes = [
     { path: config.roures.login, component: LoginPage },
+    { path: config.roures.register, component: RegisterPage },
     { path: config.roures.adminDashboard, component: AdminDashboardPage, layout: AdminDefaultLayout },
     { path: config.roures.adminProducts, component: AdminProductsPage, layout: AdminDefaultLayout },
     { path: config.roures.adminCustomers, component: AdminCustomersPage, layout: AdminDefaultLayout },

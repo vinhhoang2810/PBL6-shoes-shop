@@ -11,11 +11,22 @@ import {
 export const findProducts = (reqData) => async (dispatch) => {
     dispatch({ type: FIND_PRODUCT_REQUEST });
 
-    const { colors, sizes, minPrice, maxPrice, minDiscount, brand, stock, sort, pageNumber, pageSize } = reqData;
+    const { color, size, minPrice, maxPrice, minDiscount, brand, stock, sort, pageNumber, pageSize } = reqData;
+    // console.log('reqData:   ', reqData);
     try {
-        const { data } = await api_instance.get(
-            `/api/products/?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&brand=${brand}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+        const token = localStorage.getItem('jwt');
+        console.log(
+            `/api/products/?color=${color}&size=${size}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&brand=${brand}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
         );
+        const { data } = await api_instance.get(
+            `/api/products/?color=${color}&size=${size}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&brand=${brand}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+
         dispatch({ type: FIND_PRODUCT_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: FIND_PRODUCT_FAILURE, payload: error.message });

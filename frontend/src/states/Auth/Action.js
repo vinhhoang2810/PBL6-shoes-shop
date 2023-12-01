@@ -12,7 +12,7 @@ import {
 } from './ActionType';
 import api_instance from '~/utils/axiosCustomize';
 
-const token = localStorage.getItem('jwt');
+// const token = localStorage.getItem('jwt');
 
 const registerRequest = () => ({ type: REGISTER_REQUEST });
 const registerSuccess = (user) => ({ type: REGISTER_SUCCESS, payload: user });
@@ -24,6 +24,7 @@ export const register = (reqData) => async (dispatch) => {
     try {
         const response = await api_instance.post(`/auth/signup`, reqData);
         const user = response.data;
+
         if (user.jwt) {
             localStorage.setItem('jwt', user.jwt);
         }
@@ -40,13 +41,15 @@ const loginFailure = (error) => ({ type: LOGIN_FAILURE, payload: error });
 export const login = (reqData) => async (dispatch) => {
     dispatch(loginRequest());
 
+    // console.log('reqData.data: ', reqData);
     try {
-        const res = await api_instance.post(`/auth/signin`, reqData.data);
+        const res = await api_instance.post(`/auth/signin`, reqData);
         const user = res.data;
+        // console.log(' ============', user);
         if (user.jwt) {
             localStorage.setItem('jwt', user.jwt);
         }
-        dispatch(loginSuccess(user.jwt));
+        dispatch(loginSuccess(user));
     } catch (error) {
         dispatch(loginFailure(error.message));
     }
@@ -56,20 +59,19 @@ const getUserRequest = () => ({ type: GET_USER_REQUEST });
 const getUserSuccess = (user) => ({ type: GET_USER_SUCCESS, payload: user });
 const getUserFailure = (error) => ({ type: GET_USER_FAILURE, payload: error });
 
-export const getUser = () => async (dispatch) => {
+export const getUser = (jwt) => async (dispatch) => {
     dispatch(getUserRequest());
 
     try {
         const response = await api_instance.get(`/api/users/profile`, {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${jwt}`,
             },
         });
         const user = response.data;
+        localStorage.setItem('user', JSON.stringify(user));
 
-        localStorage.setItem(user);
-
-        dispatch(getUserSuccess);
+        dispatch(getUserSuccess(user)); // Pass the user to getUserSuccess
     } catch (error) {
         dispatch(getUserFailure(error.message));
     }

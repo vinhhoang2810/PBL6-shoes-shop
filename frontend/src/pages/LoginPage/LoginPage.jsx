@@ -4,13 +4,16 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import classNames from 'classnames/bind';
 import styles from './LoginPage.module.scss';
-import { postSignIn } from '~/services/authService';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '~/states/Auth/Action';
 
 const cx = classNames.bind(styles);
 export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    const dispatch = useDispatch();
+    const { auth } = useSelector((store) => store);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,15 +26,12 @@ export default function LoginPage() {
                 email: username,
                 password,
             };
-            const res = await postSignIn(formData);
 
-            if (res.status === 201 && res.data?.role === 'admin') {
-                // debugger;
-                toast.success(res.data?.message);
-                localStorage.setItem('token', res?.data?.jwt);
-                localStorage.setItem('user', JSON.stringify(formData));
-                navigate('/dashboard');
-            } else if (res.status === 201 && res.data?.role === 'user') {
+            dispatch(login(formData));
+
+            if (auth?.user?.role === 'admin') {
+                navigate('/admin');
+            } else if (auth?.user?.role === 'user') {
                 navigate('/');
             }
         } catch (error) {

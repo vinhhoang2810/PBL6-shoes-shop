@@ -6,29 +6,26 @@
         |-- /common
         |-- /admin
         |-- /user
-        |-- /saler
-    |-- /containers
+        |-- /guest
+    |-- /config
+    |-- /layouts
         |-- /admin
         |-- /user
-        |-- /saler
-    |-- /services
-        |-- authService.js
-        |-- productService.js
-        |-- userService.js
-        |-- salerService.js
-        |-- api.js (file để quản lý các endpoint API)
-    |-- /redux
-        |-- /actions
-        |-- /reducers
-        |-- /thunks
+        |-- /guest
+    |-- /pages
+        |-- /auth
+        |-- /admin
+            |-- AddProduct.js
+        |-- /user
+        |-- /guest
+    |-- /routes
+    |-- /states
+        |-- /Auth
+        |-- /Cart
+        |-- /Order
+        |-- /vv
         |-- /store.js
     |-- /utils
-        |-- /helpers
-        |-- /constants
-        |-- /middlewares
-    |-- /views
-        |-- /admin
-        |-- /user
-        |-- /saler
+        |-- axiosCustomize.js
     |-- App.js
     |-- index.js`
