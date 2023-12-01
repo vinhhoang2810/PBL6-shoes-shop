@@ -1,4 +1,4 @@
-package com.shop.shoes.project.ui.login
+package com.shop.shoes.project.ui.auth
 
 import android.app.Application
 import android.widget.Toast

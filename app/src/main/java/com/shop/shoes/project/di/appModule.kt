@@ -9,7 +9,7 @@ import com.shop.shoes.project.data.source.Repository
 import com.shop.shoes.project.data.source.local.LocalDataSourceImpl
 import com.shop.shoes.project.data.source.local.LocalDatabase
 import com.shop.shoes.project.data.source.remote.RemoteDataSourceImpl
-import com.shop.shoes.project.ui.login.LoginViewModel
+import com.shop.shoes.project.ui.auth.LoginViewModel
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Constants.SERVER
 import com.shop.shoes.project.utils.Constants.TIME_OUT
