@@ -6,4 +6,9 @@
     <color name="ic_launcher_background">#2DCE74</color>
     <color name="color_view">#AE60D0</color>
     <color name="color_bg">#F4E3FF</color>
+    <color name="color_border">#C5CAD0</color>
+    <color name="color_start_box">#FDF5F3</color>
+    <color name="color_start_btn">#D151A8</color>
+    <color name="color_end_btn">#8D4DD7</color>
+    <color name="color_grey">#8D8A91</color>
 </resources>
