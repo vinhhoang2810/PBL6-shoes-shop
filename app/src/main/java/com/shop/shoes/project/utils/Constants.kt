@@ -11,4 +11,6 @@ object Constants {
     const val SIGN_IN = "/auth/signin"
     const val GET_INFO = "/api/users/profile"
     const val REQUEST_CODE_LOGIN = 123
+    const val ROLE = "USER"
+    const val SIGN_UP = "/auth/signup"
 }

@@ -8,4 +8,5 @@ import retrofit2.http.Body
 interface RemoteDataSource {
     suspend fun signIn(@Body request: Auth) : AuthResponse
     suspend fun getInfo() : User
+    suspend fun signUp(@Body request: User) : AuthResponse
 }

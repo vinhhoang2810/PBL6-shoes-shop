@@ -40,4 +40,6 @@
     <string name="account_is_not_exists">Account is not exists</string>
     <string name="go_to_back">Go to back</string>
     <string name="address">Address</string>
+    <string name="sign_up_success">Resigter success</string>
+    <string name="register_error">Register error</string>
 </resources>

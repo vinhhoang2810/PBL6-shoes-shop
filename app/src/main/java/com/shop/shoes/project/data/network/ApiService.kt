@@ -12,6 +12,9 @@ interface ApiService {
     @POST(Constants.SIGN_IN)
     suspend fun signIn(@Body request: Auth) : AuthResponse
 
+    @POST(Constants.SIGN_UP)
+    suspend fun signUp(@Body request: User) : AuthResponse
+
     @GET(Constants.GET_INFO)
     suspend fun getInfo() : User
 }

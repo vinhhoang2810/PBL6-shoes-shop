@@ -112,13 +112,13 @@
             android:layout_marginBottom="@dimen/_16sdp"/>
 
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_16sdp"
             android:background="@drawable/bg_btn"
             android:text="@string/register"
-            android:textColor="@color/white"
-            android:layout_marginVertical="@dimen/_16sdp"/>
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:id="@+id/llLogin"

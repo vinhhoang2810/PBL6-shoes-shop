@@ -20,4 +20,8 @@ class Repository(
         return remoteDataSource.getInfo()
     }
 
+    override suspend fun signUp(request: User): AuthResponse {
+        return remoteDataSource.signUp(request)
+    }
+
 }
