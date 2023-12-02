@@ -35,4 +35,6 @@
     <string name="email_feedback">daongocanh20052002@gmail.com</string>
     <string name="no_mail_found">No mail found</string>
     <string name="error_can_not_send">ERROR: can not send</string>
+    <string name="change_password">Change password</string>
+    <string name="get_info_fail">Get info fail</string>
 </resources>

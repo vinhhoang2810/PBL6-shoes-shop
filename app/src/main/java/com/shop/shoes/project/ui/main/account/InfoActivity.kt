@@ -1,12 +1,19 @@
 package com.shop.shoes.project.ui.main.account
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.shop.shoes.project.R
+import android.view.LayoutInflater
+import com.shop.shoes.project.databinding.ActivityInfoBinding
+import com.shop.shoes.project.ui.main.base.BaseActivity
 
-class InfoActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_info)
+class InfoActivity : BaseActivity<ActivityInfoBinding>(){
+    override fun viewBinding(inflate: LayoutInflater): ActivityInfoBinding  = ActivityInfoBinding.inflate(inflate)
+
+    override fun initView() {
     }
+
+    override fun initData() {
+    }
+
+    override fun initListener() {
+    }
+
 }

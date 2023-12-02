@@ -9,5 +9,6 @@ object Constants {
     const val DATABASE_NAME = "saved.db"
     const val TIME_OUT = 60_000L
     const val SIGN_IN = "/auth/signin"
+    const val GET_INFO = "/api/users/profile"
     const val REQUEST_CODE_LOGIN = 123
 }
