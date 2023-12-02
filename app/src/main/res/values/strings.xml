@@ -38,4 +38,5 @@
     <string name="change_password">Change password</string>
     <string name="get_info_fail">Get info fail</string>
     <string name="account_is_not_exists">Account is not exists</string>
+    <string name="go_to_back">Go to back</string>
 </resources>

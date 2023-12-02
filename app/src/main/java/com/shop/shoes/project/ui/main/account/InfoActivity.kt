@@ -18,7 +18,9 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>(){
         infoViewModel.getInfo()
     }
 
-    override fun initListener() {
+    override fun initListener() = binding.run {
+        btnBack.setOnClickListener { finish() }
+        btnChangePass.setOnClickListener {  handleChangePass() }
     }
 
     private fun listenVM() {
@@ -34,6 +36,10 @@ class InfoActivity : BaseActivity<ActivityInfoBinding>(){
         edtFirstName.setText(user.firstName)
         edtEmail.setText(user.email)
         edtPhone.setText(user.mobile)
+    }
+
+    private fun handleChangePass() {
+        //TODO
     }
 
 }
