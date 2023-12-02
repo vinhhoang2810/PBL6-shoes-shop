@@ -24,4 +24,15 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="sign_in_later">Sign in later</string>
+    <string name="become_a_member">Welcome!</string>
+    <string name="account_information">Account information</string>
+    <string name="my_cart">My Cart</string>
+    <string name="my_reviews">My Rating</string>
+    <string name="log_out">Log Out</string>
+    <string name="support">Support</string>
+    <string name="welcome">Welcome</string>
+    <string name="we_will_support_you_as_soon_as_possible">We will support you as soon as possible</string>
+    <string name="email_feedback">daongocanh20052002@gmail.com</string>
+    <string name="no_mail_found">No mail found</string>
+    <string name="error_can_not_send">ERROR: can not send</string>
 </resources>
