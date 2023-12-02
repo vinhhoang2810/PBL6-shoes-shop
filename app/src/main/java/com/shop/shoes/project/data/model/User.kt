@@ -4,17 +4,17 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
     @SerializedName("firstName")
-    var firstName: String ,
+    var firstName: String = "",
     @SerializedName("lastName")
-    var lastName: String,
+    var lastName: String = "",
     @SerializedName("email")
-    var email: String,
+    var email: String = "",
     @SerializedName("password")
-    var password: String,
+    var password: String = "",
     @SerializedName("mobile")
-    var mobile: String,
+    var mobile: String = "",
     @SerializedName("role")
-    var role: String
+    var role: String = ""
 )
 
 data class ResponseProfile(

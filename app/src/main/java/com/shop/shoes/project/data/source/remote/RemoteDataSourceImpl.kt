@@ -16,4 +16,8 @@ class RemoteDataSourceImpl(
         return apiService.getInfo()
     }
 
+    override suspend fun signUp(request: User): AuthResponse {
+        return apiService.signUp(request)
+    }
+
 }
