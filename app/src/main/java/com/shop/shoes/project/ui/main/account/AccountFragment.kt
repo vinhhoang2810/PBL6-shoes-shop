@@ -43,6 +43,9 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
         tvCart.setOnClickListener {
             //TODO
         }
+        tvAddress.setOnClickListener {
+            //TODO
+        }
     }
 
     override fun getViewBinding(

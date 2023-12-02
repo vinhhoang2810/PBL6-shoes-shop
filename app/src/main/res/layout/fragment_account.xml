@@ -87,6 +87,23 @@
             android:background="@drawable/bg_btn"/>
 
         <TextView
+            android:id="@+id/tvAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/icon_place"
+            android:text="@string/address"
+            android:textSize="@dimen/_16sdp"
+            android:paddingVertical="@dimen/_16sdp"
+            android:drawablePadding="@dimen/_8sdp"
+            android:textColor="@color/black"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginVertical="@dimen/_1sdp"
+            android:background="@drawable/bg_btn"/>
+
+        <TextView
             android:id="@+id/tvCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
