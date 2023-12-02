@@ -87,7 +87,7 @@
             android:background="@drawable/bg_btn"/>
 
         <TextView
-            android:id="@+id/tvCard"
+            android:id="@+id/tvCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_cart"
@@ -104,7 +104,7 @@
             android:background="@drawable/bg_btn"/>
 
         <TextView
-            android:id="@+id/tvReview"
+            android:id="@+id/tvRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_review"
@@ -121,7 +121,7 @@
             android:background="@drawable/bg_btn"/>
 
         <TextView
-            android:id="@+id/tvFeedback"
+            android:id="@+id/tvSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/img_support"
