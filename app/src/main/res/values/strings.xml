@@ -24,4 +24,11 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="sign_in_later">Sign in later</string>
+    <string name="become_a_member">Welcome!</string>
+    <string name="account_information">Account information</string>
+    <string name="my_cart">My Cart</string>
+    <string name="my_reviews">My Rating</string>
+    <string name="log_out">Log Out</string>
+    <string name="support">Support</string>
+    <string name="welcome">Welcome</string>
 </resources>
