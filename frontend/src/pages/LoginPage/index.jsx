@@ -20,7 +20,7 @@ export default function LoginPage() {
         password,
       };
       const response = await axios.post(
-        "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signin",
+        "https://pbl6-shoes-shop-production-9e98.up.railway.app/auth/signin",
         formData
       );
       console.log(response);

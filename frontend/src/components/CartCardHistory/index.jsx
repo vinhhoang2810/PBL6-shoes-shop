@@ -3,15 +3,15 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./style.scss";
-export default function CartCard({
+export default function CartCardHistory({
   product,
-  onIncreaseQuantity,
-  onDeCreaseQuantity,
+  // onIncreaseQuantity,
+  // onDeCreaseQuantity,
   onDelete,
   onUpdate,
 }) {
   const [quantityDefault, setQuantityDefault] = useState(product?.quantity);
-  const [newQuantity, setNewQuantity] = useState(product.quantity);
+  const [quantityNew, setQuantityNew] = useState(quantityDefault);
   // console.log(quantityNew);
   // console.log(quantityDefault);
   const hexColorCode = product?.product.color;
@@ -21,32 +21,9 @@ export default function CartCard({
   //   onIncreaseQuantity(price, quantity);
   // }, []);
 
-  const handleDecreaseQuantity = () => {
-    if (quantityDefault > 1) {
-      const newQuantity = quantityDefault - 1;
-      setQuantityDefault(newQuantity);
-      setNewQuantity(newQuantity);
-    }
-    onDeCreaseQuantity();
-  };
-
-  const handleIncreaseQuantity = () => {
-    const newQuantity = quantityDefault + 1;
-    setQuantityDefault(newQuantity);
-    setNewQuantity(newQuantity);
-    onIncreaseQuantity();
-  };
-  const handleDelete = () => {
-    onDelete();
-  };
-  const handleUpdate = () => {
-    // Use quantityNew here for the updated value
-    onUpdate();
-    // console.log("Updated Quantity:", quantityNew);
-  };
   return (
     <>
-      <div className="cartList" role="list">
+      <div className="cartList-history" role="list">
         <div className="cartList-detail ">
           <Link
             to={`/product/${product?.product.id}`}
@@ -86,33 +63,17 @@ export default function CartCard({
         <div className="cartList-priceSale">
           <span className="font-15">{product?.price + " "}VND</span>
         </div>
-        <div className="cartList-quantity">
-          <button
-            className="cartList-decrease"
-            onClick={handleDecreaseQuantity}
-          >
-            -
-          </button>
+        <div className="cartHistory-Quantity">
           <input
             type="number"
-            className="cartList-input"
+            className="cartHistory-input"
             value={quantityDefault}
           />
-          <button
-            className="cartList-increase"
-            onClick={handleIncreaseQuantity}
-          >
-            +
-          </button>
         </div>
         <div className="cartList-money">
           <span className="font-15">
             {quantityDefault * Number(product.discountedPrice) + " "}VND
           </span>
-        </div>
-        <div className="cartList-operation">
-          <Button onClick={handleDelete}>Delete</Button>
-          <Button onClick={handleUpdate}>Update</Button>
         </div>
       </div>
     </>

@@ -225,7 +225,7 @@
 }
 input[type="number"] {
   -webkit-appearance: none; /* Remove default arrow styles for Safari */
-  margin: 0; /* Remove default margin */
+  // margin: 0; /* Remove default margin */
   -moz-appearance: textfield; /* Firefox */
 }
 input[type="number"]::-webkit-inner-spin-button,

@@ -6,10 +6,11 @@ import "./style.scss";
 import apiCart from "../API/apiCart";
 import { toast, ToastContainer } from "react-toastify";
 import apiRemoveCartItems from "../API/apiRemoveCartItems";
+import apiUpdateCartItems from "../API/apiUPdateCartItems";
+import apiAddItem from "../API/apiAddItem";
 
 export default function CartList() {
   const [products, setProducts] = useState([]);
-
   const fetchCarts = async () => {
     try {
       const response = await apiCart.getAllCart();
@@ -25,36 +26,29 @@ export default function CartList() {
     fetchCarts();
   }, []);
 
-  const handleIncreaseQuantity = (productId) => {
-    // Tìm sản phẩm cần tăng số lượng
-    const updatedProducts = products?.product?.map((product) =>
-      product.id === productId
-        ? { ...product, quantity: product.quantity + 1 }
-        : product
-    );
+  const handleQuantityChange = (productId, newQuantity) => {};
 
-    // Cập nhật danh sách sản phẩm
-    setProducts(updatedProducts);
+  const handleQuantity = (productId, changeAmount) => {
+    const product = products.cartItems.find((p) => p.id === productId);
+    const currentQuantity = product ? product.quantity : 0;
+    const newQuantity = Math.max(currentQuantity + changeAmount, 1);
+    handleQuantityChange(productId, newQuantity);
   };
 
-  const handleDeCreaseQuantity = (productId) => {
-    // Tìm sản phẩm cần giảm số lượng
-    const updatedProducts = products.map((product) =>
-      product.id === productId && product.quantity > 1
-        ? { ...product, quantity: product.quantity - 1 }
-        : product
-    );
+  const handleIncreaseQuantity = (productId) => {
+    handleQuantity(productId, 1);
+  };
 
-    // Cập nhật danh sách sản phẩm
-    setProducts(updatedProducts);
+  const handleDecreaseQuantity = (productId) => {
+    handleQuantity(productId, -1);
   };
 
   const handleDeleteProduct = async (productId) => {
     try {
       const response = await apiRemoveCartItems.delRemoveCartItems(productId);
       if (response) {
-        fetchCarts()
-        toast.succes("Xóa sản phẩm thành công");
+        fetchCarts();
+        toast.success("Xóa sản phẩm thành công");
       } else {
         toast.error("Xóa sản phẩm thất bại");
       }
@@ -62,7 +56,25 @@ export default function CartList() {
       toast.error(error.message);
     }
   };
-
+  const handleUpdateProduct = async (productId, newQuantity) => {
+    const formData = {
+      quantity: newQuantity,
+    };
+    console.log(newQuantity);
+    try {
+      const response = await apiUpdateCartItems.putUpdateCartItems(
+        productId,
+        formData
+      );
+      if (response) {
+        toast.success("Update quantity successful");
+      } else {
+        toast.error("Update quantity failed");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <>
       <div className="cart container-layout">
@@ -89,8 +101,9 @@ export default function CartList() {
                 key={product?.id}
                 product={product}
                 onDelete={() => handleDeleteProduct(product.id)}
+                onUpdate={() => handleUpdateProduct(product.id)}
                 onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
-                onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
+                onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
               />
             );
           })}

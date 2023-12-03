@@ -22,7 +22,7 @@ export default function Header() {
   useEffect(() => {
     // Click outside handler
     const handleClickOutside = (event) => {
-      console.log(event?.target);
+      // console.log(event?.target);
       if (!dropdownRef?.current?.contains(event?.target)) {
         setActive(false);
       }

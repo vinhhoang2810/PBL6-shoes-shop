@@ -1,7 +1,7 @@
 import React from "react";
 import AddressCard from "../AddressCard";
-import CartList from "../CartList";
 import "./style.scss";
+import CartHistory from "../CartHistory";
 
 export default function OrderSummary() {
   return (
@@ -9,7 +9,7 @@ export default function OrderSummary() {
       <div className="ordersummary">
         <AddressCard />
       </div>
-      <CartList />
+      <CartHistory />
     </>
   );
 }

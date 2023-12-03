@@ -52,7 +52,7 @@ export default function RegisterPage() {
         role,
       };
       const response = await axios.post(
-        "https://pbl6-shoes-shop-production-810a.up.railway.app/auth/signup",
+        "https://pbl6-shoes-shop-production-9e98.up.railway.app/auth/signup",
         formData
       );
       console.log(formData);
