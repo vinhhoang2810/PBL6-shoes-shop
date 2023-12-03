@@ -1,0 +1,19 @@
+.address {
+  display: grid;
+  gap: 20px 0;
+  margin: 20px;
+}
+.address {
+  &-name,
+  &-phone-title,
+  &-email-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  &-phone,
+  &-email {
+    display: flex;
+    gap: 0 30px;
+    align-items: center;
+  }
+}
