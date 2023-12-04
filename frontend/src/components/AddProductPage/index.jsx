@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 import apiAddProduct from '~/states/API/apiAddProduct';
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function AddProductPage() {
     const [nameProduct, setnameProduct] = useState('GIÀY THỂ THAO REEBOK RIDER V');
@@ -9,11 +10,11 @@ export default function AddProductPage() {
         'ĐÔI GIÀY LẤY CẢM HỨNG TỪ GIÀY CHẠY BỘ CỔ ĐIỂN VỚI PHONG CÁCH HIỆN ĐẠI Vẻ ngoài của bạn sẽ luôn trong khỏe khoắn năng động suốt ngày dài khi diện đôi Giày Reebok Rider V này',
     );
     const [priceProduct, setpriceProduct] = useState('200000');
+    const [warehousePriceProduct, setwarehousePriceProduct] = useState('200000');
+
     const [discountedPriceProduct, setdiscountedPriceProduct] = useState('180000');
     const [discountPersentProduct, setdiscountPersentProduct] = useState('10');
-    const [imageProduct, setimageProduct] = useState(
-        'https://raw.githubusercontent.com/DNAnh01/PBL6-shoes-shop/main/frontend-user/src/images/shoes6.png',
-    );
+    const [imageProduct, setimageProduct] = useState('');
     const [selectedBrand, setSelectedBrand] = useState('Nike');
     const brandDefaultImages = {
         Nike: 'https://www.dl.dropboxusercontent.com/scl/fi/spftkm2g20w80w34yusw5/logoNike.png?rlkey=0u494s5a2j3ihrgsn92v9ped3&dl=0',
@@ -83,6 +84,7 @@ export default function AddProductPage() {
                     title: nameProduct,
                     description: descriptionProduct,
                     price: parseInt(priceProduct),
+                    warehousePrice: parseInt(warehousePriceProduct),
                     discountedPrice: parseInt(discountedPriceProduct),
                     discountPersent: parseInt(discountPersentProduct),
                     quantity: totalQuantity,
@@ -96,31 +98,32 @@ export default function AddProductPage() {
                 };
                 try {
                     const response = await apiAddProduct.postAddProduct(formData);
-                    console.log('response:', response);
+                    // console.log('response:', response.data);
                     if (response) {
-                        console.log('Thêm sản phẩm mới thành công');
+                        toast.log('Thêm sản phẩm mới thành công');
                         setTimeout(() => {
                             navigate('/admin/products');
                         }, 2000);
                     } else {
-                        console.error('Có lỗi khi thêm sản phẩm');
+                        toast.error('Có lỗi khi thêm sản phẩm');
                     }
                 } catch (error) {
-                    console.error('Lỗi khi thực hiện yêu cầu API:', error);
-                    console.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
+                    toast.error('Lỗi khi thực hiện yêu cầu API:', error);
+                    toast.error(`Có lỗi khi thực hiện yêu cầu API: ${error.message}`);
                 }
             } else {
-                console.error('Giá của sản phẩm bạn đã nhập sai');
+                toast.error('Giá của sản phẩm bạn đã nhập sai');
             }
         } else {
             // Display a message or handle the case where totalQuantity is not greater than 0
-            console.error('Số lượng sản phẩm cần lớn hơn 0 để thêm vào kho');
+            toast.error('Số lượng sản phẩm cần lớn hơn 0 để thêm vào kho');
         }
     };
 
     return (
         <>
             <section>
+                <ToastContainer />
                 <div className="add-product container-layout">
                     <div className="add-content">
                         <h1 className="add-title">Đăng Bán Sản Phẩm</h1>
@@ -145,12 +148,21 @@ export default function AddProductPage() {
                         ></textarea>
                     </div>
                     <div className="add-price">
-                        <label className="add-label">Giá:</label>
+                        <label className="add-label">Price:</label>
                         <input
                             type="number"
                             className="add-price-input"
                             value={priceProduct}
                             onChange={(event) => setpriceProduct(event.target.value)}
+                        />
+                    </div>
+                    <div className="add-warehousePrice">
+                        <label className="add-label">Warehouse Price:</label>
+                        <input
+                            type="number"
+                            className="add-warehousePrice-input"
+                            value={warehousePriceProduct}
+                            onChange={(event) => setwarehousePriceProduct(event.target.value)}
                         />
                     </div>
                     <div className="add-discountedPrice">
@@ -251,9 +263,11 @@ export default function AddProductPage() {
                     <div className="add-image">
                         <label className="add-label">Hình ảnh sản phẩm:</label>
                         <input
-                            type="file"
+                            type="text" // Sử dụng type "text" thay vì "file"
                             className="add-image-input"
-                            onChange={(event) => setimageProduct(event.target.files[0])}
+                            value={imageProduct} // Giữ giá trị trong state hoặc biến tương ứng
+                            onChange={(event) => setimageProduct(event.target.value)}
+                            placeholder="Nhập đường dẫn URL ảnh sản phẩm"
                         />
                     </div>
                     <div className="add-product-btn">

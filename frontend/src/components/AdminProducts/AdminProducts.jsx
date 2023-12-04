@@ -5,7 +5,7 @@ import ProductsTable from '../ProductsTable';
 import UpdateProduct from '../UpdateProduct';
 
 const AdminProducts = () => {
-    const [showUpdateForm, setShowUpdateForm] = useState(true);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null); // State để lưu trữ sản phẩm được chọn
     const [showProductsTable, setShowProductsTable] = useState(true);
 
