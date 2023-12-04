@@ -97,9 +97,6 @@ export default function LoginPage() {
                 </Link>
               </p>
             </div>
-            <Link to={"/"}>
-              <i class="fa fa-home" aria-hidden="true"></i>
-            </Link>
           </form>
         </div>
       </div>

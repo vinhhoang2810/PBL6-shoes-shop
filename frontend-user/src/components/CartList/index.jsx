@@ -1,97 +1,80 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 import CartCard from "../CartCard";
-import shoes from "../../images/shoes4.png";
 import "./style.scss";
 import apiCart from "../API/apiCart";
 import { toast, ToastContainer } from "react-toastify";
 import apiRemoveCartItems from "../API/apiRemoveCartItems";
-import { message } from "antd";
+import apiUpdateCartItems from "../API/apiUPdateCartItems";
+import apiAddItem from "../API/apiAddItem";
 
-export default function CartList({ onDelete = () => {} }) {
+export default function CartList() {
   const [products, setProducts] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
-  console.log(products);
+  const fetchCarts = async () => {
+    try {
+      const response = await apiCart.getAllCart();
+      setProducts(response.data);
+    } catch (error) {
+      toast.error(error?.message);
+    }
+  };
 
   // API cart
   useEffect(() => {
-    const fetchCarts = async () => {
-      try {
-        const response = await apiCart.getAllCart();
-        setProducts(response.data);
-      } catch (error) {
-        toast.error(error?.message);
-      }
-    };
-
     // Gọi hàm fetchCarts
     fetchCarts();
   }, []);
 
-  const handleIncreaseQuantity = (productId) => {
-    // Tìm sản phẩm cần tăng số lượng
-    // console.log(products);
-    const updatedProducts = products?.product?.map((product) =>
-      product.id === productId
-        ? { ...product, quantity: product.quantity + 1 }
-        : product
-    );
+  const handleQuantityChange = (productId, newQuantity) => {};
 
-    // Cập nhật danh sách sản phẩm
-    setProducts(updatedProducts);
+  const handleQuantity = (productId, changeAmount) => {
+    const product = products.cartItems.find((p) => p.id === productId);
+    const currentQuantity = product ? product.quantity : 0;
+    const newQuantity = Math.max(currentQuantity + changeAmount, 1);
+    handleQuantityChange(productId, newQuantity);
   };
 
-  const handleDeCreaseQuantity = (productId) => {
-    // Tìm sản phẩm cần giảm số lượng
-    const updatedProducts = products.map((product) =>
-      product.id === productId && product.quantity > 1
-        ? { ...product, quantity: product.quantity - 1 }
-        : product
-    );
+  const handleIncreaseQuantity = (productId) => {
+    handleQuantity(productId, 1);
+  };
 
-    // Cập nhật danh sách sản phẩm
-    setProducts(updatedProducts);
+  const handleDecreaseQuantity = (productId) => {
+    handleQuantity(productId, -1);
   };
 
   const handleDeleteProduct = async (productId) => {
-    console.log("Deleting product with ID:", productId);
     try {
       const response = await apiRemoveCartItems.delRemoveCartItems(productId);
-      console.log(response);
       if (response) {
-        const updatedProducts = products.filter(
-          (product) => product?.id !== productId
-        );
-        setProducts(updatedProducts);
-
-        handleTotal();
-        toast.succes("Xóa sản phẩm thành công");
+        fetchCarts();
+        toast.success("Xóa sản phẩm thành công");
       } else {
-        console.error("Xóa sản phẩm thất bại");
+        toast.error("Xóa sản phẩm thất bại");
       }
     } catch (error) {
-      toast.error(message);
+      toast.error(error.message);
     }
-    window.location.reload();
   };
-
-  const handleTotal = useCallback(() => {
-    // Tính tổng giá trị của sản phẩm trong giỏ hàng
-    const total = products?.cartItems?.reduce((acc, product) => {
-      return acc + product.priceSale * product.quantity;
-    }, 0);
-
-    // Cập nhật state với tổng giá trị mới
-    setTotalPrice(total);
-  }, [products]);
-
-  useEffect(() => {
-    // Gọi hàm handleTotal mỗi khi danh sách sản phẩm thay đổi
-    handleTotal();
-  }, [handleTotal, products]);
-  // console.log("Total Price:", totalPrice); // Thêm dòng này để debug
-
+  const handleUpdateProduct = async (productId, newQuantity) => {
+    const formData = {
+      quantity: newQuantity,
+    };
+    console.log(newQuantity);
+    try {
+      const response = await apiUpdateCartItems.putUpdateCartItems(
+        productId,
+        formData
+      );
+      if (response) {
+        toast.success("Update quantity successful");
+      } else {
+        toast.error("Update quantity failed");
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <>
       <div className="cart container-layout">
@@ -118,8 +101,9 @@ export default function CartList({ onDelete = () => {} }) {
                 key={product?.id}
                 product={product}
                 onDelete={() => handleDeleteProduct(product.id)}
+                onUpdate={() => handleUpdateProduct(product.id)}
                 onIncreaseQuantity={() => handleIncreaseQuantity(product.id)}
-                onDeCreaseQuantity={() => handleDeCreaseQuantity(product.id)}
+                onDeCreaseQuantity={() => handleDecreaseQuantity(product.id)}
               />
             );
           })}

@@ -11,14 +11,20 @@ export default function CommentCard(productId) {
   const [value, setValue] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const postCreateRaiting = async () => {
-    const formdata = {
+    if (!reviewText.trim()) {
+      // If reviewText is empty or only contains whitespace
+      toast.error("Vui lòng nhập đánh giá của bạn trước khi gửi.");
+      return; // Stop the function execution
+    }
+
+    const formData = {
       productId: productId?.productId,
       review: reviewText,
       rating: value,
     };
 
     try {
-      const response = await apiCreateReview.postCreateReview(formdata);
+      const response = await apiCreateReview.postCreateReview(formData);
       console.log("response:", response.data);
 
       if (response) {

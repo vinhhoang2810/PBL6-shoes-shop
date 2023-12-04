@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss";
-export default function AddressCard() {
+export default function AddressCard({ address, isSelected }) {
+  console.log(address);
+  console.log(isSelected);
   return (
     <section>
-      <div className="address container-layout">
+      <div
+        className={`address container-layout ${isSelected ? "selected" : ""}`}
+      >
         <p className="address-name">Nguyễn Hoàng Mỹ</p>
-        <p className="address-p">Lien Chieu - Da Nang</p>
+        <p className="address-p">{`${address?.streetAddress} - ${address?.city}`}</p>
         <div className="address-phone">
           <p className="address-phone-title">Phone Number:</p>
           <p className="address-p">0985048769</p>

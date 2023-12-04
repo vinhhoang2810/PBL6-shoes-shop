@@ -5,8 +5,13 @@ import "./style-prefix.scss";
 import logo2 from "../../../images/logo2png.png";
 import apiCart from "../../API/apiCart";
 
-export default function Header() {
-  const [cartCount, setCartCount] = useState(0);
+export default function Header({ cartItems = [] }) {
+  console.log(cartItems);
+  const cartItemCount = cartItems?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   const dropdownRef = useRef(null);
   const [active, setActive] = useState(false);
   const [auth, setAuth] = useState(null);
@@ -37,6 +42,25 @@ export default function Header() {
     };
   }, []);
 
+  // useEffect(() => {
+  //   // Mô phỏng một cuộc gọi API để lấy số lượng sản phẩm trong giỏ hàng
+  //   // Thay thế đoạn này bằng cuộc gọi API thực tế của bạn để lấy số lượng
+  //   const fetchCartCount = async () => {
+  //     try {
+  //       // Giả lập việc lấy dữ liệu từ API
+  //       const response = await apiCart.getAllCart();
+  //       const data = await response.json();
+  //       setCartCount(data.count); // Giả sử API trả về có trường 'count'
+  //     } catch (error) {
+  //       console.error("Lỗi khi lấy số lượng sản phẩm trong giỏ hàng:", error);
+  //     }
+  //   };
+
+  //   // Gọi API để lấy số lượng sản phẩm trong giỏ hàng khi component được mount
+  //   fetchCartCount();
+
+  //   // ... (mã trước đó)
+  // }, []);
   return (
     <header className="header">
       <div className="header-main">
@@ -62,7 +86,7 @@ export default function Header() {
             </Link>
             <Link to="/cart" className="action-btn">
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-              <span className="count">0</span>
+              <span className="count">{cartItemCount}</span>
             </Link>
           </div>
         </div>
@@ -78,11 +102,6 @@ export default function Header() {
             <li className="menu-category">
               <Link to="/product" className="menu-title">
                 Product
-              </Link>
-            </li>
-            <li className="menu-category">
-              <Link to="/warehouse" className="menu-title">
-                Warehouse
               </Link>
             </li>
             <li className="menu-category">
@@ -110,7 +129,7 @@ export default function Header() {
           <Link to="/cart">
             <button className="action-btn">
               <i className="fa fa-shopping-bag" aria-hidden="true"></i>
-              <span className="count">{cartCount}</span>
+              <span className="count">{cartItemCount}</span>
             </button>
           </Link>
           <Link to="/" className="mobile-bottom-navigation-home">
@@ -148,15 +167,7 @@ export default function Header() {
                 <p className="menu-title">About</p>
               </Link>
             </li>
-            <li className="menu-category">
-              <Link
-                to="/warehouse"
-                className="accordion-menu"
-                data-accordion-btn
-              >
-                <p className="menu-title">Warehouse</p>
-              </Link>
-            </li>
+
             <li className="menu-category">
               <Link to="/hot" className="accordion-menu" data-accordion-btn>
                 <p className="menu-title">Hot Trend</p>
