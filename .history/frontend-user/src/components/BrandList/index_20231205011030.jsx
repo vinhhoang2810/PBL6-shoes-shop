@@ -38,7 +38,6 @@ export default function BrandList() {
         const uniqueBrands = filterUniqueBrands(response.data.content);
 
         setBrands(uniqueBrands);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);

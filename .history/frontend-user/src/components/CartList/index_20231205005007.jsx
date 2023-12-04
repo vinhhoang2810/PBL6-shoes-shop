@@ -7,12 +7,11 @@ import apiCart from "../API/apiCart";
 import { toast, ToastContainer } from "react-toastify";
 import apiRemoveCartItems from "../API/apiRemoveCartItems";
 import apiUpdateCartItems from "../API/apiUPdateCartItems";
-import { useDispatch } from "react-redux";
+import apiAddItem from "../API/apiAddItem";
 
 export default function CartList() {
-  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  // console.log(products);
+  console.log(products);
   const fetchCarts = async () => {
     try {
       const response = await apiCart.getAllCart();
@@ -74,6 +73,19 @@ export default function CartList() {
       toast.error("Có lỗi khi xóa tất cả sản phẩm");
     }
   };
+
+  const handleTotal = useCallback(() => {
+    // Use array destructuring to get the cartItems array directly
+    const { cartItems } = products || { cartItems: [] };
+
+    // Use reduce directly on the cartItems array
+    const total = cartItems?.reduce((acc, product) => {
+      return acc + product.priceSale * product.quantity;
+    }, 0);
+
+    // Cập nhật state với tổng giá trị mới
+    dispatch(setTotalPrice(total));
+  }, [dispatch, products]);
 
   const handleUpdateProduct = async (productId, newQuantity) => {
     const formData = {

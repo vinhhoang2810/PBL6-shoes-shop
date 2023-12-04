@@ -145,7 +145,7 @@ export default function ProfileCard() {
                 {defaultAddress ? (
                   <input
                     type="text"
-                    defaultValue={`${defaultAddress?.streetAddress} - ${defaultAddress?.city}`}
+                    defaultValue={`${defaultAddress?.streetAddress}`${defaultAddress?.city}`}
                     className="profile-show-input"
                     readOnly
                   />

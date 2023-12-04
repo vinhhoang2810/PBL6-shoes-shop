@@ -35,10 +35,9 @@ export default function BrandList() {
     const fetchData = async () => {
       try {
         const response = await apiProductGrid.getAllProduct();
-        const uniqueBrands = filterUniqueBrands(response.data.content);
+        const uniqueBrands = filterUniqueBrands(response.data?.content);
 
         setBrands(uniqueBrands);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);

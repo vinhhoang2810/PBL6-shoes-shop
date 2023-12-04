@@ -30,6 +30,8 @@ const breakpointsSwiper = {
 
 export default function BrandList() {
   const [brands, setBrands] = useState([]);
+
+  console.log(brands);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +40,6 @@ export default function BrandList() {
         const uniqueBrands = filterUniqueBrands(response.data.content);
 
         setBrands(uniqueBrands);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
         setIsLoading(false);

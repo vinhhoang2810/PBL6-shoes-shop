@@ -7,12 +7,11 @@ import apiCart from "../API/apiCart";
 import { toast, ToastContainer } from "react-toastify";
 import apiRemoveCartItems from "../API/apiRemoveCartItems";
 import apiUpdateCartItems from "../API/apiUPdateCartItems";
-import { useDispatch } from "react-redux";
 
 export default function CartList() {
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  // console.log(products);
+  console.log(products);
   const fetchCarts = async () => {
     try {
       const response = await apiCart.getAllCart();

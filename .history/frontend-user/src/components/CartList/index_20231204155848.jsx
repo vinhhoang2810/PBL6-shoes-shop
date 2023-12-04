@@ -7,12 +7,11 @@ import apiCart from "../API/apiCart";
 import { toast, ToastContainer } from "react-toastify";
 import apiRemoveCartItems from "../API/apiRemoveCartItems";
 import apiUpdateCartItems from "../API/apiUPdateCartItems";
-import { useDispatch } from "react-redux";
+import apiAddItem from "../API/apiAddItem";
 
 export default function CartList() {
-  const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
-  // console.log(products);
+  console.log(products);
   const fetchCarts = async () => {
     try {
       const response = await apiCart.getAllCart();
@@ -58,23 +57,6 @@ export default function CartList() {
       toast.error(error.message);
     }
   };
-
-  const handleDeleteAllProducts = async () => {
-    try {
-      // Iterate through all cart items and delete them one by one
-      for (const product of products.cartItems) {
-        await apiRemoveCartItems.delRemoveCartItems(product.id);
-      }
-
-      // After all items are deleted, update the state
-      dispatch(setProducts({ ...products, cartItems: [] }));
-
-      toast.success("Xóa tất cả sản phẩm thành công");
-    } catch (error) {
-      toast.error("Có lỗi khi xóa tất cả sản phẩm");
-    }
-  };
-
   const handleUpdateProduct = async (productId, newQuantity) => {
     const formData = {
       quantity: newQuantity,
@@ -137,12 +119,7 @@ export default function CartList() {
         </div>
         <div className="payment-detail">
           <button className="payment-detail-btnall">Select all</button>
-          <button
-            className="payment-detail-btndelete"
-            onClick={handleDeleteAllProducts}
-          >
-            Delete
-          </button>
+          <button className="payment-detail-btndelete">Delete</button>
           <div className="payment-content">
             <label>The Total Amount</label>
             <label>{products?.totalDiscountedPrice + " "}VND</label>

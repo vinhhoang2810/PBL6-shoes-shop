@@ -7,7 +7,11 @@ import apiCart from "../../API/apiCart";
 
 export default function Header({ cartItems = [] }) {
   console.log("cartItems", cartItems);
-  const cartItemCount = cartItems?.length || 0;
+  const cartItemCount = cartItems?.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
   const dropdownRef = useRef(null);
   const [active, setActive] = useState(false);
   const [auth, setAuth] = useState(null);
