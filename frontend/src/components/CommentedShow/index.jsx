@@ -80,7 +80,9 @@ export default function CommentedShow() {
                       <img src={image} alt="123" width={100} height={100} />
                     </div>
                     <div className="comment-profile-name">
-                      <strong>My Nguyen Hoang</strong>
+                      <strong>
+                        {review?.user?.firstName} {review?.user?.lastName}
+                      </strong>
                       <div className="likes">
                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>
                         <i className="fa fa-solid fa-star fa-2xl icon-star"></i>

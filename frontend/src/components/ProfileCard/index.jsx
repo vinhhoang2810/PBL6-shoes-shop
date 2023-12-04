@@ -10,7 +10,7 @@ export default function ProfileCard() {
   const [fullName, setfullName] = useState("");
   const [streetAddress, setstreetAddress] = useState("");
   const [defaultAddress, setDefaultAddress] = useState(null);
-
+  console.log(defaultAddress);
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -145,7 +145,7 @@ export default function ProfileCard() {
                 {defaultAddress ? (
                   <input
                     type="text"
-                    defaultValue={`${defaultAddress?.streetAddress}`}
+                    defaultValue={`${defaultAddress?.streetAddress} - ${defaultAddress?.city}`}
                     className="profile-show-input"
                     readOnly
                   />
