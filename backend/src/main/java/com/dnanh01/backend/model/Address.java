@@ -17,12 +17,6 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
     @Column(name = "street_address")
     private String streetAddress;
 
@@ -40,19 +34,16 @@ public class Address {
     @JsonIgnore
     private User user;
 
-    private String mobile;
-
     public Address() {
     }
 
-    public Address(Long id, String streetAddress, String city, String state, String zipCode, User user, String mobile) {
+    public Address(Long id, String streetAddress, String city, String state, String zipCode, User user) {
         this.id = id;
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
         this.zipCode = zipCode;
         this.user = user;
-        this.mobile = mobile;
     }
 
     public Long getId() {
@@ -101,14 +92,6 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
     }
 
 }

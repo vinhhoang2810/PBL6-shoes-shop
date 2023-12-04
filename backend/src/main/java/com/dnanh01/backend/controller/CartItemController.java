@@ -20,7 +20,7 @@ import com.dnanh01.backend.service.CartItemService;
 import com.dnanh01.backend.service.UserService;
 
 @RestController
-@RequestMapping("api/cart_items")
+@RequestMapping("/api/cart_items")
 public class CartItemController {
     @Autowired
     private CartItemService cartItemService;

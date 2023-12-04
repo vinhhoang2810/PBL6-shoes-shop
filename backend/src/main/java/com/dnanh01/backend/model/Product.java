@@ -31,6 +31,10 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "warehouse_price")
+    private int warehousePrice;
+
+    // displayed price
     @Column(name = "price")
     private int price;
 

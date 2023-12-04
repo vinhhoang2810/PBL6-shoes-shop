@@ -3,13 +3,13 @@ package com.dnanh01.backend.service;
 import java.util.List;
 
 import com.dnanh01.backend.exception.OrderException;
-import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.request.ShippingAddressRequest;
 
 public interface OrderService {
 
-	public Order createOrder(User user, Address shippingAddress);
+	public Order createOrder(User user, ShippingAddressRequest shippingAddress);
 
 	public Order findOrderById(Long orderId) throws OrderException;
 

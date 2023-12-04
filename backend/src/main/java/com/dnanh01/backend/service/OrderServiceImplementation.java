@@ -13,11 +13,16 @@ import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.CartItem;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.OrderItem;
+import com.dnanh01.backend.model.Product;
+import com.dnanh01.backend.model.Size;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.AddressRepository;
+import com.dnanh01.backend.repository.CartItemRepository;
 import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
+import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
+import com.dnanh01.backend.request.ShippingAddressRequest;
 
 @Service
 public class OrderServiceImplementation implements OrderService {
@@ -28,6 +33,8 @@ public class OrderServiceImplementation implements OrderService {
 	private UserRepository userRepository;
 	private OrderItemService orderItemService;
 	private OrderItemRepository orderItemRepository;
+	private ProductRepository productRepository;
+	private CartItemRepository cartItemRepository;
 
 	public OrderServiceImplementation(
 			OrderRepository orderRepository,
@@ -35,28 +42,51 @@ public class OrderServiceImplementation implements OrderService {
 			AddressRepository addressRepository,
 			UserRepository userRepository,
 			OrderItemService orderItemService,
-			OrderItemRepository orderItemRepository) {
+			OrderItemRepository orderItemRepository,
+			ProductRepository productRepository,
+			CartItemRepository cartItemRepository) {
 		this.orderRepository = orderRepository;
 		this.cartService = cartService;
 		this.addressRepository = addressRepository;
 		this.userRepository = userRepository;
 		this.orderItemService = orderItemService;
 		this.orderItemRepository = orderItemRepository;
+		this.productRepository = productRepository;
+		this.cartItemRepository = cartItemRepository;
 	}
 
 	@Override
-	public Order createOrder(User user, Address shippingAddress) {
-		shippingAddress.setUser(user);
-		Address address = addressRepository.save(shippingAddress);
-		user.getAddresses().add(address);
-		userRepository.save(user);
+	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
 
+		// Check if an order already exists for the user
+		List<Order> existingOrders = orderRepository.findByUser(user);
+
+		if (!existingOrders.isEmpty()) {
+			// Handle the case where orders already exist
+			// You might need to iterate through the list or choose a specific order based
+			// on your logic
+			// For example, you can choose the first order in the list:
+			// existingOrders.get(0)
+			return updateOrder(existingOrders.get(0), reqShippingAddress);
+		}
+		// Continue with the order creation logic if no existing order is found
+		Address existingAddress = findExistingAddress(user, reqShippingAddress);
+		Address address;
+
+		if (existingAddress != null) {
+			// Use the existing address if available
+			address = existingAddress;
+		} else {
+			// Create a new address if no existing address is found
+			address = createNewAddress(user, reqShippingAddress);
+		}
+
+		// Continue with the rest of the order creation logic
 		Cart cart = cartService.findUserCart(user.getId());
 		List<OrderItem> orderItems = new ArrayList<>();
 
 		for (CartItem item : cart.getCartItems()) {
 			OrderItem orderItem = new OrderItem();
-
 			orderItem.setProduct(item.getProduct());
 			orderItem.setSize(item.getSize());
 			orderItem.setQuantity(item.getQuantity());
@@ -66,7 +96,6 @@ public class OrderServiceImplementation implements OrderService {
 
 			OrderItem createdOrderItem = orderItemRepository.save(orderItem);
 			orderItems.add(createdOrderItem);
-
 		}
 
 		Order createdOrder = new Order();
@@ -78,11 +107,10 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.setTotalItem(cart.getTotalItem());
 
 		createdOrder.setShippingAddress(address);
-		createdOrder.setOrderDate(LocalDateTime.now());
-		createdOrder.setOrderStatus("PENDING");
-		// TODO
-		// createdOrder.getPaymentDetails().setStatus("PENDING");
 		createdOrder.setCreateAt(LocalDateTime.now());
+		createdOrder.setOrderDate(LocalDateTime.now());
+		createdOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		createdOrder.setOrderStatus("PENDING");
 
 		Order savedOrder = orderRepository.save(createdOrder);
 
@@ -90,7 +118,44 @@ public class OrderServiceImplementation implements OrderService {
 			item.setOrder(savedOrder);
 			orderItemRepository.save(item);
 		}
+
 		return savedOrder;
+	}
+
+	private Order updateOrder(Order existingOrder, ShippingAddressRequest reqShippingAddress) {
+
+		existingOrder.setShippingAddress(findExistingAddress(existingOrder.getUser(), reqShippingAddress));
+		existingOrder.setOrderDate(LocalDateTime.now());
+		existingOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		existingOrder.setOrderStatus("PENDING");
+
+		return orderRepository.save(existingOrder);
+	}
+
+	private Address createNewAddress(User user, ShippingAddressRequest reqShippingAddress) {
+		Address saveAddress = new Address();
+		saveAddress.setStreetAddress(reqShippingAddress.getStreetAddress());
+		saveAddress.setCity(reqShippingAddress.getCity());
+		saveAddress.setState(reqShippingAddress.getState());
+		saveAddress.setZipCode(reqShippingAddress.getZipCode());
+		saveAddress.setUser(user);
+
+		Address address = addressRepository.save(saveAddress);
+
+		user.getAddresses().add(address);
+		userRepository.save(user);
+
+		return address;
+	}
+
+	private Address findExistingAddress(User user, ShippingAddressRequest reqShippingAddress) {
+		return user.getAddresses().stream()
+				.filter(address -> address.getStreetAddress().equals(reqShippingAddress.getStreetAddress())
+						&& address.getCity().equals(reqShippingAddress.getCity())
+						&& address.getState().equals(reqShippingAddress.getState())
+						&& address.getZipCode().equals(reqShippingAddress.getZipCode()))
+				.findFirst()
+				.orElse(null);
 	}
 
 	@Override
@@ -112,8 +177,6 @@ public class OrderServiceImplementation implements OrderService {
 	public Order placedOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
 		order.setOrderStatus("PLACED");
-		// TODO
-		// order.getPaymentDetails().setStatus("COMPLETED");
 
 		return order;
 	}
@@ -128,14 +191,54 @@ public class OrderServiceImplementation implements OrderService {
 	@Override
 	public Order shippedOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
+
+		if (!order.getOrderStatus().equals("CONFIRMED")) {
+			throw new OrderException("Order must be in CONFIRMED state before shipping.");
+		}
+
 		order.setOrderStatus("SHIPPED");
+		clearCartItems(order.getUser().getId());
+
 		return orderRepository.save(order);
+	}
+
+	private void clearCartItems(Long userId) {
+
+		List<CartItem> cartItems = cartItemRepository.findByUserId(userId);
+
+		cartItemRepository.deleteAll(cartItems);
 	}
 
 	@Override
 	public Order deliveredOrder(Long orderId) throws OrderException {
+
 		Order order = findOrderById(orderId);
+
+		List<OrderItem> orderItems = order.getOrderItems();
+
+		for (OrderItem item : orderItems) {
+			int quantity = item.getQuantity();
+			String sizeName = item.getSize();
+			Long productId = item.getProduct().getId();
+			Product product = productRepository.findById(productId)
+					.orElseThrow(() -> new OrderException("Product not found"));
+
+			Optional<Size> optionalSize = product.getSizes().stream()
+					.filter(size -> size.getName().equals(sizeName))
+					.findFirst();
+
+			optionalSize.ifPresent(size -> {
+				int updatedQuantity = size.getQuantity() - quantity;
+				size.setQuantity(updatedQuantity);
+
+				product.setQuantity(product.getQuantity() - quantity);
+
+				productRepository.save(product);
+			});
+		}
+
 		order.setOrderStatus("DELIVERED");
+
 		return orderRepository.save(order);
 	}
 

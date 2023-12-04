@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.exception.UserException;
-import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.request.ShippingAddressRequest;
 import com.dnanh01.backend.service.OrderService;
 import com.dnanh01.backend.service.UserService;
 
@@ -33,7 +33,8 @@ public class OrderController {
 
     @PostMapping("/")
     public ResponseEntity<Order> createOrder(
-            @RequestBody Address shippingAddress,
+            // đổi lại là ShippingAddressRequest
+            @RequestBody ShippingAddressRequest shippingAddress,
             @RequestHeader("Authorization") String jwt)
             throws UserException {
 

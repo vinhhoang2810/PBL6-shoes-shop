@@ -21,52 +21,61 @@ import jakarta.servlet.http.HttpServletRequest;
 @EnableAutoConfiguration
 public class AppConfig {
 
-    // Configuration for the Spring Security filter chain
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement(management -> management
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(Authorize -> Authorize
-                        .requestMatchers("/api/products/findAll").permitAll() // Permit access to /api/findAll without
-                        // authentication
-                        .requestMatchers("/api/**").authenticated() // Require authentication for other authorized
-                                                                    // requests
-                        .anyRequest().permitAll()) // Permit all other requests without authentication
-                .addFilterBefore(
-                        new JwtValidator(), BasicAuthenticationFilter.class // Add JwtValidator before
-                // BasicAuthenticationFilter
-                ).csrf(csrf -> csrf // Disable Cross-Site Request Forgery (CSRF) protection
-                        .disable())
-                .cors(cors -> cors // Enable Cross-Origin Resource Sharing (CORS)
-                        .configurationSource(
-                                new CorsConfigurationSource() {
+        // Configuration for the Spring Security filter chain
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http.sessionManagement(management -> management
+                                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                                .authorizeHttpRequests(Authorize -> Authorize
+                                                .requestMatchers("/api/guest/products/**").permitAll() // Permit access
+                                                                                                       // to
+                                                                                                       // without
+                                                // authentication
+                                                .requestMatchers("/api/**").authenticated() // Require authentication
+                                                                                            // for other authorized
+                                                                                            // requests
+                                                .anyRequest().permitAll()) // Permit all other requests without
+                                                                           // authentication
+                                .addFilterBefore(
+                                                new JwtValidator(), BasicAuthenticationFilter.class // Add JwtValidator
+                                                                                                    // before
+                                // BasicAuthenticationFilter
+                                ).csrf(csrf -> csrf // Disable Cross-Site Request Forgery (CSRF) protection
+                                                .disable())
+                                .cors(cors -> cors // Enable Cross-Origin Resource Sharing (CORS)
+                                                .configurationSource(
+                                                                new CorsConfigurationSource() {
 
-                                    @Override
-                                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                                        CorsConfiguration cfg = new CorsConfiguration();
-                                        cfg.setAllowedOrigins(Arrays.asList(
-                                                "http://localhost:3000",
-                                                "http://localhost:4200",
-                                                "http://localhost:5454",
-                                                "https://pbl6-shoes-shop-production.up.railway.app",
-                                                "https://study-fontend.vercel.app"));
-                                        cfg.setAllowedMethods(Collections.singletonList("*"));
-                                        cfg.setAllowCredentials(true);
-                                        cfg.setAllowedHeaders(Collections.singletonList("*"));
-                                        cfg.setExposedHeaders(Arrays.asList("Authorization"));
-                                        cfg.setMaxAge(3600L);
-                                        return cfg;
-                                    }
+                                                                        @Override
+                                                                        public CorsConfiguration getCorsConfiguration(
+                                                                                        HttpServletRequest request) {
+                                                                                CorsConfiguration cfg = new CorsConfiguration();
+                                                                                cfg.setAllowedOrigins(Arrays.asList(
+                                                                                                "http://localhost:3000",
+                                                                                                "http://localhost:4200",
+                                                                                                "http://localhost:5454",
+                                                                                                "https://pbl6-shoes-shop-production.up.railway.app",
+                                                                                                "https://study-fontend.vercel.app"));
+                                                                                cfg.setAllowedMethods(Collections
+                                                                                                .singletonList("*"));
+                                                                                cfg.setAllowCredentials(true);
+                                                                                cfg.setAllowedHeaders(Collections
+                                                                                                .singletonList("*"));
+                                                                                cfg.setExposedHeaders(Arrays.asList(
+                                                                                                "Authorization"));
+                                                                                cfg.setMaxAge(3600L);
+                                                                                return cfg;
+                                                                        }
 
-                                }))
-                .httpBasic(withDefaults())
-                .formLogin(withDefaults()); // Enable form-based authentication
-        return http.build(); // Build and return the configured HttpSecurity object
-    }
+                                                                }))
+                                .httpBasic(withDefaults())
+                                .formLogin(withDefaults()); // Enable form-based authentication
+                return http.build(); // Build and return the configured HttpSecurity object
+        }
 
-    // Bean definition for PasswordEncoder
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Use BCryptPasswordEncoder for password encoding
-    }
+        // Bean definition for PasswordEncoder
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder(); // Use BCryptPasswordEncoder for password encoding
+        }
 }
