@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Icon from '../Icons/Icon';
+import OrdersTable from '../OrdersTable/OrdersTable';
 
 const AdminOrders = () => {
     return (
@@ -8,6 +9,7 @@ const AdminOrders = () => {
                 <Icon icon="orders" classes={`ml-2`} />
                 <h5 className={`mb-0 ml-4`}>Admin Orders</h5>
             </header>
+            <OrdersTable />
         </Fragment>
     );
 };
