@@ -42,37 +42,25 @@ public class CartServiceImplementation implements CartService {
             throws ProductException, CartItemException, UserException {
         Cart cart = cartRepository.findByUserId(userId);
         Product product = productService.findProductById(req.getProductId());
-        CartItem isPresent = cartItemService.isCartItemExist(cart, product, req.getSize(), userId);
+        CartItem existingCartItem = cartItemService.isCartItemExist(cart, product, req.getSize(), userId);
 
-        if (isPresent == null) {
-            CartItem cartItem = new CartItem();
+        CartItem cartItem = new CartItem();
+        int price = req.getQuantity() * product.getDiscountedPrice();
+        cartItem.setPrice(price);
+        cartItem.setQuantity(req.getQuantity());
+        cartItem.setSize(req.getSize());
+        cartItem.setUserId(userId);
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
 
-            int price = req.getQuantity() * product.getDiscountedPrice();
-            cartItem.setPrice(price);
-            cartItem.setQuantity(req.getQuantity());
-            cartItem.setSize(req.getSize());
-            cartItem.setUserId(userId);
-            cartItem.setCart(cart);
-            cartItem.setProduct(product);
-
+        if (existingCartItem == null) {
             CartItem createdCartItem = cartItemService.createCartItem(cartItem);
-
             cart.getCartItems().add(createdCartItem);
-
-            cartRepository.save(cart);
         } else {
-            CartItem cartItem = new CartItem();
-            int price = req.getQuantity() * product.getDiscountedPrice();
-            cartItem.setPrice(price);
-            cartItem.setQuantity(req.getQuantity());
-            cartItem.setSize(req.getSize());
-            cartItem.setUserId(userId);
-            cartItem.setCart(cart);
-            cartItem.setProduct(product);
-
-            cartItemService.updateCartItem(userId, isPresent.getId(), cartItem);
-
+            cartItemService.updateCartItem(userId, existingCartItem.getId(), cartItem);
         }
+
+        cartRepository.save(cart);
 
         return "Item add to cart";
     }

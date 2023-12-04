@@ -35,7 +35,6 @@ public class AdminOrderController {
     public ResponseEntity<Order> confirmedOrderHandler(
             @PathVariable("orderId") Long orderId,
             @RequestHeader("Authorization") String jwt) throws OrderException {
-
         Order order = orderService.confirmedOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }

@@ -24,9 +24,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    // @Column(name = "order_id")
-    // private String orderId;
-
     @ManyToOne
     private User user;
 
@@ -39,9 +36,6 @@ public class Order {
 
     @OneToOne
     private Address shippingAddress;
-
-    @Embedded
-    private PaymentDetails paymentDetails = new PaymentDetails();
 
     private double totalPrice;
 
@@ -58,17 +52,15 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate,
-            LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice,
-            Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
+    public Order(Long id, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate,
+            Address shippingAddress, double totalPrice, Integer totalDiscountedPrice, Integer discount,
+            String orderStatus, int totalItem, LocalDateTime createAt) {
         this.id = id;
-        // this.orderId = orderId;
         this.user = user;
         this.orderItems = orderItems;
         this.orderDate = orderDate;
         this.deliveryDate = deliveryDate;
         this.shippingAddress = shippingAddress;
-        this.paymentDetails = paymentDetails;
         this.totalPrice = totalPrice;
         this.totalDiscountedPrice = totalDiscountedPrice;
         this.discount = discount;
@@ -84,14 +76,6 @@ public class Order {
     public void setId(Long id) {
         this.id = id;
     }
-
-    // public String getOrderId() {
-    // return orderId;
-    // }
-
-    // public void setOrderId(String orderId) {
-    // this.orderId = orderId;
-    // }
 
     public User getUser() {
         return user;
@@ -131,14 +115,6 @@ public class Order {
 
     public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
-    }
-
-    public PaymentDetails getPaymentDetails() {
-        return paymentDetails;
-    }
-
-    public void setPaymentDetails(PaymentDetails paymentDetails) {
-        this.paymentDetails = paymentDetails;
     }
 
     public double getTotalPrice() {
