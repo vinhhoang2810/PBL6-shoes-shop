@@ -152,10 +152,14 @@
         outline: none;
         padding: 10px 20px;
         border-radius: 5px;
+        margin-bottom: 20px;
     }
 
     &-image-input {
         cursor: pointer;
+    }
+    .gray-background {
+        background-color: #d2d2d2; /* Mã màu xám */
     }
 }
 .btn-add-product {

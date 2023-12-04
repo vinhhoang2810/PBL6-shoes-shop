@@ -11,6 +11,7 @@ import apiAddItem from "../API/apiAddItem";
 
 export default function CartList() {
   const [products, setProducts] = useState([]);
+  console.log(products);
   const fetchCarts = async () => {
     try {
       const response = await apiCart.getAllCart();
@@ -95,7 +96,7 @@ export default function CartList() {
 
         {/* Danh sách sản phẩm  */}
         {products?.cartItems?.length > 0 &&
-          products?.cartItems.map((product) => {
+          products?.cartItems?.map((product) => {
             return (
               <CartCard
                 key={product?.id}

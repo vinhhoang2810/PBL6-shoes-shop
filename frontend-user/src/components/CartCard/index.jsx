@@ -44,6 +44,7 @@ export default function CartCard({
     onUpdate();
     // console.log("Updated Quantity:", quantityNew);
   };
+  console.log(product);
   return (
     <>
       <div className="cartList" role="list">
@@ -81,10 +82,12 @@ export default function CartCard({
           </div>
         </div>
         <div className="cartList-price">
-          <span className="font-15">{product?.discountedPrice + " "}VND</span>
+          <span className="font-15">
+            {product?.product?.discountedPrice + " "}VND
+          </span>
         </div>
         <div className="cartList-priceSale">
-          <span className="font-15">{product?.price + " "}VND</span>
+          <span className="font-15">{product?.product?.price + " "}VND</span>
         </div>
         <div className="cartList-quantity">
           <button
@@ -107,7 +110,8 @@ export default function CartCard({
         </div>
         <div className="cartList-money">
           <span className="font-15">
-            {quantityDefault * Number(product.discountedPrice) + " "}VND
+            {quantityDefault * Number(product?.product?.discountedPrice) + " "}
+            VND
           </span>
         </div>
         <div className="cartList-operation">

@@ -1,6 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import apiProductDetail from '~/states/API/apiProductDetail';
+import apiUpdateProduct from '~/states/API/apiUpdateProduct';
+const UpdateProduct = ({ onClose, product }) => {
+    console.log(product);
 
-export default function UpdateProduct() {
+    const [productName, setProductName] = useState('');
+    const [productDescription, setProductDescription] = useState('');
+    const [productPrice, setProductPrice] = useState('');
+    const [productDiscountedPrice, setProductDiscountedPrice] = useState('');
+    const [productDiscountPercent, setProductDiscountPersent] = useState('');
+    const [brand, setBrand] = useState('');
+    const [selectedColor, setSelectedColor] = useState('');
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const [selectedSizes, setSelectedSizes] = useState([]);
     // Assuming arrSize is defined somewhere in your code
     const [arrSize, setArrSize] = useState([
@@ -9,105 +23,127 @@ export default function UpdateProduct() {
         { name: 'S', quantity: null },
     ]);
 
-    const handleSizeChange = (event, sizeName) => {
-        // Implement the logic to handle size changes
+    const handleQuantityChange = (event, sizeName) => {
+        const value = event.target.value;
+        console.log(value);
+        setArrSize((prevArrSize) =>
+            prevArrSize.map((item) =>
+                item.name === sizeName ? { ...item, quantity: value === '' ? null : parseInt(value, 10) } : item,
+            ),
+        );
+    };
+    // Thay đổi hàm xử lý sự kiện khi chọn size
+    const handleSizeChange = (event, sizeName, quantitySize) => {
+        if (event.target.checked) {
+            setArrSize((prevArrSize) =>
+                prevArrSize.map((item) => (item.name === sizeName ? { ...item, quantity: quantitySize } : item)),
+            );
+        } else {
+            setArrSize((prevArrSize) =>
+                prevArrSize.map((item) => (item.name === sizeName ? { ...item, quantity: null } : item)),
+            );
+        }
+
+        setSelectedSizes((prevSelectedSizes) =>
+            event.target.checked
+                ? [...prevSelectedSizes, { name: sizeName, quantity: quantitySize }]
+                : prevSelectedSizes.filter((size) => size.name !== sizeName),
+        );
     };
 
-    const handleSubmit = () => {
-        // Implement the logic to handle form submission
+    const handleSubmit = async () => {
+        const formData = {
+            title: productName,
+            description: productDescription,
+            price: productPrice,
+            discountedPrice: productDiscountedPrice,
+            discountPersent: productDiscountPercent,
+            // Add other fields if needed
+        };
+        try {
+            const response = await apiUpdateProduct.putUpdateProduct(product?.id, formData);
+            // Handle the success response, you might want to show a success message
+            console.log('Product updated successfully:', response.data);
+            toast.success('Product updated successfully');
+            onClose(); // Close the modal or navigate away
+        } catch (error) {
+            console.log(error);
+        }
     };
 
+    useEffect(() => {
+        console.log('UpdateProduct is mounted');
+        // Truyền thông tin sản phẩm được chọn vào các trạng thái khi component được mount
+        if (product) {
+            setProductName(product.title);
+            setProductDescription(product.description);
+            setProductPrice(product.price);
+            setProductDiscountedPrice(product.discountedPrice);
+            setProductDiscountPersent(product.discountPersent);
+        }
+        return () => {
+            console.log('UpdateProduct is unmounted'); // Được gọi khi component bị unmount
+        };
+    }, [product]);
     return (
         <>
             <section>
                 <div className="add-product container-layout">
                     <div className="add-content">
-                        <h1 className="add-title">Đăng Bán Sản Phẩm</h1>
-                        <p className="add-title-clone">Hãy đăng những thông tin sản phẩm bạn cần bán</p>
+                        <h1 className="add-title">Cập Nhật Sản Phẩm</h1>
                     </div>
                     <div className="add-name">
                         <label className="add-label">Tên sản phẩm:</label>
-                        <input type="text" className="add-name-input" />
+                        <input
+                            type="text"
+                            className="add-name-input"
+                            value={productName}
+                            onChange={(e) => setProductName(e.target.value)}
+                            readOnly
+                            style={{ background: '#d2d2d2' }}
+                        />
                     </div>
                     <div className="add-description">
                         <label className="add-label">Mô tả sản phẩm:</label>
-                        <textarea className="add-description-text" rows="4"></textarea>
+                        <textarea
+                            className="add-description-text"
+                            rows="4"
+                            value={productDescription}
+                            onChange={(e) => setProductDescription(e.target.value)}
+                        ></textarea>
                     </div>
                     <div className="add-price">
                         <label className="add-label">Giá:</label>
-                        <input type="number" className="add-price-input" />
+                        <input
+                            type="number"
+                            className="add-price-input"
+                            value={productPrice}
+                            onChange={(e) => setProductPrice(e.target.value)}
+                        />
                     </div>
                     <div className="add-discountedPrice">
                         <label className="add-label">Discounted Price:</label>
-                        <input type="number" className="add-discountedPrice-input" />
+                        <input
+                            type="number"
+                            className="add-discountedPrice-input"
+                            value={productDiscountedPrice}
+                            onChange={(e) => setProductDiscountedPrice(e.target.value)}
+                        />
                     </div>
                     <div className="add-discountPersent">
                         <label className="add-label">Discount Percent:</label>
-                        <input type="number" className="add-discountPersent-input" />
+                        <input
+                            type="number"
+                            className="add-discountPersent-input"
+                            value={productDiscountPercent}
+                            onChange={(e) => setProductDiscountPersent(e.target.value)}
+                        />
                     </div>
                     <div className="add-type">
-                        <div className="add-brand">
-                            <label className="add-label">Chọn nhãn hiệu:</label>
-                            <select id="add-brand-check" className="add-select">
-                                <option value="Nike">Nike</option>
-                                <option value="Adidas">Adidas</option>
-                                <option value="Converse">Converse</option>
-                                <option value="Puma">Puma</option>
-                                <option value="Alexander Mqueen">Alexander Mqueen</option>
-                                <option value="New Balance">New Balance</option>
-                                <option value="Reebok">Reebok</option>
-                            </select>
+                        <div className="add-brand" style={{ display: 'flex', alignItems: 'center' }}>
+                            <label className="add-label">Nhãn hiệu:</label>
+                            <span style={{ fontSize: '20px' }}>{product?.brand?.name}</span>
                         </div>
-                        <div className="add-size">
-                            <label className="add-label">Chọn Size và Số lượng:</label>
-                            {arrSize.map((size) => (
-                                <div key={size.name} className="add-size-checkbox">
-                                    <div className="add-size-name">
-                                        <input
-                                            type="checkbox"
-                                            id={`checkbox-${size.name}`}
-                                            checked={selectedSizes.some(
-                                                (selectedSize) => selectedSize.name === size.name,
-                                            )}
-                                            onChange={(event) => handleSizeChange(event, size.name)}
-                                            style={{
-                                                transform: 'scale(1.2)',
-                                                cursor: 'pointer',
-                                                backgroundColor: selectedSizes.some(
-                                                    (selectedSize) => selectedSize.name === size.name,
-                                                )
-                                                    ? 'pink'
-                                                    : 'initial',
-                                            }}
-                                        />
-                                        <label
-                                            style={{ fontSize: '20px', cursor: 'pointer' }}
-                                            htmlFor={`checkbox-${size.name}`}
-                                        >
-                                            {size.name}
-                                        </label>
-                                    </div>
-                                    <input type="number" className="add-size-input" id={`size-${size.name}`} />
-                                </div>
-                            ))}
-                        </div>
-                        <div className="add-color">
-                            <label className="add-label">Chọn màu:</label>
-                            <select id="add-color-check" className="add-select">
-                                <option value="#FF0000">Đỏ</option>
-                                <option value="#00FF00">Xanh lá</option>
-                                <option value="#FFFF00">Vàng</option>
-                                <option value="#C0C0C0">Bạc</option>
-                                <option value="#00FFFF">Xanh Dương</option>
-                                <option value="#FFFFFF">Trắng</option>
-                                <option value="#000000">Đen</option>
-                                <option value="#808080">Xám</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="add-image">
-                        <label className="add-label">Hình ảnh sản phẩm:</label>
-                        <input type="file" className="add-image-input" />
                     </div>
                     <div className="add-product-btn">
                         <button onClick={handleSubmit} className="add-product-btn-submit">
@@ -118,4 +154,5 @@ export default function UpdateProduct() {
             </section>
         </>
     );
-}
+};
+export default UpdateProduct;

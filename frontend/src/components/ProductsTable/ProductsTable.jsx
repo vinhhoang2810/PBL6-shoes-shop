@@ -9,17 +9,24 @@ import { deleteProduct, findProducts } from '~/states/Product/Action';
 import Button from '../Button';
 
 const cx = classNames.bind(styles);
-const ProductsTable = () => {
+const ProductsTable = ({ handleProductUpdate }) => {
     const dispatch = useDispatch();
     const { products } = useSelector((store) => store);
     const jwt = localStorage.getItem('jwt');
-    console.log(products);
+    const [selectedProduct, setSelectedProduct] = useState(null); // State to store selected product
 
     const pageSize = 5;
     const [currentPage, setCurrentPage] = useState(0);
 
     const handleProductDelete = (productId) => {
         dispatch(deleteProduct(productId));
+    };
+    const handleProductUpdateClick = (product) => {
+        // You can navigate to the update page or open a modal here
+        // For example, set the selected product in state
+        console.log(product);
+        setSelectedProduct(product);
+        handleProductUpdate(product);
     };
 
     useEffect(() => {
@@ -82,7 +89,13 @@ const ProductsTable = () => {
                                     <TableCell className={cx('price')}>{item?.price}</TableCell>
                                     <TableCell className={cx('quantity')}>{item?.quantity}</TableCell>
                                     <TableCell className={cx('action')}>
-                                        <Button small primary rounded className={`${cx('btn')} ml-0`}>
+                                        <Button
+                                            small
+                                            primary
+                                            rounded
+                                            className={`${cx('btn')} ml-0`}
+                                            onClick={() => handleProductUpdateClick(item)}
+                                        >
                                             Update
                                         </Button>
                                         <Button

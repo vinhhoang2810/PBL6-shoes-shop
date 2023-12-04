@@ -12,7 +12,7 @@ export default function AddProductPage() {
     const [discountedPriceProduct, setdiscountedPriceProduct] = useState('180000');
     const [discountPersentProduct, setdiscountPersentProduct] = useState('10');
     const [imageProduct, setimageProduct] = useState(
-        'https://raw.githubusercontent.com/NguyenHoangMy1st/Study-fontend/main/front-end/src/images/shoes8.png',
+        'https://raw.githubusercontent.com/DNAnh01/PBL6-shoes-shop/main/frontend-user/src/images/shoes6.png',
     );
     const [selectedBrand, setSelectedBrand] = useState('Nike');
     const brandDefaultImages = {
