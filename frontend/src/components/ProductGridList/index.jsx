@@ -14,7 +14,6 @@ export default function ProductGridList() {
   const selectedBrand = searchParams.get("brand");
   const [sortCriteria, setSortCriteria] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
-
   const fetchData = useCallback(async () => {
     try {
       setIsLoading(true);

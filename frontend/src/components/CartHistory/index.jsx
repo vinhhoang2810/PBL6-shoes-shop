@@ -4,18 +4,31 @@ import Button from "../Button";
 import apiBuyNow from "../API/apiBuyNow";
 import CartCardHistory from "../CartCardHistory";
 import "./style.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function CartHistory() {
   const [products, setProducts] = useState([]);
+  console.log(products);
   const handleBuyNow = async () => {
-    const response = await apiBuyNow.postBuyNow();
-    console.log("response:", response.data);
+    try {
+      const orderInfo = {
+        productName: "Example Product",
+        totalItem: products?.totalItem,
+        totalDiscountedPrice: products?.totalDiscountedPrice,
+        // Bất kỳ thông tin thanh toán nào khác mà bạn cần thêm vào đây
+      };
 
-    if (response) {
-      console.log("Đang chuyển sang trang thanh toán");
-      //   Navigate(response.data);
-    } else {
-      console.error("Có lỗi khi thêm sản phẩm");
+      const response = await apiBuyNow.postBuyNow(orderInfo);
+      console.log(response.data);
+      if (response) {
+        console.log("Đang chuyển sang trang thanh toán");
+        const externalURL = response.data; // Đảm bảo response.data chứa URL đầy đủ
+        window.location.href = externalURL;
+      } else {
+        console.error("Có lỗi khi thêm thanh toán ");
+      }
+    } catch (error) {
+      console.error(error?.message);
     }
   };
   const fetchCarts = async () => {

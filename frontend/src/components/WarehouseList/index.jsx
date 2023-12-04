@@ -7,15 +7,15 @@ import apiDelproduct from "../API/apiDeleleProduct";
 
 export default function WarehouseList() {
   const [products, setProducts] = useState([]);
-  const fetchProductGrid = async () => {
-    try {
-      const response = await apiProductGrid.getAllProduct();
-      setProducts(response.data.content);
-    } catch (error) {
-      toast.error(error?.message);
-    }
-  }; // Gọi hàm fetchProductGrid
   useEffect(() => {
+    const fetchProductGrid = async () => {
+      try {
+        const response = await apiProductGrid.getAllProduct();
+        setProducts(response.data.content);
+      } catch (error) {
+        toast.error(error?.message);
+      }
+    }; // Gọi hàm fetchProductGrid
     fetchProductGrid();
   }, []);
 
@@ -30,17 +30,24 @@ export default function WarehouseList() {
   };
 
   const handleDeleteProduct = async (productId) => {
+    // console.log(productId);
     try {
       const response = await apiDelproduct.delProduct(productId);
-      if (response) {
-        fetchProductGrid();
-        toast.success("Xóa sản phẩm thành công");
+      console.log(response);
+      const data = await response.json();
+      // console.log(data);
+      if (data.success) {
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== productId)
+        );
+        toast.success("Product deleted successfully");
       } else {
-        toast.error("Xóa sản phẩm thất bại");
+        console.error("Xóa sản phẩm thất bại");
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error?.message);
     }
+    window.location.reload();
   };
 
   const handleUpdateProduct = (productId, updatedProductInfo) => {

@@ -32,14 +32,12 @@ export default function BrandList() {
   const [brands, setBrands] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    // Simulate fetching data
     const fetchData = async () => {
       try {
-        // Simulate a delay
         const response = await apiProductGrid.getAllProduct();
-        setBrands(response.data.content);
+        const uniqueBrands = filterUniqueBrands(response.data.content);
 
-        // Set loading state to false after data is loaded
+        setBrands(uniqueBrands);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -49,6 +47,22 @@ export default function BrandList() {
 
     fetchData();
   }, []);
+
+  const filterUniqueBrands = (brands) => {
+    const uniqueBrandNames = new Set();
+    const uniqueBrands = [];
+
+    brands.forEach((brand) => {
+      const brandName = brand?.brand?.name;
+
+      if (!uniqueBrandNames.has(brandName)) {
+        uniqueBrandNames.add(brandName);
+        uniqueBrands.push(brand);
+      }
+    });
+
+    return uniqueBrands;
+  };
 
   return (
     <section className="container-layout">

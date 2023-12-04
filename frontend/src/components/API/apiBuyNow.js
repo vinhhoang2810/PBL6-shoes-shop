@@ -1,9 +1,11 @@
+// Trong apiBuyNow.js
 import axiosClient from "./axiosClient";
 
 const apiBuyNow = {
-  postBuyNow() {
-    const url = `/payment/submitOrder?orderInfo=thanh toan`;
-    return axiosClient.post(url);
+  postBuyNow(orderInfo) {
+    const url = `/payment/submitOrder`;
+    return axiosClient.post(url, null, { params: orderInfo });
   },
 };
+
 export default apiBuyNow;
