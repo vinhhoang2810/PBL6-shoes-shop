@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# orther
+/.vscode
+
 # dependencies
 /node_modules
 /.pnp
@@ -10,6 +13,10 @@
 
 # production
 /build
+
+# orther
+/.vscode
+/design_layout
 
 # misc
 .DS_Store

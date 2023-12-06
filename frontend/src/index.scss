@@ -1,18 +1,18 @@
 .container-layout {
-  max-width: 1350px !important;
-  margin: 30px auto;
-  padding: 0 20px;
+    max-width: 1350px !important;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
 .red {
-  color: red !important;
+    color: red !important;
 }
 
 .bg-black {
-  background: #000 !important;
+    background: #000 !important;
 }
 html,
 body,
@@ -95,12 +95,12 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    // font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -114,52 +114,52 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+    display: block;
 }
 body {
-  line-height: 1;
+    line-height: 1;
 }
 ol,
 ul {
-  list-style: none;
+    list-style: none;
 }
 blockquote,
 q {
-  quotes: none;
+    quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
-  content: none;
+    content: '';
+    content: none;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 .loading-spinner-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Điều chỉnh chiều cao để hình tròn ở giữa màn hình */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Điều chỉnh chiều cao để hình tròn ở giữa màn hình */
 }
 
 .loading-spinner {
-  border: 8px solid #f3f3f3; /* Màu nền hình tròn */
-  border-top: 8px solid #3498db; /* Màu của hình tròn loading */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite; /* Hiệu ứng quay */
+    border: 8px solid #f3f3f3; /* Màu nền hình tròn */
+    border-top: 8px solid #3498db; /* Màu của hình tròn loading */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite; /* Hiệu ứng quay */
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
