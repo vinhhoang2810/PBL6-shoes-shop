@@ -1,17 +1,23 @@
 package com.shop.shoes.project.ui.main.home
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.shop.shoes.project.R
+import com.shop.shoes.project.databinding.FragmentHomeBinding
+import com.shop.shoes.project.ui.main.base.BaseFragment
 
-class HomeFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+    override fun initView() {
     }
+
+    override fun initData() {
+    }
+
+    override fun initListener() {
+    }
+
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater)
+
 }

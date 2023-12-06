@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bg">
+    android:background="@color/color_bg"
+    android:fitsSystemWindows="true">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/view_top"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineMid"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.shop.shoes.project.ui.main.NonSwipeViewPager
         android:id="@+id/viewPager"
@@ -18,11 +33,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_bg"
+        app:backgroundTint="@color/color_view"
         app:itemIconTint="@color/color_custom_navigation"
         app:itemTextColor="@color/color_custom_navigation"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_bottom_navigation"
-        app:backgroundTint="@color/color_view"/>
+        app:menu="@menu/menu_bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
