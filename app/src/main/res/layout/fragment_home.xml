@@ -18,6 +18,8 @@
         android:lines="1"
         android:padding="@dimen/_16sdp"
         android:text="@string/enter_your_product_name"
+        android:textColor="@color/color_grey"
+        android:textStyle="italic"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.core.widget.NestedScrollView
