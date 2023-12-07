@@ -2,6 +2,7 @@ package com.shop.shoes.project.data.source
 
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
+import com.shop.shoes.project.data.model.ResponseProduct
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.data.source.local.LocalDataSourceImpl
 import com.shop.shoes.project.data.source.local.LocalDataSource
@@ -22,6 +23,10 @@ class Repository(
 
     override suspend fun signUp(request: User): AuthResponse {
         return remoteDataSource.signUp(request)
+    }
+
+    override suspend fun getAllProducts(): ResponseProduct {
+        return remoteDataSource.getAllProducts()
     }
 
 }

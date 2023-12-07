@@ -27,7 +27,7 @@ data class Product(
     @SerializedName("sizes")
     var sizes: List<Size> = emptyList(),
     @SerializedName("imageUrl")
-    var imageUrl: Int = 0,
+    var imageUrl: String = "",
     @SerializedName("reviews")
     var reviews: List<Review> = emptyList(),
     @SerializedName("brand")
@@ -45,7 +45,7 @@ data class Review(
     @SerializedName("id")
     var id: Int = 0,
     @SerializedName("review")
-    var quantity: Int = 0,
+    var quantity: String = "",
     @SerializedName("rating")
     var rating: Int = 0,
     @SerializedName("user")

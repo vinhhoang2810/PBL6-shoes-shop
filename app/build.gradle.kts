@@ -142,5 +142,5 @@ dependencies {
 
     implementation(Dependencies.Other.lottie)
     implementation(Dependencies.Other.dotsindicator)
-
+    implementation(Dependencies.Other.glide)
 }
