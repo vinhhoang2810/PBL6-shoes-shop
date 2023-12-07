@@ -1,4 +1,4 @@
-package com.shop.shoes.project.ui.main.home
+package com.shop.shoes.project.ui.main.home.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

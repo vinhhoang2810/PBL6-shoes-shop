@@ -5,6 +5,12 @@ import com.shop.shoes.project.data.model.Brand
 object BrandUtils {
     val brands = arrayListOf(
         Brand(
+            id = 0,
+            name = "All",
+            imageUrl = "https://www.dl.dropboxusercontent.com/scl/fi/mhmes9thfotfm9caq1aq4/385525567_395749092781579_8253303120229253670_n.png?rlkey=31ssz9s2qcv9rqvjuwpr13p3z&dl=0"
+        ),
+
+        Brand(
             id = 1,
             name = "Adidas",
             imageUrl = "https://www.dl.dropboxusercontent.com/scl/fi/i167u9rl57xiy12y6cu4p/logoAdidas.png?rlkey=zobrrhbvk95aitt3lqko9hhow&dl=0"
@@ -31,7 +37,7 @@ object BrandUtils {
         Brand(
             id = 5,
             name = "Nike",
-            imageUrl = " https://www.dl.dropboxusercontent.com/scl/fi/spftkm2g20w80w34yusw5/logoNike.png?rlkey=0u494s5a2j3ihrgsn92v9ped3&dl=0"
+            imageUrl = "https://www.dl.dropboxusercontent.com/scl/fi/spftkm2g20w80w34yusw5/logoNike.png?rlkey=0u494s5a2j3ihrgsn92v9ped3&dl=0"
         ),
 
         Brand(
