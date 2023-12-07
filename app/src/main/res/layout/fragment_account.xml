@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/color_bg">
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineTop"
@@ -14,39 +13,25 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineMid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/guidelineMid"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/view_top"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:paddingTop="@dimen/_40sdp"
         android:id="@+id/clTop"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingTop="@dimen/_40sdp"
         app:layout_constraintBottom_toTopOf="@id/guidelineTop"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_start_btn"
+            android:layout_margin="@dimen/_16sdp"
+            android:elevation="@dimen/_16sdp"
             android:text="@string/welcome"
+            android:textColor="@color/color_start_btn"
             android:textSize="@dimen/_30sdp"
             android:textStyle="bold"
-            android:elevation="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="@dimen/_16sdp"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
@@ -61,110 +46,110 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_16sdp"
         android:background="@drawable/bg_box"
         android:elevation="16sp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/clTop"
-        android:layout_margin="@dimen/_16sdp"
         android:paddingHorizontal="@dimen/_16sdp"
-        android:paddingVertical="@dimen/_8sdp">
+        android:paddingVertical="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@id/clTop">
 
         <TextView
             android:id="@+id/tvInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_account"
-            android:text="@string/account_information"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/account_information"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn"/>
+            android:background="@drawable/bg_btn" />
 
         <TextView
             android:id="@+id/tvAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_place"
-            android:text="@string/address"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn"/>
+            android:background="@drawable/bg_btn" />
 
         <TextView
             android:id="@+id/tvCart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_cart"
-            android:text="@string/my_cart"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/my_cart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn"/>
+            android:background="@drawable/bg_btn" />
 
         <TextView
             android:id="@+id/tvRate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_review"
-            android:text="@string/my_reviews"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/my_reviews"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn"/>
+            android:background="@drawable/bg_btn" />
 
         <TextView
             android:id="@+id/tvSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/img_support"
-            android:text="@string/support"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/support"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn"/>
+            android:background="@drawable/bg_btn" />
 
         <TextView
             android:id="@+id/tvLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/icon_log_out"
-            android:text="@string/log_out"
-            android:textSize="@dimen/_16sdp"
-            android:paddingVertical="@dimen/_16sdp"
             android:drawablePadding="@dimen/_8sdp"
-            android:textColor="@color/black"/>
+            android:paddingVertical="@dimen/_16sdp"
+            android:text="@string/log_out"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16sdp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

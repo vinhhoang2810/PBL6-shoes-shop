@@ -2,6 +2,7 @@ package com.shop.shoes.project.data.network
 
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
+import com.shop.shoes.project.data.model.ResponseProduct
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.utils.Constants
 import retrofit2.http.Body
@@ -17,4 +18,7 @@ interface ApiService {
 
     @GET(Constants.GET_INFO)
     suspend fun getInfo() : User
+
+    @GET(Constants.GET_ALL_PRODUCTS)
+    suspend fun getAllProducts() : ResponseProduct
 }

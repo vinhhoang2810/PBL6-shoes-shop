@@ -63,6 +63,7 @@ object Dependencies {
     object Other {
         const val dotsindicator = "com.tbuonomo:dotsindicator:4.3"
         const val lottie = "com.airbnb.android:lottie:6.0.1"
+        const val glide = "com.github.bumptech.glide:glide:4.16.0"
     }
 
 }
