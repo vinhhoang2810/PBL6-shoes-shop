@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.home.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ItemProductsBinding
 import com.shop.shoes.project.utils.Pref.context
+
 
 class ProductAdapter(
     private var records: List<Product>,
@@ -23,9 +25,13 @@ class ProductAdapter(
                 if (item.discountedPrice == 0) {
                     tvDiscount.visibility = View.GONE
                     tvPrice.text = item.price.toString()
+                    tvSale.visibility = View.GONE
                 } else {
                     tvDiscount.text = item.price.toString()
+                    tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
                     tvPrice.text = item.discountedPrice.toString()
+                    val text = "-${item.discountPersent}%"
+                    tvSale.text = text
                 }
                 tvType.text = item.brand?.name
             }

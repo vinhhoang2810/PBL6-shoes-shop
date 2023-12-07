@@ -18,6 +18,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val homeViewModel by inject<HomeViewModel>()
     private val products = mutableListOf<Product>()
+    private val bestProducts = mutableListOf<Product>()
     private val brands = BrandUtils.brands
     private val poster = arrayListOf(
         R.drawable.img_banner,
@@ -34,6 +35,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //TODO
         }
     }
+    private val bestAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        ProductAdapter(bestProducts) { pos ->
+            //TODO
+        }
+    }
     private val viewPagerAdapter by lazy { PosterViewPagerAdapter(poster) }
 
     override fun initView() = binding.run {
@@ -42,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = brandAdapter
         }
+        rvBestSeller.layoutManager = GridLayoutManager(context, 2)
         viewPager.adapter = viewPagerAdapter
         dotIndicator.setViewPager(viewPager)
     }
@@ -60,14 +67,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater)
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun listenVM() {
-        homeViewModel.product.observe(this) {
+    private fun listenVM() = binding.run {
+        homeViewModel.product.observe(this@HomeFragment) {
             products.run {
                 clear()
                 addAll(it)
             }
+            bestProducts.run {
+                clear()
+                addAll(it.take(4))
+            }
             adapter.notifyDataSetChanged()
-            binding.rvProducts.adapter = adapter
+            rvProducts.adapter = adapter
+            bestAdapter.notifyDataSetChanged()
+            rvBestSeller.adapter = bestAdapter
         }
     }
 }

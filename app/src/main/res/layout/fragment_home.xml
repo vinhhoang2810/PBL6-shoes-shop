@@ -55,11 +55,30 @@
                 app:layout_constraintTop_toBottomOf="@id/viewPager"
                 app:stiffness="300" />
 
+            <TextView
+                android:id="@+id/tvBestSeller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/best_sellers"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_24sdp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/dotIndicator" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBestSeller"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvBestSeller"
+                app:spanCount="2" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBrand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/dotIndicator" />
+                app:layout_constraintTop_toBottomOf="@id/rvBestSeller" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProducts"
