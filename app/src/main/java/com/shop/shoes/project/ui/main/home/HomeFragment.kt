@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.base.BaseFragment
@@ -19,10 +20,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             //TODO
         }
     }
+    private val poster = arrayListOf(
+        R.drawable.img_banner,
+        R.drawable.img_banner_1,
+        R.drawable.img_banner_2
+    )
+    private val viewPagerAdapter by lazy { PosterViewPagerAdapter(poster) }
 
-
-    override fun initView() {
-        binding.rvProducts.layoutManager = GridLayoutManager(context, 2);
+    override fun initView() = binding.run {
+        rvProducts.layoutManager = GridLayoutManager(context, 2)
+        viewPager.adapter = viewPagerAdapter
+        dotIndicator.setViewPager(viewPager)
     }
 
     override fun initData() {
