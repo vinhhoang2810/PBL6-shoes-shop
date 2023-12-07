@@ -32,7 +32,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
     private val brandAdapter by lazy(LazyThreadSafetyMode.NONE) {
         BrandAdapter(brands) { pos ->
-            //TODO
+            val list = homeViewModel.getAllProductsBaseBrand(brands[pos].name)
+            products.run {
+                clear()
+                addAll(list)
+            }
+            adapter.updateData(products)
         }
     }
     private val bestAdapter by lazy(LazyThreadSafetyMode.NONE) {

@@ -22,4 +22,18 @@ class HomeViewModel(application: Application, private val repository: Repository
             }
         }
     }
+
+    fun getAllProductsBaseBrand(brand: String): List<Product> {
+        val list = mutableListOf<Product>()
+        if (brand == "All") {
+            list.addAll(_product.value!!)
+        } else {
+            _product.value?.forEach {
+                if (it.brand?.name!!.contains(brand)) {
+                    list.add(it)
+                }
+            }
+        }
+        return list
+    }
 }
