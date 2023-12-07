@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,6 +12,7 @@ import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.base.BaseFragment
 import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
+import com.shop.shoes.project.ui.main.search.SearchActivity
 import com.shop.shoes.project.utils.BrandUtils
 import org.koin.android.ext.android.inject
 
@@ -64,6 +66,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun initListener() {
+        binding.tvSearch.setOnClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+        }
     }
 
     override fun getViewBinding(
