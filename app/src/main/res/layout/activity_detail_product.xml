@@ -141,9 +141,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16sdp"
-                android:layout_marginVertical="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:background="@drawable/bg_box"
-                android:elevation="@dimen/_16sdp"
                 android:padding="@dimen/_16sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvNoRating">
@@ -191,7 +190,6 @@
                     android:id="@+id/rvRating"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
                     app:layout_constraintTop_toBottomOf="@id/view" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
