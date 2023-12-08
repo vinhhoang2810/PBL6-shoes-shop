@@ -44,4 +44,6 @@
     <string name="register_error">Register error</string>
     <string name="enter_your_product_name">Enter your product name...</string>
     <string name="best_sellers">Best Sellers</string>
+    <string name="description">Description</string>
+    <string name="product_reviews">Product reviews</string>
 </resources>
