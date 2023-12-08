@@ -17,7 +17,13 @@ class SizeAdapter(
         fun onBind(item: SizeShow) {
             binding.run {
                 tvSize.text = item.size
-                root.setBackgroundResource(if (item.isSelected) R.drawable.bg_box_view else R.drawable.bg_box)
+                root.setBackgroundResource(
+                    if (item.quantity == 0) {
+                        R.drawable.bg_box_grey
+                    } else {
+                        if (item.isSelected) R.drawable.bg_box_view else R.drawable.bg_box
+                    }
+                )
             }
         }
     }
