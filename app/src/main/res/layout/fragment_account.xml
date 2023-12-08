@@ -89,40 +89,6 @@
             android:background="@drawable/bg_btn" />
 
         <TextView
-            android:id="@+id/tvCart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/icon_cart"
-            android:drawablePadding="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_16sdp"
-            android:text="@string/my_cart"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
-            android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
-
-        <TextView
-            android:id="@+id/tvRate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/icon_review"
-            android:drawablePadding="@dimen/_8sdp"
-            android:paddingVertical="@dimen/_16sdp"
-            android:text="@string/my_reviews"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
-            android:layout_marginVertical="@dimen/_1sdp"
-            android:background="@drawable/bg_btn" />
-
-        <TextView
             android:id="@+id/tvSupport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

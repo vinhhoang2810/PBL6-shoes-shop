@@ -7,6 +7,7 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.databinding.ActivityLoginBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(){
@@ -23,11 +24,16 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(){
         llRegister.setOnClickListener { startActivity(Intent(this@LoginActivity, RegisterActivity::class.java)) }
         tvLater.setOnClickListener { finish() }
         btnLogin.setOnClickListener { handleSignIn() }
+        cbShowPass.setOnCheckedChangeListener { _, isChecked ->
+            Utils.showCharactersEDT(edtPassword, isChecked)
+        }
     }
 
     private fun handleSignIn() {
         if(checkIsSignIn()){
-            viewModel.signIn(createAuth()) {finish()}
+            viewModel.signIn(createAuth()) {
+                setResult(RESULT_OK)
+                finish()}
         }else{
             Toast.makeText(this, getString(R.string.please_enter_enough_information), Toast.LENGTH_LONG).show()
         }

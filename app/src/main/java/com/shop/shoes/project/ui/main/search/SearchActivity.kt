@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import androidx.recyclerview.widget.GridLayoutManager
+import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ActivitySearchBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
@@ -16,7 +17,7 @@ import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
-    private val searchViewModel by inject<SearchViewModel>()
+    private val searchViewModel by lazy { (application as ShopShoesApp).shareViewModel }
     private val products = mutableListOf<Product>()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(products) { pos ->

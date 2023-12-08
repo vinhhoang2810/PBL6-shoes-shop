@@ -10,9 +10,8 @@ import com.shop.shoes.project.data.source.local.LocalDataSourceImpl
 import com.shop.shoes.project.data.source.local.LocalDatabase
 import com.shop.shoes.project.data.source.remote.RemoteDataSourceImpl
 import com.shop.shoes.project.ui.auth.LoginViewModel
+import com.shop.shoes.project.ui.main.ShareViewModel
 import com.shop.shoes.project.ui.main.account.InfoViewModel
-import com.shop.shoes.project.ui.main.home.HomeViewModel
-import com.shop.shoes.project.ui.main.search.SearchViewModel
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Constants.SERVER
 import com.shop.shoes.project.utils.Constants.TIME_OUT
@@ -29,8 +28,7 @@ import java.util.concurrent.TimeUnit
 val appModule = module {
     viewModel { LoginViewModel(androidApplication(), get()) }
     viewModel { InfoViewModel(androidApplication(), get()) }
-    viewModel { HomeViewModel(androidApplication(), get()) }
-    viewModel { SearchViewModel(androidApplication(), get()) }
+    viewModel { ShareViewModel(androidApplication(), get()) }
     fun appApi(client: OkHttpClient, builder: GsonBuilder): ApiService {
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(SERVER)
@@ -65,7 +63,6 @@ val appModule = module {
             Constants.DATABASE_NAME
         ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
     }
-
     single { appApi(provideOkHttpClient(androidContext()), gsonBuilder()) }
     single { Repository(get(), get()) }
     single { LocalDataSourceImpl(get()) }

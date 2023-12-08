@@ -41,6 +41,8 @@ data class Size(
     var quantity: Int = 0,
 )
 
+data class SizeShow(var size: String, var quantity: Int = 0, var isSelected: Boolean = false)
+
 data class Review(
     @SerializedName("id")
     var id: Int = 0,

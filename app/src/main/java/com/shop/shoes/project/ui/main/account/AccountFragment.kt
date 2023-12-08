@@ -1,5 +1,6 @@
 package com.shop.shoes.project.ui.main.account
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
@@ -10,14 +11,17 @@ import com.airbnb.lottie.LottieDrawable
 import com.shop.shoes.project.R
 import com.shop.shoes.project.databinding.FragmentAccountBinding
 import com.shop.shoes.project.ui.auth.LoginActivity
+import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.main.base.BaseFragment
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 
-class AccountFragment : BaseFragment<FragmentAccountBinding>(){
-    override fun initView() = binding.run{
+class AccountFragment : BaseFragment<FragmentAccountBinding>() {
+
+    private val shareViewModel by lazy { (context as MainActivity).shareViewModel }
+    override fun initView() = binding.run {
         playAnimation()
-        if(Pref.accessToken == ""){
+        if (Pref.accessToken == "") {
             tvLogout.visibility = View.GONE
             view.visibility = View.GONE
         }
@@ -27,26 +31,22 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
     }
 
     override fun initListener() = binding.run {
-        tvInfo.setOnClickListener { mustBeLogin {
-            startActivity(Intent(context, InfoActivity::class.java))
-        } }
+        tvInfo.setOnClickListener {
+            mustBeLogin {
+                startActivity(Intent(context, InfoActivity::class.java))
+            }
+        }
 
         tvSupport.setOnClickListener { sendFeedBack() }
         tvLogout.setOnClickListener {
             Pref.accessToken = ""
             tvLogout.visibility = View.GONE
             view.visibility = View.GONE
+            shareViewModel.clearCart()
         }
-        tvRate.setOnClickListener {mustBeLogin {
-            //TODO
-            }
-        }
-        tvCart.setOnClickListener {mustBeLogin {
-            //TODO
-            }
-        }
-        tvAddress.setOnClickListener {mustBeLogin {
-            //TODO
+        tvAddress.setOnClickListener {
+            mustBeLogin {
+                //TODO
             }
         }
     }
@@ -64,9 +64,12 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
     }
 
     private fun mustBeLogin(listener: () -> Unit) {
-        if(Pref.accessToken == ""){
-            startActivityForResult(Intent(context, LoginActivity::class.java), Constants.REQUEST_CODE_LOGIN)
-        }else{
+        if (Pref.accessToken == "") {
+            startActivityForResult(
+                Intent(context, LoginActivity::class.java),
+                Constants.REQUEST_CODE_LOGIN
+            )
+        } else {
             listener.invoke()
         }
     }
@@ -75,7 +78,8 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
         try {
             val emailIntent = Intent(Intent.ACTION_SENDTO)
             val emailSubjectFormat = getString(R.string.we_will_support_you_as_soon_as_possible)
-            val emailSubject = String.format(emailSubjectFormat, getString(R.string.app_name)
+            val emailSubject = String.format(
+                emailSubjectFormat, getString(R.string.app_name)
             )
             emailIntent.data =
                 Uri.parse("mailto:" + getString(R.string.email_feedback))
@@ -88,6 +92,19 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
             toast(getString(R.string.no_mail_found))
         } catch (e: Exception) {
             toast(getString(R.string.error_can_not_send))
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            binding.run {
+                tvLogout.visibility = View.VISIBLE
+                view.visibility = View.VISIBLE
+            }
+            shareViewModel.getAllCart()
+            shareViewModel.getAllProducts()
         }
     }
 

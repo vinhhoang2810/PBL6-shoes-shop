@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Review
 import com.shop.shoes.project.databinding.ActivityDetailProductBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils
 
 class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
+
+    private val cartViewModel by lazy { (application as ShopShoesApp).shareViewModel }
 
     private var entity: Product? = null
 
@@ -47,6 +51,13 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
 
     override fun initListener() = binding.run {
         imgBack.setOnClickListener { finish() }
+        llAddCart.setOnClickListener {
+            Utils.showBottomAddCart(
+                context = this@DetailProductActivity,
+                product = entity!!,
+                viewModel = cartViewModel
+            )
+        }
     }
 
     private fun getRating(list: List<Review>): String {

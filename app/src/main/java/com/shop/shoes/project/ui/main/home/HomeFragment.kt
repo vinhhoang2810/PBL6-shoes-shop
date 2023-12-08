@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentHomeBinding
+import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.main.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
@@ -17,11 +18,10 @@ import com.shop.shoes.project.ui.main.search.SearchActivity
 import com.shop.shoes.project.utils.BrandUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils
-import org.koin.android.ext.android.inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
-    private val homeViewModel by inject<HomeViewModel>()
+    private val homeViewModel by lazy { (context as MainActivity).shareViewModel }
     private val products = mutableListOf<Product>()
     private val bestProducts = mutableListOf<Product>()
     private val brands = BrandUtils.brands

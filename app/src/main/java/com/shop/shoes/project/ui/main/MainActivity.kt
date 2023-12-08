@@ -2,18 +2,21 @@ package com.shop.shoes.project.ui.main
 
 import android.view.LayoutInflater
 import com.shop.shoes.project.R
+import com.shop.shoes.project.ShopShoesApp
 import com.shop.shoes.project.databinding.ActivityMainBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
 import com.shop.shoes.project.utils.Constants
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
+    val shareViewModel by lazy { (application as ShopShoesApp).shareViewModel }
+
     private val viewPagerAdapter by lazy { MainViewPagerAdapter(supportFragmentManager) }
     override fun viewBinding(inflate: LayoutInflater): ActivityMainBinding = ActivityMainBinding.inflate(inflate)
 
     override fun initView() {
         binding.viewPager.run {
-            offscreenPageLimit = 0;
+            offscreenPageLimit = 2
             adapter = viewPagerAdapter
         }
     }
