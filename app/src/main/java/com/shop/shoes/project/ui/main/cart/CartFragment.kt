@@ -63,16 +63,19 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
     @SuppressLint("NotifyDataSetChanged")
     private fun listenCart() = binding.run {
         cartViewModel.cart.observe(this@CartFragment) {
-            carts.run {
-                clear()
-                addAll(it)
-            }
-            adapter.notifyDataSetChanged()
-            rvCart.adapter = adapter
-            if (Pref.accessToken == "") {
-                tvLogin.visibility = View.VISIBLE
-            } else {
+            if (it != null) {
+                carts.run {
+                    clear()
+                    addAll(it.cartItems)
+                }
                 tvLogin.visibility = View.GONE
+                adapter.notifyDataSetChanged()
+                rvCart.adapter = adapter
+                tvTotal.text = it.totalDiscountedPrice.toString()
+            } else {
+                if (Pref.accessToken == "") {
+                    tvLogin.visibility = View.VISIBLE
+                }
             }
         }
     }

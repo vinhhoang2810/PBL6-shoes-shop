@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseCart(
     @SerializedName("cartItems")
-    var cartItems: List<Cart> = emptyList()
+    var cartItems: List<Cart> = emptyList(),
+    @SerializedName("totalDiscountedPrice")
+    var totalDiscountedPrice: Int = 0
 )
 
 data class Cart(

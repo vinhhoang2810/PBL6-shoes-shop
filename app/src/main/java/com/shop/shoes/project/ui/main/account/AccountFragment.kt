@@ -36,18 +36,12 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>() {
                 startActivity(Intent(context, InfoActivity::class.java))
             }
         }
-
         tvSupport.setOnClickListener { sendFeedBack() }
         tvLogout.setOnClickListener {
             Pref.accessToken = ""
             tvLogout.visibility = View.GONE
             view.visibility = View.GONE
             shareViewModel.clearCart()
-        }
-        tvAddress.setOnClickListener {
-            mustBeLogin {
-                //TODO
-            }
         }
     }
 
