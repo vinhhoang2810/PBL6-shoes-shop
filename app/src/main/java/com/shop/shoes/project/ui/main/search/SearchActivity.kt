@@ -1,6 +1,7 @@
 package com.shop.shoes.project.ui.main.search
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -8,7 +9,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.ActivitySearchBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
+import com.shop.shoes.project.utils.Constants
+import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
@@ -16,7 +20,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     private val products = mutableListOf<Product>()
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(products) { pos ->
-            //TODO
+            goToDetail(products[pos])
         }
     }
 
@@ -67,5 +71,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
                 }
             })
         }
+    }
+
+    private fun goToDetail(product: Product) {
+        val json = Utils.convertProductToJson(product)
+        val intent = Intent(this, DetailProductActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT, json)
+        startActivity(intent)
     }
 }

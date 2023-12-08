@@ -10,10 +10,13 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.databinding.FragmentHomeBinding
 import com.shop.shoes.project.ui.main.base.BaseFragment
+import com.shop.shoes.project.ui.main.detail.DetailProductActivity
 import com.shop.shoes.project.ui.main.home.adapter.BrandAdapter
 import com.shop.shoes.project.ui.main.home.adapter.ProductAdapter
 import com.shop.shoes.project.ui.main.search.SearchActivity
 import com.shop.shoes.project.utils.BrandUtils
+import com.shop.shoes.project.utils.Constants
+import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -29,7 +32,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     )
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(products) { pos ->
-            //TODO
+            goToDetail(products[pos])
         }
     }
     private val brandAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -44,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
     private val bestAdapter by lazy(LazyThreadSafetyMode.NONE) {
         ProductAdapter(bestProducts) { pos ->
-            //TODO
+            goToDetail(products[pos])
         }
     }
     private val viewPagerAdapter by lazy { PosterViewPagerAdapter(poster) }
@@ -92,5 +95,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             bestAdapter.notifyDataSetChanged()
             rvBestSeller.adapter = bestAdapter
         }
+    }
+
+    private fun goToDetail(product: Product) {
+        val json = Utils.convertProductToJson(product)
+        val intent = Intent(activity, DetailProductActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT, json)
+        startActivity(intent)
     }
 }
