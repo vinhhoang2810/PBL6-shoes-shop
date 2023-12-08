@@ -7,8 +7,8 @@ import Achievement from '../Achievement/Achievement';
 import MonthlyOverview from '../MonthlyOverview';
 import LineChart from '../LineChart';
 import { WeekData } from '~/components/LineChart/WeekData';
+import { MonthData } from '../BarChart/MonthData';
 import BarChart from '../BarChart';
-import { MonthData } from '../LineChart/MonthData';
 
 const cx = classNames.bind(styles);
 const AdminDashboard = () => {
