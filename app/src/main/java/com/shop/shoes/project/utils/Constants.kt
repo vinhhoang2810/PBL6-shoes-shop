@@ -15,4 +15,5 @@ object Constants {
     const val REQUEST_CODE_LOGIN = 123
     const val ROLE = "USER"
     const val SIGN_UP = "/auth/signup"
+    const val EXTRA_PRODUCT = "productExtra"
 }
