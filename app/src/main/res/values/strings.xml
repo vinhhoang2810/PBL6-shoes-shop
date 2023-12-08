@@ -58,4 +58,5 @@
     <string name="save">Save</string>
     <string name="add_cart_fail">Add cart fail. Try again!</string>
     <string name="item_add_to_cart">Item added to cart!</string>
+    <string name="you_must_login_to_see_your_cart">You must login to see your cart!!</string>
 </resources>

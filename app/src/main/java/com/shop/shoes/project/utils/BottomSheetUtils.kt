@@ -10,7 +10,7 @@ import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Size
 import com.shop.shoes.project.data.model.SizeShow
 import com.shop.shoes.project.databinding.BottomSheetCartBinding
-import com.shop.shoes.project.ui.main.cart.CartViewModel
+import com.shop.shoes.project.ui.main.ShareViewModel
 import com.shop.shoes.project.ui.main.cart.SizeAdapter
 
 object BottomSheetUtils {
@@ -18,7 +18,7 @@ object BottomSheetUtils {
     fun showBottomReminds(
         context: Context,
         product: Product,
-        viewModel: CartViewModel
+        viewModel: ShareViewModel
     ) {
         val listSize = getListSizeShow(product.sizes)
         val sizeAdapter = SizeAdapter(listSize) { pos ->

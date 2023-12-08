@@ -27,7 +27,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(){
 
     private fun handleSignIn() {
         if(checkIsSignIn()){
-            viewModel.signIn(createAuth()) {finish()}
+            viewModel.signIn(createAuth()) {
+                setResult(RESULT_OK)
+                finish()}
         }else{
             Toast.makeText(this, getString(R.string.please_enter_enough_information), Toast.LENGTH_LONG).show()
         }
