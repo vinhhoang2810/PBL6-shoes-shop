@@ -1,0 +1,23 @@
+package com.shop.shoes.project.data.model
+
+import com.google.gson.annotations.SerializedName
+
+data class ResponseCart(
+    @SerializedName("cartItems")
+    var cartItems: List<Cart> = emptyList()
+)
+
+data class Cart(
+    @SerializedName("id")
+    var id: Int,
+    @SerializedName("product")
+    var product: Product? = null,
+    @SerializedName("size")
+    var size: String = "",
+    @SerializedName("quantity")
+    var quantity: Int = 0,
+    @SerializedName("price")
+    var price: Int = 0,
+    @SerializedName("discountedPrice")
+    var discountedPrice: Int = 0,
+)

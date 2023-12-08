@@ -11,6 +11,7 @@ import com.shop.shoes.project.data.source.local.LocalDatabase
 import com.shop.shoes.project.data.source.remote.RemoteDataSourceImpl
 import com.shop.shoes.project.ui.auth.LoginViewModel
 import com.shop.shoes.project.ui.main.account.InfoViewModel
+import com.shop.shoes.project.ui.main.cart.CartViewModel
 import com.shop.shoes.project.ui.main.home.HomeViewModel
 import com.shop.shoes.project.ui.main.search.SearchViewModel
 import com.shop.shoes.project.utils.Constants
@@ -31,6 +32,7 @@ val appModule = module {
     viewModel { InfoViewModel(androidApplication(), get()) }
     viewModel { HomeViewModel(androidApplication(), get()) }
     viewModel { SearchViewModel(androidApplication(), get()) }
+    viewModel { CartViewModel(androidApplication(), get()) }
     fun appApi(client: OkHttpClient, builder: GsonBuilder): ApiService {
         val retrofitBuilder = Retrofit.Builder()
             .baseUrl(SERVER)
