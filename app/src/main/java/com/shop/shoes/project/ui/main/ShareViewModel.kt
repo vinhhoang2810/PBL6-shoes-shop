@@ -9,6 +9,7 @@ import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
+import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.source.Repository
 import com.shop.shoes.project.utils.Pref
 import kotlinx.coroutines.launch
@@ -52,21 +53,21 @@ class ShareViewModel(application: Application, private val repository: Repositor
         return list
     }
 
-    private val _cart = MutableLiveData<List<Cart>>(emptyList())
+    private val _cart = MutableLiveData<ResponseCart?>()
     val cart = _cart
     fun getAllCart() {
         viewModelScope.launch {
             try {
                 val response = repository.getAllCarts()
-                _cart.postValue(response.cartItems)
+                _cart.postValue(response)
             } catch (e: Exception) {
-                _cart.postValue(emptyList())
+                _cart.postValue(null)
             }
         }
     }
 
     fun clearCart() {
-        _cart.postValue(emptyList())
+        _cart.postValue(null)
     }
 
     fun addNewCart(cart: BodyCart, listener: () -> Unit) {

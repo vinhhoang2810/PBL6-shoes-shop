@@ -10,22 +10,13 @@
     android:elevation="@dimen/_16sdp"
     android:padding="@dimen/_16sdp">
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/imgPic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/imgPic" />
-
     <ImageView
         android:id="@+id/imgPic"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_100sdp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@id/checkBox"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
