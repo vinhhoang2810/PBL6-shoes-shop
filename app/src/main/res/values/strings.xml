@@ -56,4 +56,6 @@
     <string name="edit">Edit</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="add_cart_fail">Add cart fail. Try again!</string>
+    <string name="item_add_to_cart">Item added to cart!</string>
 </resources>

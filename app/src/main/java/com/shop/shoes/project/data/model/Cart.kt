@@ -21,3 +21,19 @@ data class Cart(
     @SerializedName("discountedPrice")
     var discountedPrice: Int = 0,
 )
+
+data class BodyCart(
+    @SerializedName("productId")
+    var productId: Int,
+    @SerializedName("quantity")
+    var quantity: Int,
+    @SerializedName("size")
+    var size: String = "",
+    @SerializedName("color")
+    var color: String = "",
+)
+
+data class ResponseCartAdd(
+    @SerializedName("status")
+    var status: Boolean,
+)

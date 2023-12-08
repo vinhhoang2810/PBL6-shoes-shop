@@ -10,11 +10,15 @@ import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Review
 import com.shop.shoes.project.databinding.ActivityDetailProductBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.ui.main.cart.CartViewModel
 import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils
+import org.koin.android.ext.android.inject
 
 class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
+
+    private val cartViewModel by inject<CartViewModel>()
 
     private var entity: Product? = null
 
@@ -50,9 +54,10 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
         imgBack.setOnClickListener { finish() }
         llAddCart.setOnClickListener {
             BottomSheetUtils.showBottomReminds(
-                this@DetailProductActivity,
-                entity!!
-            ) {}
+                context = this@DetailProductActivity,
+                product = entity!!,
+                viewModel = cartViewModel
+            )
         }
     }
 

@@ -5,23 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Size
 import com.shop.shoes.project.data.model.SizeShow
 import com.shop.shoes.project.databinding.BottomSheetCartBinding
+import com.shop.shoes.project.ui.main.cart.CartViewModel
 import com.shop.shoes.project.ui.main.cart.SizeAdapter
 
 object BottomSheetUtils {
+    private var sizeSelect = ""
     fun showBottomReminds(
         context: Context,
         product: Product,
-        listener: () -> Unit,
+        viewModel: CartViewModel
     ) {
         val listSize = getListSizeShow(product.sizes)
         val sizeAdapter = SizeAdapter(listSize) { pos ->
             listSize.forEach {
                 if (listSize[pos].quantity > 0) {
                     it.isSelected = it == listSize[pos]
+                    sizeSelect = listSize[pos].size
                 }
             }
         }
@@ -34,8 +38,16 @@ object BottomSheetUtils {
                 adapter = sizeAdapter
             }
             btnSave.setOnClickListener {
-                listener.invoke()
-                bottomSheetDialog.dismiss()
+                viewModel.addNewCart(
+                    BodyCart(
+                        productId = product.id,
+                        quantity = tvQuality.text.toString().toInt(),
+                        size = sizeSelect,
+                        color = product.color
+                    )
+                ) {
+                    bottomSheetDialog.dismiss()
+                }
             }
             btnCancel.setOnClickListener {
                 bottomSheetDialog.dismiss()
@@ -64,6 +76,7 @@ object BottomSheetUtils {
                 sizes.add(
                     SizeShow(size = list[i].name, isSelected = true, quantity = list[i].quantity)
                 )
+                sizeSelect = list[i].name
                 isSelected = true
             }
         }
