@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './style-prefix.scss';
 
-import logo2 from '../../../images/logo2png.png';
 import apiCart from '../../API/apiCart';
+import logo2 from '../../../images/logo.svg';
 
 export default function Header({ cartItems = [] }) {
     const cartItemCount = cartItems?.length || 0;

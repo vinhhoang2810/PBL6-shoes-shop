@@ -1,9 +1,9 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient';
 
-const apiChangepass = {
-  postChangepass(data) {
-    const url = "/users/change-password";
-    return axiosClient.post(url, data);
-  },
+const apiChangePass = {
+    postChangepass(data) {
+        const url = '/users/change-password';
+        return axiosClient.post(url, data);
+    },
 };
-export default apiChangepass;
+export default apiChangePass;

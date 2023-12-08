@@ -4,8 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import Button from '~/pages/Button';
 import apiProfile from '../API/apiProfile';
 import './style.scss';
-import apiChangepass from '../API/apiChangepass';
 import apiUpdateProfile from '../API/apiUpdateProfile';
+import apiChangePass from '../API/apiChangePass';
 
 export default function ProfileCard() {
     const [profiles, setProfiles] = useState([]);
@@ -82,7 +82,7 @@ export default function ProfileCard() {
                     oldPassword: oldpassword,
                     newPassword: newpassword,
                 };
-                const response = await apiChangepass.postChangepass(formdata);
+                const response = await apiChangePass.postChangepass(formdata);
                 if (response.status === 200) {
                     toast.success('Thay đổi mật khẩu thành công');
                 } else {

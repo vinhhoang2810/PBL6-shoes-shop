@@ -36,7 +36,7 @@ export default function CartList() {
         try {
             const response = await apiUpdateCartItems.putUpdateCartItems(productId, formData);
             if (response) {
-                toast.success('Bạn tăng số lượng sản phẩm lên 1');
+                console.log('Bạn tăng số lượng sản phẩm lên 1');
             } else {
                 // toast.error('Update quantity failed');
             }

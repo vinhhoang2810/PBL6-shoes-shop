@@ -34,7 +34,6 @@ export default function AddressList() {
     const handleSetDefaultAddress = (address) => {
         setDefaultAddress(address);
         setSelectedAddressId(address?.id);
-        console.log(address);
     };
 
     return (
@@ -44,7 +43,13 @@ export default function AddressList() {
             {profiles.addresses &&
                 profiles.addresses.map((address, index) => (
                     <div key={index}>
-                        <AddressCard address={address} isSelected={selectedAddressId === address?.id} />
+                        <AddressCard
+                            address={address}
+                            isSelected={selectedAddressId === address?.id}
+                            firstName={profiles.firstName}
+                            lastName={profiles.lastName}
+                            mobile={profiles.mobile}
+                        />
                         <Button text="Set as Default" onClick={() => handleSetDefaultAddress(address)}></Button>
                     </div>
                 ))}

@@ -1,30 +1,22 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import ProductGridCard from '../ProductGridCard';
 import './style-prefix.scss';
-import apiProductGrid from '../API/apiProductGrid';
 import { toast } from 'react-toastify';
 import { useSearchParams } from 'react-router-dom';
 import apiBrand from '../API/apiBrand';
 import apiFilterPrice from '../API/apiFilterPrice';
 import apiGuestProduct from '../API/apiGuestProduct';
+import apiProductGrid from '../API/apiProductGrid';
 
-export default function ProductGridList() {
+export default function ProductGridList({ productSearch }) {
     const [isLoggedIn, setIsLoggedIn] = useState(true);
     const [products, setProducts] = useState([]);
+    console.log(products);
     const [isLoading, setIsLoading] = useState(false);
     let [searchParams, setSearchParams] = useSearchParams();
     const selectedBrand = searchParams.get('brand');
-    const [sortCriteria, setSortCriteria] = useState(null);
+    const [sortCriteria, setSortCriteria] = useState('default');
     const [sortOrder, setSortOrder] = useState('desc');
-
-    useEffect(() => {
-        const checkLoginStatus = () => {
-            const access_token = localStorage.getItem('jwt');
-            setIsLoggedIn(!!access_token);
-        };
-
-        checkLoginStatus();
-    }, []);
 
     const fetchData = useCallback(async () => {
         try {
@@ -35,26 +27,20 @@ export default function ProductGridList() {
                 response = await apiBrand.getProductByBrand(selectedBrand);
                 setProducts(response?.data?.content);
             } else {
-                // Chọn API dựa trên trạng thái đăng nhập
-                response = await apiGuestProduct.getAllProduct();
-                setProducts(response.data);
-            }
-            // Sorting logic
-            if (sortCriteria) {
-                response.data.sort((a, b) => {
-                    if (sortOrder === 'asc') {
-                        return a[sortCriteria] - b[sortCriteria];
-                    } else {
-                        return b[sortCriteria] - a[sortCriteria];
-                    }
-                });
+                if (productSearch.length > 0) {
+                    setProducts(productSearch);
+                } else {
+                    response = await apiProductGrid.getAllProduct();
+                    setProducts(response.data.content);
+                }
             }
         } catch (error) {
             // toast.error(error?.message);
         } finally {
             setIsLoading(false);
         }
-    }, [selectedBrand, sortCriteria, sortOrder]);
+    }, [selectedBrand, productSearch]);
+
     const handleSort = useCallback(
         async (criteria) => {
             try {
@@ -62,7 +48,7 @@ export default function ProductGridList() {
 
                 // Update sorting criteria and order
                 if (criteria === sortCriteria) {
-                    // Chuyển đổi thứ tự sắp xếp nếu click vào cùng tiêu chí
+                    // Switch the sorting order if clicking on the same criterion
                     setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
                 } else {
                     // Set new sorting criteria
@@ -70,13 +56,13 @@ export default function ProductGridList() {
                     setSortOrder('asc'); // Default to ascending order when changing criteria
                 }
 
-                // Gọi API tương ứng với sắp xếp theo giá
+                // Call the corresponding API for sorting by price
                 if (criteria === 'price_low' || criteria === 'price_high') {
                     const priceSort = criteria === 'price_low' ? 'price_low' : 'price_high';
                     const response = await apiFilterPrice.getFilerPrice(priceSort);
                     setProducts(response.data.content);
                 } else if (criteria === 'discountPersent') {
-                    // Sắp xếp theo discountPersent
+                    // Sort by discountPersent
                     const sortedProducts = [...products].sort((a, b) => {
                         if (sortOrder === 'asc') {
                             return a.discountPersent - b.discountPersent;
@@ -86,7 +72,7 @@ export default function ProductGridList() {
                     });
                     setProducts(sortedProducts);
                 } else if (criteria === 'default') {
-                    // Nếu là sắp xếp mặc định, gọi API để lấy tất cả sản phẩm
+                    // If it's the default sort, call the API to get all products
                     const response = await apiProductGrid.getAllProduct();
                     setProducts(response.data.content);
                 }
@@ -102,7 +88,9 @@ export default function ProductGridList() {
     useEffect(() => {
         fetchData();
     }, [fetchData, selectedBrand]);
-
+    useEffect(() => {
+        handleSort('default');
+    }, []);
     return (
         <section>
             <div className="product-main container-layout">
