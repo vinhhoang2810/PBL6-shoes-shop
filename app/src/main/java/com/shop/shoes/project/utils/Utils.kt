@@ -1,6 +1,8 @@
 package com.shop.shoes.project.utils
 
 import android.content.Context
+import android.text.method.PasswordTransformationMethod
+import android.widget.EditText
 import com.google.gson.Gson
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
@@ -37,5 +39,17 @@ object Utils {
 
     fun showBottomEditCart(context: Context, cart: Cart, viewModel: ShareViewModel) {
         BottomSheetUtils.showBottomEditCart(context, cart, viewModel)
+    }
+
+    fun showCharactersEDT(edt: EditText, isShow: Boolean) {
+        edt.run {
+            if(isShow) {
+                inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_NORMAL
+                transformationMethod = null
+            }else{
+                inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
+                transformationMethod = PasswordTransformationMethod.getInstance()
+            }
+        }
     }
 }

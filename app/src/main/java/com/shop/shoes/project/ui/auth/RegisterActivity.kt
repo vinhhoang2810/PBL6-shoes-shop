@@ -7,6 +7,7 @@ import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.databinding.ActivityRegisterBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
 import com.shop.shoes.project.utils.Constants
+import com.shop.shoes.project.utils.Utils
 import org.koin.android.ext.android.inject
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(){
@@ -23,6 +24,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(){
     override fun initListener() =binding.run {
         llLogin.setOnClickListener { finish() }
         btnRegister.setOnClickListener { handleSignUp() }
+        cbShowPass.setOnCheckedChangeListener { _, isChecked ->
+            Utils.showCharactersEDT(edtPassword, isChecked)
+        }
     }
 
     private fun handleSignUp() {

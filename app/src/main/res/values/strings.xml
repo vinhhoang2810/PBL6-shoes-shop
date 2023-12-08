@@ -64,4 +64,5 @@
     <string name="delete">Detete</string>
     <string name="delete_success">Delete success!</string>
     <string name="delete_fail">Delete fail! Try again!</string>
+    <string name="show_password">Show password</string>
 </resources>
