@@ -23,7 +23,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/llAddCart"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -195,5 +195,30 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/llAddCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_view"
+        android:gravity="center"
+        android:paddingTop="@dimen/_16sdp"
+        android:paddingBottom="@dimen/_48sdp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:src="@drawable/icon_cart_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:text="@string/add_to_cart"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_20sdp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

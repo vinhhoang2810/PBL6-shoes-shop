@@ -1,5 +1,6 @@
 package com.shop.shoes.project.ui.main.detail
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -27,33 +28,11 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
         if (entity != null) {
             Glide.with(this@DetailProductActivity).load(entity!!.imageUrl).into(imgPic)
             tvName.text = entity!!.title
-            if (entity!!.discountedPrice == 0) {
-                tvDiscount.visibility = View.GONE
-                tvPrice.text = entity!!.price.toString()
-                tvSale.visibility = View.GONE
-            } else {
-                tvDiscount.text = entity!!.price.toString()
-                tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
-                tvPrice.text = entity!!.discountedPrice.toString()
-                val text = "-${entity!!.discountPersent}%"
-                tvSale.text = text
-            }
             val quality = "${entity!!.quantity} products available"
             tvQuality.text = quality
             tvDes.text = entity!!.description
-            if (entity!!.reviews.isNotEmpty()) {
-                tvRating.text = getRating(entity!!.reviews)
-                tvNoRating.visibility = View.GONE
-                rvRating.layoutManager = LinearLayoutManager(this@DetailProductActivity)
-                listRating.run {
-                    clear()
-                    addAll(entity!!.reviews)
-                }
-                adapter.notifyDataSetChanged()
-                rvRating.adapter = adapter
-            } else {
-                clRating.visibility = View.GONE
-            }
+            showPrice()
+            showRating(entity!!.reviews)
         } else {
             finish()
         }
@@ -66,7 +45,8 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
         }
     }
 
-    override fun initListener() {
+    override fun initListener() = binding.run {
+        imgBack.setOnClickListener { finish() }
     }
 
     private fun getRating(list: List<Review>): String {
@@ -76,5 +56,36 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
         }
         rate /= list.size
         return rate.toString()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun showRating(list: List<Review>) = binding.run {
+        if (list.isNotEmpty()) {
+            tvRating.text = getRating(list)
+            tvNoRating.visibility = View.GONE
+            rvRating.layoutManager = LinearLayoutManager(this@DetailProductActivity)
+            listRating.run {
+                clear()
+                addAll(list)
+            }
+            adapter.notifyDataSetChanged()
+            rvRating.adapter = adapter
+        } else {
+            clRating.visibility = View.GONE
+        }
+    }
+
+    private fun showPrice() = binding.run {
+        if (entity!!.discountedPrice == 0) {
+            tvDiscount.visibility = View.GONE
+            tvPrice.text = entity!!.price.toString()
+            tvSale.visibility = View.GONE
+        } else {
+            tvDiscount.text = entity!!.price.toString()
+            tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
+            tvPrice.text = entity!!.discountedPrice.toString()
+            val text = "-${entity!!.discountPersent}%"
+            tvSale.text = text
+        }
     }
 }
