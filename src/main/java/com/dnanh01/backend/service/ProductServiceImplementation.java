@@ -2,7 +2,9 @@ package com.dnanh01.backend.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.dnanh01.backend.exception.ProductException;
 import com.dnanh01.backend.model.Brand;
 import com.dnanh01.backend.model.Product;
+import com.dnanh01.backend.model.Size;
 import com.dnanh01.backend.repository.BrandRepository;
 import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.request.CreateProductRequest;
@@ -92,6 +95,7 @@ public class ProductServiceImplementation implements ProductService {
         }
         throw new ProductException("Product not found with id - " + id);
     }
+  
 
     @Override
     public List<Product> findProductByCategory(String category) {
@@ -136,5 +140,6 @@ public class ProductServiceImplementation implements ProductService {
         Page<Product> filteredProducts = new PageImpl<>(pageContent, pageable, products.size());
         return filteredProducts;
     }
+
 
 }

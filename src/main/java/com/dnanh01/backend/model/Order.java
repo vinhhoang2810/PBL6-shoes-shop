@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -21,7 +22,7 @@ import jakarta.persistence.Table;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     // @Column(name = "order_id")
@@ -39,9 +40,11 @@ public class Order {
 
     @OneToOne
     private Address shippingAddress;
+    
+    @OneToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
-    @Embedded
-    private PaymentDetails paymentDetails = new PaymentDetails();
 
     private double totalPrice;
 
@@ -58,26 +61,30 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, String orderId, User user, List<OrderItem> orderItems, LocalDateTime orderDate,
-            LocalDateTime deliveryDate, Address shippingAddress, PaymentDetails paymentDetails, double totalPrice,
-            Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
-        this.id = id;
-        // this.orderId = orderId;
-        this.user = user;
-        this.orderItems = orderItems;
-        this.orderDate = orderDate;
-        this.deliveryDate = deliveryDate;
-        this.shippingAddress = shippingAddress;
-        this.paymentDetails = paymentDetails;
-        this.totalPrice = totalPrice;
-        this.totalDiscountedPrice = totalDiscountedPrice;
-        this.discount = discount;
-        this.orderStatus = orderStatus;
-        this.totalItem = totalItem;
-        this.createAt = createAt;
-    }
+   
 
-    public Long getId() {
+    public Order(Long id, User user, List<OrderItem> orderItems, LocalDateTime orderDate, LocalDateTime deliveryDate,
+			Address shippingAddress, Cart cart, double totalPrice,
+			Integer totalDiscountedPrice, Integer discount, String orderStatus, int totalItem, LocalDateTime createAt) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.orderItems = orderItems;
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.shippingAddress = shippingAddress;
+		this.cart = cart;
+		this.totalPrice = totalPrice;
+		this.totalDiscountedPrice = totalDiscountedPrice;
+		this.discount = discount;
+		this.orderStatus = orderStatus;
+		this.totalItem = totalItem;
+		this.createAt = createAt;
+	}
+
+
+
+	public Long getId() {
         return id;
     }
 
@@ -125,20 +132,21 @@ public class Order {
         this.deliveryDate = deliveryDate;
     }
 
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+    
     public Address getShippingAddress() {
         return shippingAddress;
     }
 
     public void setShippingAddress(Address shippingAddress) {
         this.shippingAddress = shippingAddress;
-    }
-
-    public PaymentDetails getPaymentDetails() {
-        return paymentDetails;
-    }
-
-    public void setPaymentDetails(PaymentDetails paymentDetails) {
-        this.paymentDetails = paymentDetails;
     }
 
     public double getTotalPrice() {

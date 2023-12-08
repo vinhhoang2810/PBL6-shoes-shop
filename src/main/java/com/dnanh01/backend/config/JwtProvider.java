@@ -13,14 +13,14 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtProvider {
-    // Create a secret key using the HMAC SHA algorithm with the secret key from
+	// Tạo khóa bí mật bằng thuật toán HMAC SHA với khóa bí mật từ
     // JwtConstant
     SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
 
-    // Method to generate a JWT token based on the provided Authentication object
+    // Phương thức tạo mã thông báo JWT dựa trên đối tượng Xác thực được cung cấp
     public String generateToken(Authentication auth) {
-        // Build the JWT token with issued date, expiration date, and email claim from
-        // the Authentication object
+    	// Xây dựng mã thông báo JWT với ngày phát hành, ngày hết hạn và yêu cầu gửi email từ
+        // đối tượng xác thực
         String jwt = Jwts.builder()
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + 86000000))
@@ -30,12 +30,12 @@ public class JwtProvider {
         return jwt;
     }
 
-    // Method to extract the email claim from a given JWT token
+    // Phương pháp trích xuất xác nhận quyền sở hữu email từ mã thông báo JWT nhất định
     public String getEmailFromToken(String jwt) {
         jwt = jwt.substring(7);// Remove the "Bearer " prefix from the JWT string
-        // Parse the JWT token, validate its signature, and retrieve the claims
+        // Phân tích mã thông báo JWT, xác thực chữ ký của nó và truy xuất các xác nhận quyền sở hữu
         Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-        // Extract and return the email claim from the JWT claims
+        // Trích xuất và trả lại email xác nhận quyền sở hữu từ JWT
         String email = String.valueOf(claims.get("email"));
         return email;
     }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Address;
+import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
 
@@ -28,5 +29,5 @@ public interface OrderService {
 	public List<Order> getAllOrders();
 
 	public void deleteOrder(Long orderId) throws OrderException;
-
+	  	    
 }

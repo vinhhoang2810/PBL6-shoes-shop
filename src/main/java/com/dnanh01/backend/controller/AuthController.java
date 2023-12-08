@@ -21,6 +21,7 @@ import com.dnanh01.backend.model.Cart;
 // import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.UserRepository;
+import com.dnanh01.backend.request.ChangePasswordRequest;
 import com.dnanh01.backend.request.LoginRequest;
 import com.dnanh01.backend.response.AuthResponse;
 import com.dnanh01.backend.service.CartService;
@@ -131,4 +132,7 @@ public class AuthController {
         }
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
+
+    
+    
 }

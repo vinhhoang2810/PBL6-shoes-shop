@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.User;
@@ -46,8 +47,26 @@ public class PaymentController {
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         String vnpayUrl = vnPayService.createOrder(total, orderInfo, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
-    }
+    } 
+ /*   
+    @PostMapping("/submitOrder")
+    public RedirectView submitOrder(
+            @RequestParam("orderInfo") String orderInfo,
+            HttpServletRequest request, Principal principal) {
 
+        principal.getName();
+        User user = userServiceImplementation.getUserByEmail(principal.getName());
+
+        Cart cart = cartServiceImplementation.findUserCart(user.getId());
+        BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
+        // trang frontend cấu hình
+        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+        String vnpayUrl = vnPayService.createOrder(total, orderInfo, baseUrl);
+
+        // Sử dụng RedirectView để chuyển hướng đến trang vnpayUrl
+        return new RedirectView(vnpayUrl);
+    }
+*/
     @GetMapping("/vnpay-payment")
     public String GetMapping(HttpServletRequest request, Model model) {
         int paymentStatus = vnPayService.orderReturn(request);

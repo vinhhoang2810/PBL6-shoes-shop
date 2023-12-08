@@ -31,7 +31,7 @@ public class AdminOrderController {
         return new ResponseEntity<List<Order>>(orders, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{orderId}/confirmed")
+    @PutMapping("/{orderId}/confirmed") // xác nhận
     public ResponseEntity<Order> confirmedOrderHandler(
             @PathVariable("orderId") Long orderId,
             @RequestHeader("Authorization") String jwt) throws OrderException {
@@ -39,24 +39,7 @@ public class AdminOrderController {
         Order order = orderService.confirmedOrder(orderId);
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
-
-    @PutMapping("/{orderId}/shipped")
-    public ResponseEntity<Order> shippedOrderHandler(
-            @PathVariable("orderId") Long orderId,
-            @RequestHeader("Authorization") String jwt) throws OrderException {
-        Order order = orderService.shippedOrder(orderId);
-        return new ResponseEntity<>(order, HttpStatus.OK);
-    }
-
-    @PutMapping("/{orderId}/delivered")
-    public ResponseEntity<Order> deliveredOrderHandler(
-            @PathVariable("orderId") Long orderId,
-            @RequestHeader("Authorization") String jwt) throws OrderException {
-        Order order = orderService.deliveredOrder(orderId);
-        return new ResponseEntity<>(order, HttpStatus.OK);
-    }
-
-    @PutMapping("/{orderId}/canceled")
+    @PutMapping("/{orderId}/canceled") // hủy bỏ 
     public ResponseEntity<Order> canceledOrderHandler(
             @PathVariable("orderId") Long orderId,
             @RequestHeader("Authorization") String jwt) throws OrderException {
@@ -64,7 +47,7 @@ public class AdminOrderController {
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{orderId}/delete")
+    @DeleteMapping("/{orderId}/delete") // xóa 
     public ResponseEntity<ApiResponse> deleteOrderHandler(
             @PathVariable("orderId") Long orderId,
             @RequestHeader("Authorization") String jwt) throws OrderException {

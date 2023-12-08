@@ -98,4 +98,9 @@ public class CartServiceImplementation implements CartService {
         return cartRepository.save(cart);
     }
 
+    
+	@Override
+	public void saveOrUpdateCart(Cart cart) {
+	        cartRepository.save(cart);
+	 }
 }

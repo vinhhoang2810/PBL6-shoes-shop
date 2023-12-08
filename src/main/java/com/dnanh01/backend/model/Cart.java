@@ -17,7 +17,7 @@ import jakarta.persistence.OneToOne;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -27,6 +27,9 @@ public class Cart {
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "cart_items")
     private Set<CartItem> cartItems = new HashSet<>();
+    
+    @OneToOne(mappedBy = "cart")
+    private Order order;
 
     @Column(name = "total_price")
     private double totalPrice;
@@ -41,7 +44,24 @@ public class Cart {
     public Cart() {
     }
 
-    public Long getId() {
+
+
+	public Cart(Long id, User user, Set<CartItem> cartItems, Order order, double totalPrice, int totalItem,
+			int totalDiscountedPrice, int discount) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.cartItems = cartItems;
+		this.order = order;
+		this.totalPrice = totalPrice;
+		this.totalItem = totalItem;
+		this.totalDiscountedPrice = totalDiscountedPrice;
+		this.discount = discount;
+	}
+
+
+
+	public Long getId() {
         return id;
     }
 
@@ -89,7 +109,20 @@ public class Cart {
         this.totalDiscountedPrice = totalDiscountedPrice;
     }
 
-    public int getDiscount() {
+
+	public Order getOrder() {
+		return order;
+	}
+
+
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+
+
+	public int getDiscount() {
         return discount;
     }
 

@@ -49,4 +49,10 @@ public class ProductController {
         Product product = productService.findProductById(productId);
         return new ResponseEntity<Product>(product, HttpStatus.ACCEPTED);
     }
+    @GetMapping("/bestseller")
+    public ResponseEntity<Product> findProductSeller(
+            @PathVariable Long productId) throws ProductException {
+        Product product = productService.findProductById(productId);
+        return new ResponseEntity<Product>(product, HttpStatus.ACCEPTED);
+    }
 }

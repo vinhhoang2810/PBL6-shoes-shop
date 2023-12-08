@@ -14,4 +14,8 @@ public interface CartService {
             throws ProductException, CartItemException, UserException;
 
     public Cart findUserCart(Long userId);
+    
+	public void saveOrUpdateCart(Cart cart);
+	
+	
 }

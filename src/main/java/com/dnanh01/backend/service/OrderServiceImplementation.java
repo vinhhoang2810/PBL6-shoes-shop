@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.exception.OrderException;
@@ -13,28 +14,34 @@ import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.CartItem;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.OrderItem;
+import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.AddressRepository;
+import com.dnanh01.backend.repository.CartRepository;
 import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
+import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
 
 @Service
 public class OrderServiceImplementation implements OrderService {
 
+	@Autowired
+	private ProductRepository productRepository;
 	private OrderRepository orderRepository;
 	private CartService cartService;
 	private AddressRepository addressRepository;
 	private UserRepository userRepository;
 	private OrderItemService orderItemService;
+	
+	@Autowired
 	private OrderItemRepository orderItemRepository;
+	@Autowired
+	private CartRepository cartRepository;
+//	private ProductRepository productRepository;
 
-	public OrderServiceImplementation(
-			OrderRepository orderRepository,
-			CartService cartService,
-			AddressRepository addressRepository,
-			UserRepository userRepository,
-			OrderItemService orderItemService,
+	public OrderServiceImplementation(OrderRepository orderRepository, CartService cartService,
+			AddressRepository addressRepository, UserRepository userRepository, OrderItemService orderItemService,
 			OrderItemRepository orderItemRepository) {
 		this.orderRepository = orderRepository;
 		this.cartService = cartService;
@@ -120,8 +127,13 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order confirmedOrder(Long orderId) throws OrderException {
+		// Lấy thông tin đơn đặt hàng từ cơ sở dữ liệu
 		Order order = findOrderById(orderId);
+
+		// Thực hiện xác nhận đơn đặt hàng
 		order.setOrderStatus("CONFIRMED");
+		
+		// Lưu thông tin đơn đặt hàng sau khi đã xác nhận
 		return orderRepository.save(order);
 	}
 

@@ -22,12 +22,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * This class extends OncePerRequestFilter to perform JWT validation
- * on incoming requests. It extracts the JWT token from the request header,
- * validates its signature and structure, extracts claims, and sets up the
- * authentication in the Spring Security SecurityContextHolder. If the token is
- * invalid, it throws a BadCredentialsException. The filter then continues the
- * request processing by invoking the next filter in the chain.
+ * Lớp này mở rộng OncePerRequestFilter để thực hiện xác thực JWT
+ * trên các yêu cầu đến. Nó trích xuất mã thông báo JWT từ tiêu đề yêu cầu,
+ * xác thực chữ ký và cấu trúc của nó, trích xuất các xác nhận quyền sở hữu và thiết lập
+ * xác thực trong Spring Security SecurityContextHolder. Nếu mã thông báo là
+ * không hợp lệ, nó sẽ ném BadCredentialsException. Bộ lọc sau đó tiếp tục quá trình
+ * xử lý yêu cầu bằng cách gọi bộ lọc tiếp theo trong chuỗi.
  */
 public class JwtValidator extends OncePerRequestFilter {
 
@@ -36,35 +36,35 @@ public class JwtValidator extends OncePerRequestFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
-        // Extract the JWT token from the request header
+    	// Trích xuất mã thông báo JWT từ tiêu đề yêu cầu
         String jwt = request.getHeader(JwtConstant.JWT_HEADER);
-        // Check if the JWT token is present
+        // Kiểm tra xem mã thông báo JWT có tồn tại không
         if (jwt != null) {
-            // Remove the "Bearer " prefix from the JWT token
+            // Xóa tiền tố "Bearer" khỏi mã thông báo JWT
             jwt = jwt.substring(7);
 
             try {
-                // Create a secret key using the HMAC SHA algorithm with the secret key from
+            	// Tạo khóa bí mật bằng thuật toán HMAC SHA với khóa bí mật từ
                 // JwtConstant
                 SecretKey key = Keys.hmacShaKeyFor(JwtConstant.SECRET_KEY.getBytes());
-                // Parse the JWT token, validate its signature, and retrieve the claims
+                // Phân tích mã thông báo JWT, xác thực chữ ký của nó và truy xuất các xác nhận quyền sở hữu
                 Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(jwt).getBody();
-                // Extract the email and authorities claims from the JWT claims
+                // Trích xuất email và các khiếu nại của chính quyền từ các khiếu nại của JWT
                 String email = String.valueOf(claims.get("email"));
                 String authorties = String.valueOf(claims.get("authories"));
-                // Convert the authorities claim into a list of GrantedAuthority objects
+                // Chuyển đổi yêu cầu của cơ quan có thẩm quyền thành danh sách các đối tượng GrantedAuthority
                 List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(authorties);
-                // Create an authentication object using the email and authorities, set it in
-                // the SecurityContext
+             	// Tạo đối tượng xác thực bằng email và cơ quan có thẩm quyền, đặt nó vào
+                // Bối cảnh bảo mật
                 Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auths);
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception e) {
-                // Throw a BadCredentialsException if there's an issue with the token
+            	// Ném BadCredentialsException nếu có vấn đề với mã thông báo
                 throw new BadCredentialsException("Invalid token ... from jwt validator");
             }
         }
-        // Continue the filter chain
+     // Tiếp tục chuỗi lọc
         filterChain.doFilter(request, response);
     }
 }
