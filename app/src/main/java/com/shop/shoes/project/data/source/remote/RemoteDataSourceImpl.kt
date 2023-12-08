@@ -3,6 +3,7 @@ package com.shop.shoes.project.data.source.remote
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
+import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseProduct
@@ -34,6 +35,10 @@ class RemoteDataSourceImpl(
 
     override suspend fun addNewCart(body: BodyCart): ResponseCartAdd {
         return apiService.addNewCart(body)
+    }
+
+    override suspend fun updateCartItem(cartId: Int, body: BodyCart): Cart {
+        return apiService.updateCartItem(cartId, body)
     }
 
 

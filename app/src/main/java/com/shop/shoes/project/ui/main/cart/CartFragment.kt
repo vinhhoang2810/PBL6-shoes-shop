@@ -12,6 +12,7 @@ import com.shop.shoes.project.databinding.FragmentCartBinding
 import com.shop.shoes.project.ui.main.MainActivity
 import com.shop.shoes.project.ui.main.base.BaseFragment
 import com.shop.shoes.project.ui.main.detail.DetailProductActivity
+import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Pref
 import com.shop.shoes.project.utils.Utils
@@ -27,7 +28,13 @@ class CartFragment : BaseFragment<FragmentCartBinding>() {
                 goToDetail(carts[pos].product!!)
             },
             listenerEdit = { pos ->
-                //TODO
+                context?.let {
+                    BottomSheetUtils.showBottomEditCart(
+                        context = it,
+                        cart = carts[pos],
+                        viewModel = cartViewModel
+                    )
+                }
             }
         )
     }

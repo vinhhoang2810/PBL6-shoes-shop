@@ -52,7 +52,7 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
     override fun initListener() = binding.run {
         imgBack.setOnClickListener { finish() }
         llAddCart.setOnClickListener {
-            BottomSheetUtils.showBottomReminds(
+            BottomSheetUtils.showBottomAddCart(
                 context = this@DetailProductActivity,
                 product = entity!!,
                 viewModel = cartViewModel

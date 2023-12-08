@@ -6,6 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shop.shoes.project.data.model.BodyCart
+import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Size
 import com.shop.shoes.project.data.model.SizeShow
@@ -15,7 +16,7 @@ import com.shop.shoes.project.ui.main.cart.SizeAdapter
 
 object BottomSheetUtils {
     private var sizeSelect = ""
-    fun showBottomReminds(
+    fun showBottomAddCart(
         context: Context,
         product: Product,
         viewModel: ShareViewModel
@@ -44,6 +45,62 @@ object BottomSheetUtils {
                         quantity = tvQuality.text.toString().toInt(),
                         size = sizeSelect,
                         color = product.color
+                    )
+                ) {
+                    bottomSheetDialog.dismiss()
+                }
+            }
+            btnCancel.setOnClickListener {
+                bottomSheetDialog.dismiss()
+            }
+            btnMinus.setOnClickListener {
+                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = false)
+                if (tvQuality.text == "1") btnMinus.visibility = View.INVISIBLE
+            }
+            btnAdd.setOnClickListener {
+                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = true)
+                btnMinus.visibility = View.VISIBLE
+            }
+        }
+        bottomSheetDialog.show()
+    }
+
+    fun showBottomEditCart(
+        context: Context,
+        cart: Cart,
+        viewModel: ShareViewModel
+    ) {
+        val listSize = getListSizeShow(cart.product!!.sizes)
+        sizeSelect = cart.size
+        listSize.forEach {
+            it.isSelected = it.size == cart.size
+        }
+        val sizeAdapter = SizeAdapter(listSize) { pos ->
+            listSize.forEach {
+                if (listSize[pos].quantity > 0) {
+                    it.isSelected = it == listSize[pos]
+                    sizeSelect = listSize[pos].size
+                }
+            }
+        }
+        val bottomSheetBinding = BottomSheetCartBinding.inflate(LayoutInflater.from(context))
+        val bottomSheetDialog = BottomSheetDialog(context)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        bottomSheetBinding.run {
+            rvSize.run {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = sizeAdapter
+            }
+            tvQuality.text = cart.quantity.toString()
+            if (tvQuality.text != "1") btnMinus.visibility = View.VISIBLE
+            btnSave.setOnClickListener {
+                viewModel.updateCart(
+                    cartId = cart.id!!,
+                    cart = BodyCart(
+                        productId = cart.product!!.id,
+                        quantity = tvQuality.text.toString().toInt(),
+                        size = sizeSelect,
+                        color = cart.product!!.color
                     )
                 ) {
                     bottomSheetDialog.dismiss()

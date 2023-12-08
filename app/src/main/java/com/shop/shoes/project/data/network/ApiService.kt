@@ -3,6 +3,7 @@ package com.shop.shoes.project.data.network
 import com.shop.shoes.project.data.model.Auth
 import com.shop.shoes.project.data.model.AuthResponse
 import com.shop.shoes.project.data.model.BodyCart
+import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.ResponseCart
 import com.shop.shoes.project.data.model.ResponseCartAdd
 import com.shop.shoes.project.data.model.ResponseProduct
@@ -12,6 +13,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiService {
     @POST(Constants.SIGN_IN)
@@ -31,4 +33,6 @@ interface ApiService {
 
     @PUT(Constants.ADD_CART)
     suspend fun addNewCart(@Body body: BodyCart): ResponseCartAdd
+    @PUT("${Constants.UPDATE_CART}{cartId}")
+    suspend fun updateCartItem(@Path("cartId") cartId: Int,@Body body: BodyCart): Cart
 }

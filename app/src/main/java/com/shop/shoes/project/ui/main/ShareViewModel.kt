@@ -97,4 +97,33 @@ class ShareViewModel(application: Application, private val repository: Repositor
             }
         }
     }
+
+    fun updateCart(cartId: Int, cart: BodyCart, listener: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = repository.updateCartItem(cartId, cart)
+                if (response.id != null) {
+                    Toast.makeText(
+                        Pref.context,
+                        Pref.context.getString(R.string.cart_is_updated),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    getAllCart()
+                    listener.invoke()
+                } else {
+                    Toast.makeText(
+                        Pref.context,
+                        Pref.context.getString(R.string.update_cart_fail),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    Pref.context,
+                    Pref.context.getString(R.string.update_cart_fail),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 }

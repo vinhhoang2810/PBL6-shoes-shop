@@ -59,4 +59,6 @@
     <string name="add_cart_fail">Add cart fail. Try again!</string>
     <string name="item_add_to_cart">Item added to cart!</string>
     <string name="you_must_login_to_see_your_cart">You must login to see your cart!!</string>
+    <string name="cart_is_updated">Cart is updated!</string>
+    <string name="update_cart_fail">Update cart failed! Try gain!!</string>
 </resources>

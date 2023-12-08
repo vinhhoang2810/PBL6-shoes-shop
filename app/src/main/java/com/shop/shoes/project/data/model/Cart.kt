@@ -9,7 +9,7 @@ data class ResponseCart(
 
 data class Cart(
     @SerializedName("id")
-    var id: Int,
+    var id: Int? = null,
     @SerializedName("product")
     var product: Product? = null,
     @SerializedName("size")

@@ -16,6 +16,7 @@ object Constants {
     const val REQUEST_CODE_LOGIN = 123
     const val ROLE = "USER"
     const val ADD_CART = "/api/cart/add"
+    const val UPDATE_CART = "/api/cart_items/"
     const val SIGN_UP = "/auth/signup"
     const val EXTRA_PRODUCT = "productExtra"
 }
