@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_box"
     android:padding="@dimen/_16sdp"
+    android:layout_marginHorizontal="@dimen/_16sdp"
+    android:elevation="@dimen/_16sdp"
     android:layout_marginBottom="@dimen/_16sdp">
 
     <CheckBox
@@ -144,6 +146,7 @@
             android:textSize="@dimen/_16sdp" />
 
         <TextView
+            android:id="@+id/tvQuality"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -168,13 +171,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.8" />
+        app:layout_constraintGuide_percent="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

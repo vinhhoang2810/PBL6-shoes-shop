@@ -28,7 +28,7 @@ class ProductAdapter(
                     tvSale.visibility = View.GONE
                 } else {
                     tvDiscount.text = item.price.toString()
-                    tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG;
+                    tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                     tvPrice.text = item.discountedPrice.toString()
                     val text = "-${item.discountPersent}%"
                     tvSale.text = text
