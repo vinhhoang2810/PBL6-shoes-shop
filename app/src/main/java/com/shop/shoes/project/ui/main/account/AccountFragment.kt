@@ -37,14 +37,6 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(){
             tvLogout.visibility = View.GONE
             view.visibility = View.GONE
         }
-        tvRate.setOnClickListener {mustBeLogin {
-            //TODO
-            }
-        }
-        tvCart.setOnClickListener {mustBeLogin {
-            //TODO
-            }
-        }
         tvAddress.setOnClickListener {mustBeLogin {
             //TODO
             }
