@@ -10,6 +10,7 @@ import com.shop.shoes.project.data.model.Product
 import com.shop.shoes.project.data.model.Review
 import com.shop.shoes.project.databinding.ActivityDetailProductBinding
 import com.shop.shoes.project.ui.main.base.BaseActivity
+import com.shop.shoes.project.utils.BottomSheetUtils
 import com.shop.shoes.project.utils.Constants
 import com.shop.shoes.project.utils.Utils
 
@@ -47,6 +48,12 @@ class DetailProductActivity : BaseActivity<ActivityDetailProductBinding>() {
 
     override fun initListener() = binding.run {
         imgBack.setOnClickListener { finish() }
+        llAddCart.setOnClickListener {
+            BottomSheetUtils.showBottomReminds(
+                this@DetailProductActivity,
+                entity!!
+            ) {}
+        }
     }
 
     private fun getRating(list: List<Review>): String {

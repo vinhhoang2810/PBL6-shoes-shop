@@ -17,6 +17,7 @@ import com.shop.shoes.project.utils.Pref
 class CartAdapter(
     private var records: List<Cart>,
     private val listener: (Int) -> Unit,
+    private val listenerEdit: (Int) -> Unit,
 ) : RecyclerView.Adapter<CartAdapter.VH>() {
     inner class VH(private val binding: ItemCartBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,6 +31,9 @@ class CartAdapter(
                 tvPrice.text = item.discountedPrice.toString()
                 tvDiscount.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvQuality.text = item.quantity.toString()
+                tvEdit.setOnClickListener {
+                    listenerEdit(adapterPosition)
+                }
             }
         }
     }
