@@ -126,4 +126,33 @@ class ShareViewModel(application: Application, private val repository: Repositor
             }
         }
     }
+
+    fun deleteCart(cartId: Int, listener: () -> Unit) {
+        viewModelScope.launch {
+            try {
+                val response = repository.deleteNewCart(cartId)
+                if (response.status) {
+                    Toast.makeText(
+                        Pref.context,
+                        Pref.context.getString(R.string.delete_success),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    getAllCart()
+                    listener.invoke()
+                } else {
+                    Toast.makeText(
+                        Pref.context,
+                        Pref.context.getString(R.string.delete_fail),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(
+                    Pref.context,
+                    Pref.context.getString(R.string.delete_fail),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+    }
 }

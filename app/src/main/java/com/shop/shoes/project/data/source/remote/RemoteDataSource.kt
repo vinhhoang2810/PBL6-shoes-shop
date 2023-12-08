@@ -19,4 +19,5 @@ interface RemoteDataSource {
     suspend fun getAllCarts(): ResponseCart
     suspend fun addNewCart(@Body body: BodyCart): ResponseCartAdd
     suspend fun updateCartItem(@Path("cartId") cartId: Int, @Body body: BodyCart): Cart
+    suspend fun deleteNewCart(@Path("cartId") cartId: Int): ResponseCartAdd
 }

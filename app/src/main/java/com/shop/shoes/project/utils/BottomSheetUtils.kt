@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.shop.shoes.project.R
 import com.shop.shoes.project.data.model.BodyCart
 import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
@@ -16,11 +17,7 @@ import com.shop.shoes.project.ui.main.cart.SizeAdapter
 
 object BottomSheetUtils {
     private var sizeSelect = ""
-    fun showBottomAddCart(
-        context: Context,
-        product: Product,
-        viewModel: ShareViewModel
-    ) {
+    fun showBottomAddCart(context: Context, product: Product, viewModel: ShareViewModel) {
         val listSize = getListSizeShow(product.sizes)
         val sizeAdapter = SizeAdapter(listSize) { pos ->
             listSize.forEach {
@@ -54,22 +51,20 @@ object BottomSheetUtils {
                 bottomSheetDialog.dismiss()
             }
             btnMinus.setOnClickListener {
-                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = false)
+                tvQuality.text =
+                    changeQuality(tvQuality.text.toString(), isPlus = false, isEdit = false)
                 if (tvQuality.text == "1") btnMinus.visibility = View.INVISIBLE
             }
             btnAdd.setOnClickListener {
-                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = true)
+                tvQuality.text =
+                    changeQuality(tvQuality.text.toString(), isPlus = true, isEdit = false)
                 btnMinus.visibility = View.VISIBLE
             }
         }
         bottomSheetDialog.show()
     }
 
-    fun showBottomEditCart(
-        context: Context,
-        cart: Cart,
-        viewModel: ShareViewModel
-    ) {
+    fun showBottomEditCart(context: Context, cart: Cart, viewModel: ShareViewModel) {
         val listSize = getListSizeShow(cart.product!!.sizes)
         sizeSelect = cart.size
         listSize.forEach {
@@ -92,30 +87,45 @@ object BottomSheetUtils {
                 adapter = sizeAdapter
             }
             tvQuality.text = cart.quantity.toString()
-            if (tvQuality.text != "1") btnMinus.visibility = View.VISIBLE
+            if (tvQuality.text == "0") {
+                btnMinus.visibility = View.INVISIBLE
+                btnSave.text = context.getText(R.string.delete)
+            } else {
+                btnMinus.visibility = View.VISIBLE
+            }
             btnSave.setOnClickListener {
-                viewModel.updateCart(
-                    cartId = cart.id!!,
-                    cart = BodyCart(
-                        productId = cart.product!!.id,
-                        quantity = tvQuality.text.toString().toInt(),
-                        size = sizeSelect,
-                        color = cart.product!!.color
-                    )
-                ) {
-                    bottomSheetDialog.dismiss()
+                if (tvQuality.text.toString().toInt() != 0) {
+                    viewModel.updateCart(
+                        cartId = cart.id!!,
+                        cart = BodyCart(
+                            productId = cart.product!!.id,
+                            quantity = tvQuality.text.toString().toInt(),
+                            size = sizeSelect,
+                            color = cart.product!!.color
+                        )
+                    ) {
+                        bottomSheetDialog.dismiss()
+                    }
+                } else {
+                    viewModel.deleteCart(cart.id!!) { bottomSheetDialog.dismiss() }
                 }
             }
             btnCancel.setOnClickListener {
                 bottomSheetDialog.dismiss()
             }
             btnMinus.setOnClickListener {
-                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = false)
-                if (tvQuality.text == "1") btnMinus.visibility = View.INVISIBLE
+                tvQuality.text =
+                    changeQuality(tvQuality.text.toString(), isPlus = false, isEdit = true)
+                if (tvQuality.text == "0") {
+                    btnMinus.visibility = View.INVISIBLE
+                    btnSave.text = context.getText(R.string.delete)
+                }
             }
             btnAdd.setOnClickListener {
-                tvQuality.text = changeQuality(tvQuality.text.toString(), isPlus = true)
+                tvQuality.text =
+                    changeQuality(tvQuality.text.toString(), isPlus = true, isEdit = true)
                 btnMinus.visibility = View.VISIBLE
+                btnSave.text = context.getText(R.string.save)
             }
         }
         bottomSheetDialog.show()
@@ -140,16 +150,20 @@ object BottomSheetUtils {
         return sizes
     }
 
-    private fun changeQuality(quality: String, isPlus: Boolean): String {
+    private fun changeQuality(quality: String, isPlus: Boolean, isEdit: Boolean): String {
         return try {
             val newData = if (isPlus) {
                 quality.toInt() + 1
             } else {
                 quality.toInt() - 1
             }
-            if (newData < 1) "1" else "$newData"
+            if (newData < 1) {
+                if (isEdit) "0" else "1"
+            } else {
+                "$newData"
+            }
         } catch (e: Exception) {
-            "1"
+            if (isEdit) "0" else "1"
         }
     }
 }

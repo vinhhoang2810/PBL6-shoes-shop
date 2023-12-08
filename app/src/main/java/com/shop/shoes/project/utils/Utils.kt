@@ -1,7 +1,10 @@
 package com.shop.shoes.project.utils
 
+import android.content.Context
 import com.google.gson.Gson
+import com.shop.shoes.project.data.model.Cart
 import com.shop.shoes.project.data.model.Product
+import com.shop.shoes.project.ui.main.ShareViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -26,5 +29,13 @@ object Utils {
         } else {
             inputDate
         }
+    }
+
+    fun showBottomAddCart(context: Context, product: Product, viewModel: ShareViewModel) {
+        BottomSheetUtils.showBottomAddCart(context, product, viewModel)
+    }
+
+    fun showBottomEditCart(context: Context, cart: Cart, viewModel: ShareViewModel) {
+        BottomSheetUtils.showBottomEditCart(context, cart, viewModel)
     }
 }

@@ -17,6 +17,7 @@ object Constants {
     const val ROLE = "USER"
     const val ADD_CART = "/api/cart/add"
     const val UPDATE_CART = "/api/cart_items/"
+    const val DELETE_CART = "/api/cart_items/"
     const val SIGN_UP = "/auth/signup"
     const val EXTRA_PRODUCT = "productExtra"
 }

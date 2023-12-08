@@ -61,4 +61,7 @@
     <string name="you_must_login_to_see_your_cart">You must login to see your cart!!</string>
     <string name="cart_is_updated">Cart is updated!</string>
     <string name="update_cart_fail">Update cart failed! Try gain!!</string>
+    <string name="delete">Detete</string>
+    <string name="delete_success">Delete success!</string>
+    <string name="delete_fail">Delete fail! Try again!</string>
 </resources>

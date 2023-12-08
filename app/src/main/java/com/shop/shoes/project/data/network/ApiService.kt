@@ -10,6 +10,7 @@ import com.shop.shoes.project.data.model.ResponseProduct
 import com.shop.shoes.project.data.model.User
 import com.shop.shoes.project.utils.Constants
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -33,6 +34,10 @@ interface ApiService {
 
     @PUT(Constants.ADD_CART)
     suspend fun addNewCart(@Body body: BodyCart): ResponseCartAdd
+
     @PUT("${Constants.UPDATE_CART}{cartId}")
-    suspend fun updateCartItem(@Path("cartId") cartId: Int,@Body body: BodyCart): Cart
+    suspend fun updateCartItem(@Path("cartId") cartId: Int, @Body body: BodyCart): Cart
+
+    @DELETE("${Constants.DELETE_CART}{cartId}")
+    suspend fun deleteNewCart(@Path("cartId") cartId: Int): ResponseCartAdd
 }

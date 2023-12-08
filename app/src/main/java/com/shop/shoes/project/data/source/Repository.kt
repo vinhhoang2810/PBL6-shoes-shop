@@ -45,4 +45,8 @@ class Repository(
         return remoteDataSource.updateCartItem(cartId, body)
     }
 
+    override suspend fun deleteNewCart(cartId: Int): ResponseCartAdd {
+        return remoteDataSource.deleteNewCart(cartId)
+    }
+
 }

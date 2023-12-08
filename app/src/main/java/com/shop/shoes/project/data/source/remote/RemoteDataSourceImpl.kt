@@ -41,5 +41,9 @@ class RemoteDataSourceImpl(
         return apiService.updateCartItem(cartId, body)
     }
 
+    override suspend fun deleteNewCart(cartId: Int): ResponseCartAdd {
+        return apiService.deleteNewCart(cartId)
+    }
+
 
 }
