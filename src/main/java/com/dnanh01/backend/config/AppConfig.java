@@ -27,7 +27,7 @@ public class AppConfig {
         http.sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(Authorize -> Authorize
-                        .requestMatchers("/api/products/**","/api/payment/vnpay-payment").permitAll() // Permit access
+                        .requestMatchers("/api/products/**","/api/payment/vnpay-payment","/api/payment/thanhtoan").permitAll() // Permit access
                         // to
                         // without
                         // authentication
@@ -55,7 +55,9 @@ public class AppConfig {
                                                 "http://localhost:4200",
                                                 "http://localhost:5454",
                                                 "https://pbl6-shoes-shop-production.up.railway.app",
-                                                "https://study-fontend.vercel.app"));
+                                                "https://study-fontend.vercel.app",
+                                                "https://phong-van-cv-srsf.vercel.app",
+                                                "https://sandbox.vnpayment.vn"));
                                         cfg.setAllowedMethods(Collections
                                                 .singletonList("*"));
                                         cfg.setAllowCredentials(true);

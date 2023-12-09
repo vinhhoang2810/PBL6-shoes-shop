@@ -69,13 +69,16 @@ public class PaymentController {
         return ResponseEntity.ok(vnpayUrl);
     } 
 
+    @GetMapping("/thanhtoan")
+    public String home(){
+        return "index";
+    }
+    
     @GetMapping("/vnpay-payment")
-    public String vnpayPayment(HttpServletRequest request, Model model,
-    		@RequestHeader("Authorization") String jwt) 
-    	            throws UserException {
-    	User user = userService.findUserProfileByJwt(jwt);
+    public String vnpayPayment(HttpServletRequest request, Model model){
+    	//User user = userService.findUserProfileByJwt(jwt);
     	
-    	Order order = orderRepository.findByUserId(user.getId());
+    	//Order order = orderRepository.findByUserId(user.getId());
     	
     	
         int paymentStatus = vnPayService.orderReturn(request);
@@ -93,23 +96,17 @@ public class PaymentController {
         // Check payment status
         if (paymentStatus == 1) {
             // Payment successful, confirm the order
-            try {
+        	return "ordersuccess";
+            /*try {
                 orderService.confirmedOrder(order.getId());
                 return "ordersuccess";
             } catch (OrderException e) {
                 // Handle exception, e.g., log it or show an error message
-                return "orderfail";
-            }
+                return "ordersai";
+            }*/
         } else {
             // Payment failed, handle accordingly
             return "orderfail";
         }
-    }
-
-    // Implement your own logic to parse orderId from orderInfo
-    private Long parseOrderIdFromOrderInfo(String orderInfo) {
-        // Implement your logic here
-        // For example, you can split the orderInfo string and extract the orderId
-        return Long.parseLong(orderInfo); // This is just a placeholder, modify as needed
     }
 }
