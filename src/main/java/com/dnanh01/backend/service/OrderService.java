@@ -7,14 +7,17 @@ import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.request.ShippingAddressRequest;
 
 public interface OrderService {
 
-	public Order createOrder(User user, Address shippingAddress);
+	public Order createOrder(User user, ShippingAddressRequest shippingAddress);
 
 	public Order findOrderById(Long orderId) throws OrderException;
 
 	public List<Order> usersOrderHistory(Long userId);
+	
+	public Order OrderFindIdUser(Long userId);
 
 	public Order placedOrder(Long orderId) throws OrderException;
 
@@ -29,5 +32,7 @@ public interface OrderService {
 	public List<Order> getAllOrders();
 
 	public void deleteOrder(Long orderId) throws OrderException;
-	  	    
+	
+	public void moveToHistory(Order order) throws OrderException ;
+	
 }

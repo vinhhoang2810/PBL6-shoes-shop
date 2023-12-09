@@ -4,71 +4,80 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.List;
+
+import javax.print.attribute.standard.JobOriginatingUserName;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.dnanh01.backend.exception.OrderException;
+import com.dnanh01.backend.exception.UserException;
 import com.dnanh01.backend.model.Cart;
+import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.User;
+import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.service.CartServiceImplementation;
-import com.dnanh01.backend.service.UserServiceImplementation;
+import com.dnanh01.backend.service.OrderService;
+import com.dnanh01.backend.service.UserService;
 import com.dnanh01.backend.service.VNPayService;
 
 @RestController
 @RequestMapping("/api/payment")
 public class PaymentController {
+
     @Autowired
     private VNPayService vnPayService;
+    
+    @Autowired
+    private OrderService orderService;
+    
+    @Autowired
+    private OrderRepository orderRepository;
+    
     @Autowired
     private CartServiceImplementation cartServiceImplementation;
+    
     @Autowired
-    private UserServiceImplementation userServiceImplementation;
+    private UserService userService;
 
     @PostMapping("/submitOrder")
     @ResponseBody
     public ResponseEntity<?> submidOrder(
-            @RequestParam("orderInfo") String orderInfo,
-            HttpServletRequest request, Principal principal) {
-
-        principal.getName();
-        User user = userServiceImplementation.getUserByEmail(principal.getName());
+            HttpServletRequest request,  
+            @RequestHeader("Authorization") String jwt) 
+            throws UserException {
+    	
+    	User user = userService.findUserProfileByJwt(jwt);
+    	
+    	Order order = orderRepository.findByUserId(user.getId());
 
         Cart cart = cartServiceImplementation.findUserCart(user.getId());
         BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
         // trang frontend cấu hình
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        String vnpayUrl = vnPayService.createOrder(total, orderInfo, baseUrl);
+        String vnpayUrl = vnPayService.createOrder(total, order, baseUrl);
         return ResponseEntity.ok(vnpayUrl);
     } 
- /*   
-    @PostMapping("/submitOrder")
-    public RedirectView submitOrder(
-            @RequestParam("orderInfo") String orderInfo,
-            HttpServletRequest request, Principal principal) {
 
-        principal.getName();
-        User user = userServiceImplementation.getUserByEmail(principal.getName());
-
-        Cart cart = cartServiceImplementation.findUserCart(user.getId());
-        BigDecimal total = new BigDecimal(cart.getTotalDiscountedPrice());
-        // trang frontend cấu hình
-        String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        String vnpayUrl = vnPayService.createOrder(total, orderInfo, baseUrl);
-
-        // Sử dụng RedirectView để chuyển hướng đến trang vnpayUrl
-        return new RedirectView(vnpayUrl);
-    }
-*/
     @GetMapping("/vnpay-payment")
-    public String GetMapping(HttpServletRequest request, Model model) {
+    public String vnpayPayment(HttpServletRequest request, Model model,
+    		@RequestHeader("Authorization") String jwt) 
+    	            throws UserException {
+    	User user = userService.findUserProfileByJwt(jwt);
+    	
+    	Order order = orderRepository.findByUserId(user.getId());
+    	
+    	
         int paymentStatus = vnPayService.orderReturn(request);
 
         String orderInfo = request.getParameter("vnp_OrderInfo");
@@ -81,6 +90,26 @@ public class PaymentController {
         model.addAttribute("paymentTime", paymentTime);
         model.addAttribute("transactionId", transactionId);
 
-        return paymentStatus == 1 ? "ordersuccess" : "orderfail";
+        // Check payment status
+        if (paymentStatus == 1) {
+            // Payment successful, confirm the order
+            try {
+                orderService.confirmedOrder(order.getId());
+                return "ordersuccess";
+            } catch (OrderException e) {
+                // Handle exception, e.g., log it or show an error message
+                return "orderfail";
+            }
+        } else {
+            // Payment failed, handle accordingly
+            return "orderfail";
+        }
+    }
+
+    // Implement your own logic to parse orderId from orderInfo
+    private Long parseOrderIdFromOrderInfo(String orderInfo) {
+        // Implement your logic here
+        // For example, you can split the orderInfo string and extract the orderId
+        return Long.parseLong(orderInfo); // This is just a placeholder, modify as needed
     }
 }

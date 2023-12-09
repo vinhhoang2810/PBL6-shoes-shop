@@ -1,9 +1,13 @@
 package com.dnanh01.backend.service;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dnanh01.backend.config.VNPayConfig;
+import com.dnanh01.backend.model.Order;
+import com.dnanh01.backend.model.OrderItem;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
@@ -14,8 +18,10 @@ import java.util.*;
 
 @Service
 public class VNPayService {
+	 @Autowired
+	 private OrderService orderService;
 
-    public String createOrder(BigDecimal total, String orderInfor, String urlReturn) {
+    public String createOrder(BigDecimal total, Order order, String urlReturn) {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_TxnRef = VNPayConfig.getRandomNumber(8);
@@ -31,7 +37,7 @@ public class VNPayService {
         vnp_Params.put("vnp_CurrCode", "VND");
 
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", orderInfor);
+        vnp_Params.put("vnp_OrderInfo", getOrderItemsInfoFromOrder(order));
         vnp_Params.put("vnp_OrderType", orderType);
 
         String locate = "vn";
@@ -83,8 +89,27 @@ public class VNPayService {
         String paymentUrl = VNPayConfig.vnp_PayUrl + "?" + queryUrl;
         return paymentUrl;
     }
+    
+    private String getOrderItemsInfoFromOrder(Order order) {
+        List<String> orderItemsInfo = new ArrayList<>();
 
-    public int orderReturn(HttpServletRequest request) {
+        for (OrderItem orderItem : order.getOrderItems()) {
+            StringBuilder itemInfo = new StringBuilder();
+            itemInfo.append("Product: ").append(orderItem.getProduct().getTitle()).append("\n");
+            itemInfo.append("Size: ").append(orderItem.getSize()).append("\n");
+            itemInfo.append("Quantity: ").append(orderItem.getQuantity()).append("\n");
+            itemInfo.append("Price: ").append(orderItem.getPrice()).append("\n");
+            itemInfo.append("Discounted Price: ").append(orderItem.getDiscountedPrice()).append("\n");
+
+            orderItemsInfo.add(itemInfo.toString());
+        }
+
+        // Chuyển danh sách các chuỗi thành một chuỗi duy nhất, mỗi mục được ngăn cách bằng dòng mới ("\n")
+        return String.join("\n", orderItemsInfo);
+    }
+
+
+	public int orderReturn(HttpServletRequest request) {
         Map fields = new HashMap();
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String fieldName = null;

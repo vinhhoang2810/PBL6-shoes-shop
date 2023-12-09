@@ -12,16 +12,20 @@ import com.dnanh01.backend.exception.OrderException;
 import com.dnanh01.backend.model.Address;
 import com.dnanh01.backend.model.Cart;
 import com.dnanh01.backend.model.CartItem;
+import com.dnanh01.backend.model.HistoryOrder;
+import com.dnanh01.backend.model.HistoryOrderItem;
 import com.dnanh01.backend.model.Order;
 import com.dnanh01.backend.model.OrderItem;
 import com.dnanh01.backend.model.Product;
 import com.dnanh01.backend.model.User;
 import com.dnanh01.backend.repository.AddressRepository;
 import com.dnanh01.backend.repository.CartRepository;
+import com.dnanh01.backend.repository.HistoryOrderRepository;
 import com.dnanh01.backend.repository.OrderItemRepository;
 import com.dnanh01.backend.repository.OrderRepository;
 import com.dnanh01.backend.repository.ProductRepository;
 import com.dnanh01.backend.repository.UserRepository;
+import com.dnanh01.backend.request.ShippingAddressRequest;
 
 @Service
 public class OrderServiceImplementation implements OrderService {
@@ -33,6 +37,9 @@ public class OrderServiceImplementation implements OrderService {
 	private AddressRepository addressRepository;
 	private UserRepository userRepository;
 	private OrderItemService orderItemService;
+	@Autowired
+	private HistoryOrderRepository historyOrderRepository;
+
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
@@ -52,18 +59,37 @@ public class OrderServiceImplementation implements OrderService {
 	}
 
 	@Override
-	public Order createOrder(User user, Address shippingAddress) {
-		shippingAddress.setUser(user);
-		Address address = addressRepository.save(shippingAddress);
-		user.getAddresses().add(address);
-		userRepository.save(user);
+	public Order createOrder(User user, ShippingAddressRequest reqShippingAddress) {
 
+		// Check if an order already exists for the user
+		List<Order> existingOrders = orderRepository.findByUser(user);
+
+		if (!existingOrders.isEmpty()) {
+			// Handle the case where orders already exist
+			// You might need to iterate through the list or choose a specific order based
+			// on your logic
+			// For example, you can choose the first order in the list:
+			// existingOrders.get(0)
+			return updateOrder(existingOrders.get(0), reqShippingAddress);
+		}
+		// Continue with the order creation logic if no existing order is found
+		Address existingAddress = findExistingAddress(user, reqShippingAddress);
+		Address address;
+
+		if (existingAddress != null) {
+			// Use the existing address if available
+			address = existingAddress;
+		} else {
+			// Create a new address if no existing address is found
+			address = createNewAddress(user, reqShippingAddress);
+		}
+
+		// Continue with the rest of the order creation logic
 		Cart cart = cartService.findUserCart(user.getId());
 		List<OrderItem> orderItems = new ArrayList<>();
 
 		for (CartItem item : cart.getCartItems()) {
 			OrderItem orderItem = new OrderItem();
-
 			orderItem.setProduct(item.getProduct());
 			orderItem.setSize(item.getSize());
 			orderItem.setQuantity(item.getQuantity());
@@ -73,7 +99,6 @@ public class OrderServiceImplementation implements OrderService {
 
 			OrderItem createdOrderItem = orderItemRepository.save(orderItem);
 			orderItems.add(createdOrderItem);
-
 		}
 
 		Order createdOrder = new Order();
@@ -85,11 +110,10 @@ public class OrderServiceImplementation implements OrderService {
 		createdOrder.setTotalItem(cart.getTotalItem());
 
 		createdOrder.setShippingAddress(address);
-		createdOrder.setOrderDate(LocalDateTime.now());
-		createdOrder.setOrderStatus("PENDING");
-		// TODO
-		// createdOrder.getPaymentDetails().setStatus("PENDING");
 		createdOrder.setCreateAt(LocalDateTime.now());
+		createdOrder.setOrderDate(LocalDateTime.now());
+		createdOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		createdOrder.setOrderStatus("PENDING");
 
 		Order savedOrder = orderRepository.save(createdOrder);
 
@@ -97,8 +121,47 @@ public class OrderServiceImplementation implements OrderService {
 			item.setOrder(savedOrder);
 			orderItemRepository.save(item);
 		}
+
 		return savedOrder;
 	}
+	
+	private Order updateOrder(Order existingOrder, ShippingAddressRequest reqShippingAddress) {
+
+		existingOrder.setShippingAddress(findExistingAddress(existingOrder.getUser(), reqShippingAddress));
+		existingOrder.setOrderDate(LocalDateTime.now());
+		existingOrder.setDeliveryDate(LocalDateTime.now().plusWeeks(1));
+		existingOrder.setOrderStatus("PENDING");
+
+		return orderRepository.save(existingOrder);
+	}
+
+	private Address createNewAddress(User user, ShippingAddressRequest reqShippingAddress) {
+		Address saveAddress = new Address();
+		saveAddress.setStreetAddress(reqShippingAddress.getStreetAddress());
+		saveAddress.setCity(reqShippingAddress.getCity());
+		saveAddress.setState(reqShippingAddress.getState());
+		saveAddress.setZipCode(reqShippingAddress.getZipCode());
+		saveAddress.setUser(user);
+
+		Address address = addressRepository.save(saveAddress);
+
+		user.getAddresses().add(address);
+		userRepository.save(user);
+
+		return address;
+	}
+
+	private Address findExistingAddress(User user, ShippingAddressRequest reqShippingAddress) {
+		return user.getAddresses().stream()
+				.filter(address -> address.getStreetAddress().equals(reqShippingAddress.getStreetAddress())
+						&& address.getCity().equals(reqShippingAddress.getCity())
+						&& address.getState().equals(reqShippingAddress.getState())
+						&& address.getZipCode().equals(reqShippingAddress.getZipCode()))
+				.findFirst()
+				.orElse(null);
+	}
+
+	
 
 	@Override
 	public Order findOrderById(Long orderId) throws OrderException {
@@ -127,15 +190,60 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public Order confirmedOrder(Long orderId) throws OrderException {
-		// Lấy thông tin đơn đặt hàng từ cơ sở dữ liệu
-		Order order = findOrderById(orderId);
+	    // Lấy thông tin đơn đặt hàng từ cơ sở dữ liệu
+	    Order order = findOrderById(orderId);
 
-		// Thực hiện xác nhận đơn đặt hàng
-		order.setOrderStatus("CONFIRMED");
-		
-		// Lưu thông tin đơn đặt hàng sau khi đã xác nhận
-		return orderRepository.save(order);
+	    // Chuyển đơn hàng sang trạng thái "CONFIRMED"
+	    order.setOrderStatus("CONFIRMED");
+
+	    // Lưu thông tin đơn hàng sau khi đã xác nhận
+	    Order confirmedOrder = orderRepository.save(order);
+
+	    // Chuyển đơn hàng sang lịch sử
+	    moveToHistory(confirmedOrder);
+
+	    // Xóa giỏ hàng sau khi đã xác nhận
+	    clearCart(confirmedOrder.getUser().getId());
+
+	    return confirmedOrder;
 	}
+	@Override
+	public void moveToHistory(Order order) {
+	    // Tạo một đối tượng lịch sử đơn hàng
+	    HistoryOrder historyOrder = new HistoryOrder();
+	    historyOrder.setUser(order.getUser());
+	    historyOrder.setOrderDate_his(order.getOrderDate());
+	    // Các thông tin khác của lịch sử đơn hàng...
+
+	    // Tạo danh sách mục lịch sử đơn hàng
+	    List<HistoryOrderItem> historyOrderItems = new ArrayList<>();
+	    for (OrderItem orderItem : order.getOrderItems()) {
+	        HistoryOrderItem historyOrderItem = new HistoryOrderItem();
+	        historyOrderItem.setHistoryOrder(historyOrder);
+	        historyOrderItem.setProduct(orderItem.getProduct());
+	        historyOrderItem.setSize(orderItem.getSize());
+	        historyOrderItem.setQuantity(orderItem.getQuantity());
+	        historyOrderItem.setPrice(orderItem.getPrice());
+	        historyOrderItem.setDiscountedPrice(orderItem.getDiscountedPrice());
+	        historyOrderItem.setUserId(orderItem.getUserId());
+	        // Các thông tin khác của mục lịch sử đơn hàng...
+	        historyOrderItems.add(historyOrderItem);
+	    }
+
+	    // Gán danh sách mục lịch sử đơn hàng cho lịch sử đơn hàng
+	    historyOrder.setHistoryOrderItems(historyOrderItems);
+
+	    // Lưu lịch sử đơn hàng vào cơ sở dữ liệu
+	    historyOrderRepository.save(historyOrder);
+	}
+
+	// Phương thức xóa giỏ hàng
+	private void clearCart(Long userId) {
+	    Cart cart = cartService.findUserCart(userId);
+	    cart.getCartItems().clear();
+	    cartRepository.save(cart);
+	}
+
 
 	@Override
 	public Order shippedOrder(Long orderId) throws OrderException {
@@ -167,6 +275,10 @@ public class OrderServiceImplementation implements OrderService {
 	public void deleteOrder(Long orderId) throws OrderException {
 		Order order = findOrderById(orderId);
 		orderRepository.delete(order);
+	}
+	@Override
+	public Order OrderFindIdUser(Long userId) {
+		return orderRepository.findByUserId(userId);
 	}
 
 }
